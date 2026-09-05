@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FFBox-UI Playground</title>
+  <link rel="stylesheet" href="../src/themes/light.css">
+  <link rel="stylesheet" href="../src/themes/dark.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px 40px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: hwb(var(--bg95));
+      color: var(--fontColor);
+      transition: background 0.3s, color 0.3s;
+    }
+    h1 { margin-bottom: 8px; }
+    h2 {
+      margin: 12px 0 ;
+      padding-bottom: 8px;
+      border-bottom: 1px solid hwb(var(--opposite80) / 0.2);
+    }
+    .row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .label { font-size: 13px; color: var(--66); min-width: 80px; }
+    .theme-toggle {
+      position: fixed; top: 12px; right: 12px;
+      padding: 6px 14px; border-radius: 6px; border: 1px solid hwb(var(--bg90, 0 90% 10%));
+      color: var(--fontColor); background: hwb(var(--bg97));
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .theme-toggle:hover { background: hwb(var(--bg99)); }
+    .event-log {
+      margin-top: 4px; min-height: 20px;
+      color: var(--66);
+      font-size: 12px; font-family: monospace;
+    }
+  </style>
+</head>
+<body class="themeLight">
+  <button class="theme-toggle" id="themeToggle">切换暗色主题</button>
+
+  <h1>FFBox-UI Playground</h1>
+  <p style="margin-bottom: 32px;">基于 Lit Web Components 的组件库演示</p>
+
+  <!-- Button -->
+  <h2>Button 按钮</h2>
+  <div class="section" id="button-section">
+    <div class="row">
+      <ffbox-button>普通按钮</ffbox-button>
+      <ffbox-button type="primary">主要按钮</ffbox-button>
+      <ffbox-button type="danger">危险按钮</ffbox-button>
+      <ffbox-button type="noBg">无背景按钮</ffbox-button>
+    </div>
+    <div class="row">
+      <ffbox-button size="small">小按钮</ffbox-button>
+      <ffbox-button size="normal">正常按钮</ffbox-button>
+      <ffbox-button size="large">大按钮</ffbox-button>
+    </div>
+    <div class="row">
+      <ffbox-button disabled>禁用按钮</ffbox-button>
+      <ffbox-button type="primary" disabled>禁用主要</ffbox-button>
+    </div>
+    <div class="event-log" id="button-log"></div>
+  </div>
+
+  <!-- Switch -->
+  <h2>Switch 开关</h2>
+  <div class="section" id="switch-section">
+    <div class="row">
+      <span class="label">开关 A:</span>
+      <ffbox-switch id="switchA"></ffbox-switch>
+      <span id="switchA-value">false</span>
+    </div>
+    <div class="row">
+      <span class="label">开关 B:</span>
+      <ffbox-switch id="switchB" checked></ffbox-switch>
+      <span id="switchB-value">true</span>
+    </div>
+    <div class="event-log" id="switch-log"></div>
+  </div>
+
+  <!-- Checkbox -->
+  <h2>Checkbox 复选框</h2>
+  <div class="section" id="checkbox-section">
+    <div class="row">
+      <span class="label">未选中:</span>
+      <ffbox-checkbox id="cb1"></ffbox-checkbox>
+    </div>
+    <div class="row">
+      <span class="label">已选中:</span>
+      <ffbox-checkbox id="cb2" checked></ffbox-checkbox>
+    </div>
+    <div class="row">
+      <span class="label">部分选中:</span>
+      <ffbox-checkbox id="cb3" checked="partial"></ffbox-checkbox>
+    </div>
+    <div class="row">
+      <span class="label">禁用:</span>
+      <ffbox-checkbox disabled></ffbox-checkbox>
+      <ffbox-checkbox checked disabled></ffbox-checkbox>
+    </div>
+    <div class="event-log" id="checkbox-log"></div>
+  </div>
+
+  <!-- Radio -->
+  <h2>Radio 单选框</h2>
+  <div class="section" id="radio-section">
+    <div class="row">
+      <span class="label">未选中:</span>
+      <ffbox-radio id="r1"></ffbox-radio>
+    </div>
+    <div class="row">
+      <span class="label">已选中:</span>
+      <ffbox-radio id="r2" checked></ffbox-radio>
+    </div>
+    <div class="row">
+      <span class="label">禁用:</span>
+      <ffbox-radio disabled></ffbox-radio>
+      <ffbox-radio checked disabled></ffbox-radio>
+    </div>
+    <div class="event-log" id="radio-log"></div>
+  </div>
+
+  <!-- RockerSwitch -->
+  <h2>RockerSwitch 摇杆开关</h2>
+  <div class="section" id="rocker-section">
+    <div class="row">
+      <ffbox-rocker-switch id="rs1">帧率</ffbox-rocker-switch>
+    </div>
+    <div class="row">
+      <ffbox-rocker-switch id="rs2" size="m">分辨率</ffbox-rocker-switch>
+    </div>
+    <div class="row">
+      <ffbox-rocker-switch disabled-left>左禁用</ffbox-rocker-switch>
+      <ffbox-rocker-switch disabled-right>右禁用</ffbox-rocker-switch>
+    </div>
+    <div class="event-log" id="rocker-log"></div>
+  </div>
+
+  <!-- 非 Vite 环境的 fallback，Vite 会忽略这段 -->
+  <script type="importmap">
+    {
+      "imports": {
+        "ffbox-ui": "../dist/esm/ffbox-ui-autoregister.js",
+        "ffbox-button": "../dist/esm/components/button/ffbox-button.js"
+      }
+    }
+  </script>
+  
+  <script type="module">
+    import 'ffbox-ui';  // Vite → 重写为源文件; 无 Vite → importmap 解析
+    // import 'ffbox-button';  // 独立引入示例
+
+    document.body.classList.add('themeLight');
+
+    const themeToggle = document.getElementById('themeToggle');
+    let isDark = false;
+
+    themeToggle.addEventListener('click', () => {
+      isDark = !isDark;
+      document.body.className = isDark ? 'themeDark' : 'themeLight';
+      themeToggle.textContent = isDark ? '切换亮色主题' : '切换暗色主题';
+      document.querySelectorAll('[data-theme]').forEach(el => {
+        el.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      });
+      document.querySelectorAll('ffbox-button, ffbox-switch, ffbox-checkbox, ffbox-radio, ffbox-rocker-switch').forEach(el => {
+        el.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      });
+    });
+
+    function logEvent(sectionId, msg) {
+      const log = document.getElementById(sectionId);
+      if (log) log.textContent = msg;
+    }
+
+    document.querySelectorAll('ffbox-button').forEach(btn => {
+      btn.addEventListener('ffbox-click', e => logEvent('button-log', `Button clicked: ${btn.textContent.trim()}`));
+    });
+
+    const switchA = document.getElementById('switchA');
+    const switchB = document.getElementById('switchB');
+    switchA.addEventListener('ffbox-change', e => {
+      document.getElementById('switchA-value').textContent = e.detail;
+      logEvent('switch-log', `Switch A → ${e.detail}`);
+    });
+    switchB.addEventListener('ffbox-change', e => {
+      document.getElementById('switchB-value').textContent = e.detail;
+      logEvent('switch-log', `Switch B → ${e.detail}`);
+    });
+
+    document.querySelectorAll('ffbox-checkbox').forEach(cb => {
+      cb.addEventListener('ffbox-change', e => logEvent('checkbox-log', `Checkbox → ${e.detail}`));
+    });
+
+    document.querySelectorAll('ffbox-radio').forEach(r => {
+      r.addEventListener('ffbox-change', e => logEvent('radio-log', `Radio → ${e.detail}`));
+    });
+
+    document.querySelectorAll('ffbox-rocker-switch').forEach(rs => {
+      rs.addEventListener('ffbox-left', () => logEvent('rocker-log', `Rocker ← left`));
+      rs.addEventListener('ffbox-right', () => logEvent('rocker-log', `Rocker → right`));
+    });
+  </script>
+</body>
+</html>
