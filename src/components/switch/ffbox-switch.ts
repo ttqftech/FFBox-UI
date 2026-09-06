@@ -1,5 +1,8 @@
+import '../theme-provider/ffbox-theme-provider.js';
 import { LitElement, html, css } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import { consume } from '@lit/context';
+import { themeContext, Theme } from '../../contexts/theme-context.js';
 
 @customElement('ffbox-switch')
 export class FFBoxSwitch extends LitElement {
@@ -8,6 +11,10 @@ export class FFBoxSwitch extends LitElement {
 			display: inline-block;
 		}
 
+		// :host([data-theme="dark"]) {
+		// 	outline: red 1px solid;	// 测试 theme 响应
+		// }
+	
 		.switch-track {
 			position: relative;
 			height: 24px;
@@ -54,7 +61,8 @@ export class FFBoxSwitch extends LitElement {
 	`;
 
 	@property({ type: Boolean, reflect: true }) checked = false;
-	@property({ reflect: true, attribute: 'data-theme' }) theme: 'light' | 'dark' = 'light';
+	@consume({ context: themeContext, subscribe: true })
+	@property({ reflect: true, attribute: 'data-theme' }) theme: Theme = 'light';
 
 	@query('.switch-slipper') private slipperEl!: HTMLElement;
 
@@ -148,7 +156,7 @@ export class FFBoxSwitch extends LitElement {
 	private _emitChange(value: boolean) {
 		const old = this.checked;
 		this.checked = value;
-		this.dispatchEvent(new CustomEvent('ffbox-change', {
+		this.dispatchEvent(new CustomEvent('change', {
 			detail: value,
 			bubbles: true,
 			composed: true,

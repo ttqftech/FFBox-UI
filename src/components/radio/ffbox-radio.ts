@@ -1,5 +1,8 @@
+import '../theme-provider/ffbox-theme-provider.js';
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { consume } from '@lit/context';
+import { themeContext, Theme } from '../../contexts/theme-context.js';
 
 @customElement('ffbox-radio')
 export class FFBoxRadio extends LitElement {
@@ -7,6 +10,10 @@ export class FFBoxRadio extends LitElement {
 		:host {
 			display: inline-block;
 		}
+
+		// :host([data-theme="dark"]) {
+		// 	outline: red 1px solid;	// 测试 theme 响应
+		// }
 
 		.box {
 			position: relative;
@@ -62,7 +69,8 @@ export class FFBoxRadio extends LitElement {
 		},
 	}) checked: boolean | 'partial' = false;
 	@property({ type: Boolean, reflect: true }) disabled = false;
-	@property({ reflect: true, attribute: 'data-theme' }) theme: 'light' | 'dark' = 'light';
+	@consume({ context: themeContext, subscribe: true })
+	@property({ reflect: true, attribute: 'data-theme' }) theme: Theme = 'light';
 
 	render() {
 		const isSelected = this.checked === true || this.checked === 'partial';
@@ -81,7 +89,7 @@ export class FFBoxRadio extends LitElement {
 		if (this.disabled) return;
 		const newValue = this.checked === true ? false : true;
 		this.checked = newValue;
-		this.dispatchEvent(new CustomEvent('ffbox-change', {
+		this.dispatchEvent(new CustomEvent('change', {
 			detail: newValue,
 			bubbles: true,
 			composed: true,

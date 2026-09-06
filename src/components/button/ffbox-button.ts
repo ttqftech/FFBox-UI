@@ -1,5 +1,8 @@
-import { LitElement, html, css, nothing } from 'lit';
+import '../theme-provider/ffbox-theme-provider.js';
+import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { consume } from '@lit/context';
+import { themeContext, Theme } from '../../contexts/theme-context.js';
 
 export type ButtonType = 'normal' | 'primary' | 'danger' | 'noBg';
 export type ButtonSize = 'small' | 'normal' | 'large';
@@ -25,8 +28,8 @@ export class FFBoxButton extends LitElement {
 			line-height: 100%;
 			font-size: 14px;
 			text-align: center;
-			background: linear-gradient(180deg, hwb(var(--bg99, 0 99% 1%)), hwb(var(--bg94, 0 94% 6%)));
-			color: var(--33, #333);
+			background: linear-gradient(180deg, hwb(var(--bg99)), hwb(var(--bg94)));
+			color: var(--33);
 			font-family: inherit;
 			border-radius: 8px;
 			border: none;
@@ -41,18 +44,18 @@ export class FFBoxButton extends LitElement {
 		}
 
 		/* Light theme */
-		:host(:not([data-theme="dark"])) .button {
+		:host([data-theme="light"]) .button {
 			box-shadow:
-				0 0 1px 0.5px hwb(var(--bg99, 0 99% 1%)),
-				0 1px 3px 0 hwb(var(--hoverShadow, 0 0% 100%) / 0.3);
+				0 0 1px 0.5px hwb(var(--bg99)),
+				0 1px 3px 0 hwb(var(--hoverShadow) / 0.3);
 		}
-		:host(:not([data-theme="dark"])) .button:hover {
+		:host([data-theme="light"]) .button:hover {
 			box-shadow:
 				0 0 1px 0.5px hwb(var(--bg99, 0 99% 1%)),
 				0 0 0 0.5px hwb(var(--highlight, 0 100% 0%)) inset,
 				0 1px 4px 0 hwb(var(--hoverShadow, 0 0% 100%) / 0.4);
 		}
-		:host(:not([data-theme="dark"])) .button:active {
+		:host([data-theme="light"]) .button:active {
 			box-shadow:
 				0 0px 2px 0.5px hwb(var(--hoverShadow, 0 0% 100%) / 0.15),
 				0 8px 12px hwb(var(--hoverShadow, 0 0% 100%) / 0.1) inset;
@@ -60,6 +63,7 @@ export class FFBoxButton extends LitElement {
 
 		/* Dark theme */
 		:host([data-theme="dark"]) .button {
+			/* outline: red 1px solid;	// 测试 theme 响应 */
 			box-shadow:
 				0 0 1px 0.5px hwb(var(--bg99, 0 18.5% 81.5%)),
 				0 0 0 0.5px hwb(var(--highlight, 0 25% 75%) / 0.5) inset,
@@ -200,10 +204,26 @@ export class FFBoxButton extends LitElement {
 		}
 	`;
 
+	constructor() {
+		super();
+		this.addEventListener('click', (e: Event) => {
+			if (this.disabled) {
+				e.stopImmediatePropagation();
+			}
+		});
+		// 以下实现等同于装饰器 @consume({ context: themeContext, subscribe: true }) 的功能，保留注释以供参考
+		// new ContextConsumer(this, {
+		// 	context: themeContext,
+		// 	subscribe: true,
+		// 	callback: (value: Theme) => { this.theme = value; },
+		// });
+	}
+
 	@property({ reflect: true }) type: ButtonType = 'normal';
 	@property({ reflect: true }) size: ButtonSize = 'normal';
 	@property({ reflect: true, type: Boolean }) disabled = false;
-	@property({ reflect: true, attribute: 'data-theme' }) theme: 'light' | 'dark' = 'light';
+	@consume({ context: themeContext, subscribe: true })
+	@property({ reflect: true, attribute: 'data-theme' }) theme: Theme = 'light';
 
 	render() {
 		const typeClass = this.type !== 'normal' ? this.type : '';
@@ -214,21 +234,10 @@ export class FFBoxButton extends LitElement {
 			<button
 				class=${classes}
 				?disabled=${this.disabled}
-				@click=${this._handleClick}
 			>
 				<slot></slot>
 			</button>
 		`;
-	}
-
-	private _handleClick(e: MouseEvent) {
-		if (this.disabled) return;
-		e.stopImmediatePropagation();
-		this.dispatchEvent(new CustomEvent('ffbox-click', {
-			detail: e,
-			bubbles: true,
-			composed: true,
-		}));
 	}
 }
 

@@ -1,5 +1,8 @@
+import '../theme-provider/ffbox-theme-provider.js';
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { consume } from '@lit/context';
+import { themeContext, Theme } from '../../contexts/theme-context.js';
 
 @customElement('ffbox-rocker-switch')
 export class FFBoxRockerSwitch extends LitElement {
@@ -11,6 +14,10 @@ export class FFBoxRockerSwitch extends LitElement {
 			isolation: isolate;
 			opacity: 0.7;
 		}
+
+		// :host([data-theme="dark"]) {
+		// 	outline: red 1px solid;	// 测试 theme 响应
+		// }
 
 		.rockerSwitch {
 			position: relative;
@@ -84,7 +91,8 @@ export class FFBoxRockerSwitch extends LitElement {
 	@property({ reflect: true }) size: 's' | 'm' = 's';
 	@property({ type: Boolean, attribute: 'disabled-left' }) disabledLeft = false;
 	@property({ type: Boolean, attribute: 'disabled-right' }) disabledRight = false;
-	@property({ reflect: true, attribute: 'data-theme' }) theme: 'light' | 'dark' = 'light';
+	@consume({ context: themeContext, subscribe: true })
+	@property({ reflect: true, attribute: 'data-theme' }) theme: Theme = 'light';
 
 	render() {
 		return html`

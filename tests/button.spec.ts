@@ -15,7 +15,7 @@ test.describe('ffbox-button', () => {
     await expect(buttons).toHaveCount(9);
   });
 
-  test('disabled button does not fire ffbox-click', async ({ page }) => {
+  test('disabled button does not fire click', async ({ page }) => {
     await page.goto('/playground/');
     const disabledBtn = page.locator('ffbox-button[disabled]').first();
     const clickPromise = page.waitForEvent('page', { timeout: 500 }).catch(() => null);
@@ -24,7 +24,7 @@ test.describe('ffbox-button', () => {
     await expect(log).toHaveText('');
   });
 
-  test('clicking normal button fires ffbox-click', async ({ page }) => {
+  test('clicking normal button fires click', async ({ page }) => {
     await page.goto('/playground/');
     const btn = page.locator('ffbox-button').first();
     await btn.click();

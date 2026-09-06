@@ -6,16 +6,16 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */
   var _a;
-  const t$2 = globalThis, e$4 = t$2.ShadowRoot && (void 0 === t$2.ShadyCSS || t$2.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, s$2 = Symbol(), o$4 = /* @__PURE__ */ new WeakMap();
-  let n$3 = class n {
+  const t$3 = globalThis, e$6 = t$3.ShadowRoot && (void 0 === t$3.ShadyCSS || t$3.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, s$5 = Symbol(), o$4 = /* @__PURE__ */ new WeakMap();
+  let n$4 = class n {
     constructor(t2, e2, o2) {
-      if (this._$cssResult$ = true, o2 !== s$2) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+      if (this._$cssResult$ = true, o2 !== s$5) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
       this.cssText = t2, this.t = e2;
     }
     get styleSheet() {
       let t2 = this.o;
       const s2 = this.t;
-      if (e$4 && void 0 === t2) {
+      if (e$6 && void 0 === t2) {
         const e2 = void 0 !== s2 && 1 === s2.length;
         e2 && (t2 = o$4.get(s2)), void 0 === t2 && ((this.o = t2 = new CSSStyleSheet()).replaceSync(this.cssText), e2 && o$4.set(s2, t2));
       }
@@ -25,20 +25,20 @@
       return this.cssText;
     }
   };
-  const r$3 = (t2) => new n$3("string" == typeof t2 ? t2 : t2 + "", void 0, s$2), i$3 = (t2, ...e2) => {
+  const r$3 = (t2) => new n$4("string" == typeof t2 ? t2 : t2 + "", void 0, s$5), i$4 = (t2, ...e2) => {
     const o2 = 1 === t2.length ? t2[0] : e2.reduce((e3, s2, o3) => e3 + ((t3) => {
       if (true === t3._$cssResult$) return t3.cssText;
       if ("number" == typeof t3) return t3;
       throw Error("Value passed to 'css' function must be a 'css' function result: " + t3 + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
     })(s2) + t2[o3 + 1], t2[0]);
-    return new n$3(o2, t2, s$2);
+    return new n$4(o2, t2, s$5);
   }, S$1 = (s2, o2) => {
-    if (e$4) s2.adoptedStyleSheets = o2.map((t2) => t2 instanceof CSSStyleSheet ? t2 : t2.styleSheet);
+    if (e$6) s2.adoptedStyleSheets = o2.map((t2) => t2 instanceof CSSStyleSheet ? t2 : t2.styleSheet);
     else for (const e2 of o2) {
-      const o3 = document.createElement("style"), n2 = t$2.litNonce;
+      const o3 = document.createElement("style"), n2 = t$3.litNonce;
       void 0 !== n2 && o3.setAttribute("nonce", n2), o3.textContent = e2.cssText, s2.appendChild(o3);
     }
-  }, c$2 = e$4 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
+  }, c$3 = e$6 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
     let e2 = "";
     for (const s2 of t3.cssRules) e2 += s2.cssText;
     return r$3(e2);
@@ -48,7 +48,7 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const { is: i$2, defineProperty: e$3, getOwnPropertyDescriptor: h$1, getOwnPropertyNames: r$2, getOwnPropertySymbols: o$3, getPrototypeOf: n$2 } = Object, a$1 = globalThis, c$1 = a$1.trustedTypes, l$1 = c$1 ? c$1.emptyScript : "", p$1 = a$1.reactiveElementPolyfillSupport, d$1 = (t2, s2) => t2, u$1 = { toAttribute(t2, s2) {
+  const { is: i$3, defineProperty: e$5, getOwnPropertyDescriptor: h$1, getOwnPropertyNames: r$2, getOwnPropertySymbols: o$3, getPrototypeOf: n$3 } = Object, a$1 = globalThis, c$2 = a$1.trustedTypes, l$1 = c$2 ? c$2.emptyScript : "", p$1 = a$1.reactiveElementPolyfillSupport, d$1 = (t2, s2) => t2, u$1 = { toAttribute(t2, s2) {
     switch (s2) {
       case Boolean:
         t2 = t2 ? l$1 : null;
@@ -76,7 +76,7 @@
         }
     }
     return i2;
-  } }, f$1 = (t2, s2) => !i$2(t2, s2), b$1 = { attribute: true, type: String, converter: u$1, reflect: false, useDefault: false, hasChanged: f$1 };
+  } }, f$1 = (t2, s2) => !i$3(t2, s2), b$1 = { attribute: true, type: String, converter: u$1, reflect: false, useDefault: false, hasChanged: f$1 };
   Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), a$1.litPropertyMetadata ?? (a$1.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
   let y$1 = class y extends HTMLElement {
     static addInitializer(t2) {
@@ -88,7 +88,7 @@
     static createProperty(t2, s2 = b$1) {
       if (s2.state && (s2.attribute = false), this._$Ei(), this.prototype.hasOwnProperty(t2) && ((s2 = Object.create(s2)).wrapped = true), this.elementProperties.set(t2, s2), !s2.noAccessor) {
         const i2 = Symbol(), h2 = this.getPropertyDescriptor(t2, i2, s2);
-        void 0 !== h2 && e$3(this.prototype, t2, h2);
+        void 0 !== h2 && e$5(this.prototype, t2, h2);
       }
     }
     static getPropertyDescriptor(t2, s2, i2) {
@@ -107,7 +107,7 @@
     }
     static _$Ei() {
       if (this.hasOwnProperty(d$1("elementProperties"))) return;
-      const t2 = n$2(this);
+      const t2 = n$3(this);
       t2.finalize(), void 0 !== t2.l && (this.l = [...t2.l]), this.elementProperties = new Map(t2.elementProperties);
     }
     static finalize() {
@@ -132,8 +132,8 @@
       const i2 = [];
       if (Array.isArray(s2)) {
         const e2 = new Set(s2.flat(1 / 0).reverse());
-        for (const s3 of e2) i2.unshift(c$2(s3));
-      } else void 0 !== s2 && i2.push(c$2(s2));
+        for (const s3 of e2) i2.unshift(c$3(s3));
+      } else void 0 !== s2 && i2.push(c$3(s2));
       return i2;
     }
     static _$Eu(t2, s2) {
@@ -287,11 +287,11 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$1 = globalThis, i$1 = (t2) => t2, s$1 = t$1.trustedTypes, e$2 = s$1 ? s$1.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, h = "$lit$", o$2 = `lit$${Math.random().toFixed(9).slice(2)}$`, n$1 = "?" + o$2, r$1 = `<${n$1}>`, l = document, c = () => l.createComment(""), a = (t2) => null === t2 || "object" != typeof t2 && "function" != typeof t2, u = Array.isArray, d = (t2) => u(t2) || "function" == typeof (t2 == null ? void 0 : t2[Symbol.iterator]), f = "[ 	\n\f\r]", v = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, _ = /-->/g, m = />/g, p = RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ 	
+  const t$2 = globalThis, i$2 = (t2) => t2, s$4 = t$2.trustedTypes, e$4 = s$4 ? s$4.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, h = "$lit$", o$2 = `lit$${Math.random().toFixed(9).slice(2)}$`, n$2 = "?" + o$2, r$1 = `<${n$2}>`, l = document, c$1 = () => l.createComment(""), a = (t2) => null === t2 || "object" != typeof t2 && "function" != typeof t2, u = Array.isArray, d = (t2) => u(t2) || "function" == typeof (t2 == null ? void 0 : t2[Symbol.iterator]), f = "[ 	\n\f\r]", v = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, _ = /-->/g, m = />/g, p = RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ 	
 \f\r"'\`<>=]|("|')|))|$)`, "g"), g = /'/g, $ = /"/g, y = /^(?:script|style|textarea|title)$/i, x = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), b = x(1), E = Symbol.for("lit-noChange"), A = Symbol.for("lit-nothing"), C = /* @__PURE__ */ new WeakMap(), P = l.createTreeWalker(l, 129);
   function V(t2, i2) {
     if (!u(t2) || !t2.hasOwnProperty("raw")) throw Error("invalid template strings array");
-    return void 0 !== e$2 ? e$2.createHTML(i2) : i2;
+    return void 0 !== e$4 ? e$4.createHTML(i2) : i2;
   }
   const N = (t2, i2) => {
     const s2 = t2.length - 1, e2 = [];
@@ -324,12 +324,12 @@
           if (y.test(r2.tagName)) {
             const t3 = r2.textContent.split(o$2), i3 = t3.length - 1;
             if (i3 > 0) {
-              r2.textContent = s$1 ? s$1.emptyScript : "";
-              for (let s2 = 0; s2 < i3; s2++) r2.append(t3[s2], c()), P.nextNode(), d2.push({ type: 2, index: ++l2 });
-              r2.append(t3[i3], c());
+              r2.textContent = s$4 ? s$4.emptyScript : "";
+              for (let s2 = 0; s2 < i3; s2++) r2.append(t3[s2], c$1()), P.nextNode(), d2.push({ type: 2, index: ++l2 });
+              r2.append(t3[i3], c$1());
             }
           }
-        } else if (8 === r2.nodeType) if (r2.data === n$1) d2.push({ type: 2, index: l2 });
+        } else if (8 === r2.nodeType) if (r2.data === n$2) d2.push({ type: 2, index: l2 });
         else {
           let t3 = -1;
           for (; -1 !== (t3 = r2.data.indexOf(o$2, t3 + 1)); ) d2.push({ type: 7, index: l2 }), t3 += o$2.length - 1;
@@ -425,14 +425,14 @@
       u(this._$AH) || (this._$AH = [], this._$AR());
       const i2 = this._$AH;
       let s2, e2 = 0;
-      for (const h2 of t2) e2 === i2.length ? i2.push(s2 = new k(this.O(c()), this.O(c()), this, this.options)) : s2 = i2[e2], s2._$AI(h2), e2++;
+      for (const h2 of t2) e2 === i2.length ? i2.push(s2 = new k(this.O(c$1()), this.O(c$1()), this, this.options)) : s2 = i2[e2], s2._$AI(h2), e2++;
       e2 < i2.length && (this._$AR(s2 && s2._$AB.nextSibling, e2), i2.length = e2);
     }
     _$AR(t2 = this._$AA.nextSibling, s2) {
       var _a2;
       for ((_a2 = this._$AP) == null ? void 0 : _a2.call(this, false, true, s2); t2 !== this._$AB; ) {
-        const s3 = i$1(t2).nextSibling;
-        i$1(t2).remove(), t2 = s3;
+        const s3 = i$2(t2).nextSibling;
+        i$2(t2).remove(), t2 = s3;
       }
     }
     setConnected(t2) {
@@ -506,14 +506,14 @@
       M(this, t2);
     }
   }
-  const B = t$1.litHtmlPolyfillSupport;
-  B == null ? void 0 : B(S, k), (t$1.litHtmlVersions ?? (t$1.litHtmlVersions = [])).push("3.3.3");
+  const B = t$2.litHtmlPolyfillSupport;
+  B == null ? void 0 : B(S, k), (t$2.litHtmlVersions ?? (t$2.litHtmlVersions = [])).push("3.3.3");
   const D = (t2, i2, s2) => {
     const e2 = (s2 == null ? void 0 : s2.renderBefore) ?? i2;
     let h2 = e2._$litPart$;
     if (void 0 === h2) {
       const t3 = (s2 == null ? void 0 : s2.renderBefore) ?? null;
-      e2._$litPart$ = h2 = new k(i2.insertBefore(c(), t3), t3, void 0, s2 ?? {});
+      e2._$litPart$ = h2 = new k(i2.insertBefore(c$1(), t3), t3, void 0, s2 ?? {});
     }
     return h2._$AI(t2), h2;
   };
@@ -522,8 +522,8 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const s = globalThis;
-  class i extends y$1 {
+  const s$3 = globalThis;
+  let i$1 = class i extends y$1 {
     constructor() {
       super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
     }
@@ -547,17 +547,17 @@
     render() {
       return E;
     }
-  }
-  i._$litElement$ = true, i["finalized"] = true, (_a = s.litElementHydrateSupport) == null ? void 0 : _a.call(s, { LitElement: i });
-  const o$1 = s.litElementPolyfillSupport;
-  o$1 == null ? void 0 : o$1({ LitElement: i });
-  (s.litElementVersions ?? (s.litElementVersions = [])).push("4.2.2");
+  };
+  i$1._$litElement$ = true, i$1["finalized"] = true, (_a = s$3.litElementHydrateSupport) == null ? void 0 : _a.call(s$3, { LitElement: i$1 });
+  const o$1 = s$3.litElementPolyfillSupport;
+  o$1 == null ? void 0 : o$1({ LitElement: i$1 });
+  (s$3.litElementVersions ?? (s$3.litElementVersions = [])).push("4.2.2");
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t = (t2) => (e2, o2) => {
+  const t$1 = (t2) => (e2, o2) => {
     void 0 !== o2 ? o2.addInitializer(() => {
       customElements.define(t2, e2);
     }) : customElements.define(t2, e2);
@@ -588,7 +588,7 @@
     }
     throw Error("Unsupported decorator location: " + n2);
   };
-  function n(t2) {
+  function n$1(t2) {
     return (e2, o2) => "object" == typeof o2 ? r(t2, e2, o2) : ((t3, e3, o3) => {
       const r2 = e3.hasOwnProperty(o3);
       return e3.constructor.createProperty(o3, t3), r2 ? Object.getOwnPropertyDescriptor(e3, o3) : void 0;
@@ -599,23 +599,262 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const e$1 = (e2, t2, c2) => (c2.configurable = true, c2.enumerable = true, Reflect.decorate && "object" != typeof t2 && Object.defineProperty(e2, t2, c2), c2);
+  const e$3 = (e2, t2, c2) => (c2.configurable = true, c2.enumerable = true, Reflect.decorate && "object" != typeof t2 && Object.defineProperty(e2, t2, c2), c2);
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  function e(e2, r2) {
+  function e$2(e2, r2) {
     return (n2, s2, i2) => {
       const o2 = (t2) => {
         var _a2;
         return ((_a2 = t2.renderRoot) == null ? void 0 : _a2.querySelector(e2)) ?? null;
       };
-      return e$1(n2, s2, { get() {
+      return e$3(n2, s2, { get() {
         return o2(this);
       } });
     };
   }
+  /**
+   * @license
+   * Copyright 2021 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  let s$2 = class s extends Event {
+    constructor(s2, t2, e2, o2) {
+      super("context-request", { bubbles: true, composed: true }), this.context = s2, this.contextTarget = t2, this.callback = e2, this.subscribe = o2 ?? false;
+    }
+  };
+  /**
+   * @license
+   * Copyright 2021 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  function n(n2) {
+    return n2;
+  }
+  /**
+   * @license
+   * Copyright 2021 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  let s$1 = class s {
+    constructor(t2, s2, i2, h2) {
+      if (this.subscribe = false, this.provided = false, this.value = void 0, this.t = (t3, s3) => {
+        this.unsubscribe && (this.unsubscribe !== s3 && (this.provided = false, this.unsubscribe()), this.subscribe || this.unsubscribe()), this.value = t3, this.host.requestUpdate(), this.provided && !this.subscribe || (this.provided = true, this.callback && this.callback(t3, s3)), this.unsubscribe = s3;
+      }, this.host = t2, void 0 !== s2.context) {
+        const t3 = s2;
+        this.context = t3.context, this.callback = t3.callback, this.subscribe = t3.subscribe ?? false;
+      } else this.context = s2, this.callback = i2, this.subscribe = h2 ?? false;
+      this.host.addController(this);
+    }
+    hostConnected() {
+      this.dispatchRequest();
+    }
+    hostDisconnected() {
+      this.unsubscribe && (this.unsubscribe(), this.unsubscribe = void 0);
+    }
+    dispatchRequest() {
+      this.host.dispatchEvent(new s$2(this.context, this.host, this.t, this.subscribe));
+    }
+  };
+  /**
+   * @license
+   * Copyright 2021 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  class s {
+    get value() {
+      return this.o;
+    }
+    set value(s2) {
+      this.setValue(s2);
+    }
+    setValue(s2, t2 = false) {
+      const i2 = t2 || !Object.is(s2, this.o);
+      this.o = s2, i2 && this.updateObservers();
+    }
+    constructor(s2) {
+      this.subscriptions = /* @__PURE__ */ new Map(), this.updateObservers = () => {
+        for (const [s3, { disposer: t2 }] of this.subscriptions) s3(this.o, t2);
+      }, void 0 !== s2 && (this.value = s2);
+    }
+    addCallback(s2, t2, i2) {
+      if (!i2) return void s2(this.value);
+      this.subscriptions.has(s2) || this.subscriptions.set(s2, { disposer: () => {
+        this.subscriptions.delete(s2);
+      }, consumerHost: t2 });
+      const { disposer: h2 } = this.subscriptions.get(s2);
+      s2(this.value, h2);
+    }
+    clearCallbacks() {
+      this.subscriptions.clear();
+    }
+  }
+  /**
+   * @license
+   * Copyright 2021 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  let e$1 = class e extends Event {
+    constructor(t2, s2) {
+      super("context-provider", { bubbles: true, composed: true }), this.context = t2, this.contextTarget = s2;
+    }
+  };
+  class i extends s {
+    constructor(s2, e2, i2) {
+      var _a2, _b;
+      super(void 0 !== e2.context ? e2.initialValue : i2), this.onContextRequest = (t2) => {
+        if (t2.context !== this.context) return;
+        const s3 = t2.contextTarget ?? t2.composedPath()[0];
+        s3 !== this.host && (t2.stopPropagation(), this.addCallback(t2.callback, s3, t2.subscribe));
+      }, this.onProviderRequest = (s3) => {
+        if (s3.context !== this.context) return;
+        if ((s3.contextTarget ?? s3.composedPath()[0]) === this.host) return;
+        const e3 = /* @__PURE__ */ new Set();
+        for (const [s4, { consumerHost: i3 }] of this.subscriptions) e3.has(s4) || (e3.add(s4), i3.dispatchEvent(new s$2(this.context, i3, s4, true)));
+        s3.stopPropagation();
+      }, this.host = s2, void 0 !== e2.context ? this.context = e2.context : this.context = e2, this.attachListeners(), (_b = (_a2 = this.host).addController) == null ? void 0 : _b.call(_a2, this);
+    }
+    attachListeners() {
+      this.host.addEventListener("context-request", this.onContextRequest), this.host.addEventListener("context-provider", this.onProviderRequest);
+    }
+    hostConnected() {
+      this.host.dispatchEvent(new e$1(this.context, this.host));
+    }
+  }
+  /**
+   * @license
+   * Copyright 2021 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  class t {
+    constructor() {
+      this.pendingContextRequests = /* @__PURE__ */ new Map(), this.onContextProvider = (t2) => {
+        const s2 = this.pendingContextRequests.get(t2.context);
+        if (void 0 === s2) return;
+        this.pendingContextRequests.delete(t2.context);
+        const { requests: o2 } = s2;
+        for (const { elementRef: s3, callbackRef: n2 } of o2) {
+          const o3 = s3.deref(), c2 = n2.deref();
+          void 0 === o3 || void 0 === c2 || o3.dispatchEvent(new s$2(t2.context, o3, c2, true));
+        }
+      }, this.onContextRequest = (e2) => {
+        if (true !== e2.subscribe) return;
+        const t2 = e2.contextTarget ?? e2.composedPath()[0], s2 = e2.callback;
+        let o2 = this.pendingContextRequests.get(e2.context);
+        void 0 === o2 && this.pendingContextRequests.set(e2.context, o2 = { callbacks: /* @__PURE__ */ new WeakMap(), requests: [] });
+        let n2 = o2.callbacks.get(t2);
+        void 0 === n2 && o2.callbacks.set(t2, n2 = /* @__PURE__ */ new WeakSet()), n2.has(s2) || (n2.add(s2), o2.requests.push({ elementRef: new WeakRef(t2), callbackRef: new WeakRef(s2) }));
+      };
+    }
+    attach(e2) {
+      e2.addEventListener("context-request", this.onContextRequest), e2.addEventListener("context-provider", this.onContextProvider);
+    }
+    detach(e2) {
+      e2.removeEventListener("context-request", this.onContextRequest), e2.removeEventListener("context-provider", this.onContextProvider);
+    }
+  }
+  /**
+   * @license
+   * Copyright 2017 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  function e({ context: e2 }) {
+    return (n2, i$12) => {
+      const r2 = /* @__PURE__ */ new WeakMap();
+      if ("object" == typeof i$12) return { get() {
+        return n2.get.call(this);
+      }, set(t2) {
+        return r2.get(this).setValue(t2), n2.set.call(this, t2);
+      }, init(n3) {
+        return r2.set(this, new i(this, { context: e2, initialValue: n3 })), n3;
+      } };
+      {
+        n2.constructor.addInitializer(((n3) => {
+          r2.set(n3, new i(n3, { context: e2 }));
+        }));
+        const o2 = Object.getOwnPropertyDescriptor(n2, i$12);
+        let s2;
+        if (void 0 === o2) {
+          const t2 = /* @__PURE__ */ new WeakMap();
+          s2 = { get() {
+            return t2.get(this);
+          }, set(e3) {
+            r2.get(this).setValue(e3), t2.set(this, e3);
+          }, configurable: true, enumerable: true };
+        } else {
+          const t2 = o2.set;
+          s2 = { ...o2, set(e3) {
+            r2.get(this).setValue(e3), t2 == null ? void 0 : t2.call(this, e3);
+          } };
+        }
+        return void Object.defineProperty(n2, i$12, s2);
+      }
+    };
+  }
+  /**
+   * @license
+   * Copyright 2022 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  function c({ context: c2, subscribe: e2 }) {
+    return (o2, n2) => {
+      "object" == typeof n2 ? n2.addInitializer((function() {
+        new s$1(this, { context: c2, callback: (t2) => {
+          o2.set.call(this, t2);
+        }, subscribe: e2 });
+      })) : o2.constructor.addInitializer(((o3) => {
+        new s$1(o3, { context: c2, callback: (t2) => {
+          o3[n2] = t2;
+        }, subscribe: e2 });
+      }));
+    };
+  }
+  const themeContext = n("ffbox-theme");
+  var __defProp$5 = Object.defineProperty;
+  var __getOwnPropDesc$5 = Object.getOwnPropertyDescriptor;
+  var __decorateClass$5 = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$5(target, key) : target;
+    for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
+      if (decorator = decorators[i2])
+        result = (kind ? decorator(target, key, result) : decorator(result)) || result;
+    if (kind && result) __defProp$5(target, key, result);
+    return result;
+  };
+  if (typeof globalThis.__ffbox_context_root_attached === "undefined") {
+    globalThis.__ffbox_context_root_attached = true;
+    if (typeof document !== "undefined" && document.body) {
+      new t().attach(document.body);
+    }
+  }
+  let FFBoxThemeProvider = class extends i$1 {
+    constructor() {
+      super(...arguments);
+      this.theme = "light";
+    }
+    // 以下实现等同于装饰器 @provide({ context: themeContext }) 的功能，保留注释以供参考
+    // private _provider = new ContextProvider(this, {
+    // 	context: themeContext,
+    // 	initialValue: this.theme,
+    // });
+    // willUpdate(changed: Map<string, unknown>) {
+    // 	if (changed.has('theme')) {
+    // 		this._provider.setValue(this.theme);
+    // 	}
+    // }
+    render() {
+      return b`<slot></slot>`;
+    }
+  };
+  __decorateClass$5([
+    e({ context: themeContext }),
+    n$1({ reflect: true, attribute: "data-theme" })
+  ], FFBoxThemeProvider.prototype, "theme", 2);
+  FFBoxThemeProvider = __decorateClass$5([
+    t$1("ffbox-theme-provider")
+  ], FFBoxThemeProvider);
   var __defProp$4 = Object.defineProperty;
   var __getOwnPropDesc$4 = Object.getOwnPropertyDescriptor;
   var __decorateClass$4 = (decorators, target, key, kind) => {
@@ -626,13 +865,18 @@
     if (kind && result) __defProp$4(target, key, result);
     return result;
   };
-  let FFBoxButton = class extends i {
+  let FFBoxButton = class extends i$1 {
     constructor() {
-      super(...arguments);
+      super();
       this.type = "normal";
       this.size = "normal";
       this.disabled = false;
       this.theme = "light";
+      this.addEventListener("click", (e2) => {
+        if (this.disabled) {
+          e2.stopImmediatePropagation();
+        }
+      });
     }
     render() {
       const typeClass = this.type !== "normal" ? this.type : "";
@@ -642,23 +886,13 @@
 			<button
 				class=${classes}
 				?disabled=${this.disabled}
-				@click=${this._handleClick}
 			>
 				<slot></slot>
 			</button>
 		`;
     }
-    _handleClick(e2) {
-      if (this.disabled) return;
-      e2.stopImmediatePropagation();
-      this.dispatchEvent(new CustomEvent("ffbox-click", {
-        detail: e2,
-        bubbles: true,
-        composed: true
-      }));
-    }
   };
-  FFBoxButton.styles = i$3`
+  FFBoxButton.styles = i$4`
 		:host {
 			display: inline-block;
 			font-family: inherit;
@@ -677,8 +911,8 @@
 			line-height: 100%;
 			font-size: 14px;
 			text-align: center;
-			background: linear-gradient(180deg, hwb(var(--bg99, 0 99% 1%)), hwb(var(--bg94, 0 94% 6%)));
-			color: var(--33, #333);
+			background: linear-gradient(180deg, hwb(var(--bg99)), hwb(var(--bg94)));
+			color: var(--33);
 			font-family: inherit;
 			border-radius: 8px;
 			border: none;
@@ -693,18 +927,18 @@
 		}
 
 		/* Light theme */
-		:host(:not([data-theme="dark"])) .button {
+		:host([data-theme="light"]) .button {
 			box-shadow:
-				0 0 1px 0.5px hwb(var(--bg99, 0 99% 1%)),
-				0 1px 3px 0 hwb(var(--hoverShadow, 0 0% 100%) / 0.3);
+				0 0 1px 0.5px hwb(var(--bg99)),
+				0 1px 3px 0 hwb(var(--hoverShadow) / 0.3);
 		}
-		:host(:not([data-theme="dark"])) .button:hover {
+		:host([data-theme="light"]) .button:hover {
 			box-shadow:
 				0 0 1px 0.5px hwb(var(--bg99, 0 99% 1%)),
 				0 0 0 0.5px hwb(var(--highlight, 0 100% 0%)) inset,
 				0 1px 4px 0 hwb(var(--hoverShadow, 0 0% 100%) / 0.4);
 		}
-		:host(:not([data-theme="dark"])) .button:active {
+		:host([data-theme="light"]) .button:active {
 			box-shadow:
 				0 0px 2px 0.5px hwb(var(--hoverShadow, 0 0% 100%) / 0.15),
 				0 8px 12px hwb(var(--hoverShadow, 0 0% 100%) / 0.1) inset;
@@ -712,6 +946,7 @@
 
 		/* Dark theme */
 		:host([data-theme="dark"]) .button {
+			/* outline: red 1px solid;	// 测试 theme 响应 */
 			box-shadow:
 				0 0 1px 0.5px hwb(var(--bg99, 0 18.5% 81.5%)),
 				0 0 0 0.5px hwb(var(--highlight, 0 25% 75%) / 0.5) inset,
@@ -852,19 +1087,20 @@
 		}
 	`;
   __decorateClass$4([
-    n({ reflect: true })
+    n$1({ reflect: true })
   ], FFBoxButton.prototype, "type", 2);
   __decorateClass$4([
-    n({ reflect: true })
+    n$1({ reflect: true })
   ], FFBoxButton.prototype, "size", 2);
   __decorateClass$4([
-    n({ reflect: true, type: Boolean })
+    n$1({ reflect: true, type: Boolean })
   ], FFBoxButton.prototype, "disabled", 2);
   __decorateClass$4([
-    n({ reflect: true, attribute: "data-theme" })
+    c({ context: themeContext, subscribe: true }),
+    n$1({ reflect: true, attribute: "data-theme" })
   ], FFBoxButton.prototype, "theme", 2);
   FFBoxButton = __decorateClass$4([
-    t("ffbox-button")
+    t$1("ffbox-button")
   ], FFBoxButton);
   var __defProp$3 = Object.defineProperty;
   var __getOwnPropDesc$3 = Object.getOwnPropertyDescriptor;
@@ -876,7 +1112,7 @@
     if (kind && result) __defProp$3(target, key, result);
     return result;
   };
-  let FFBoxSwitch = class extends i {
+  let FFBoxSwitch = class extends i$1 {
     constructor() {
       super(...arguments);
       this.checked = false;
@@ -965,18 +1201,22 @@
     _emitChange(value) {
       this.checked;
       this.checked = value;
-      this.dispatchEvent(new CustomEvent("ffbox-change", {
+      this.dispatchEvent(new CustomEvent("change", {
         detail: value,
         bubbles: true,
         composed: true
       }));
     }
   };
-  FFBoxSwitch.styles = i$3`
+  FFBoxSwitch.styles = i$4`
 		:host {
 			display: inline-block;
 		}
 
+		// :host([data-theme="dark"]) {
+		// 	outline: red 1px solid;	// 测试 theme 响应
+		// }
+	
 		.switch-track {
 			position: relative;
 			height: 24px;
@@ -1022,16 +1262,17 @@
 		}
 	`;
   __decorateClass$3([
-    n({ type: Boolean, reflect: true })
+    n$1({ type: Boolean, reflect: true })
   ], FFBoxSwitch.prototype, "checked", 2);
   __decorateClass$3([
-    n({ reflect: true, attribute: "data-theme" })
+    c({ context: themeContext, subscribe: true }),
+    n$1({ reflect: true, attribute: "data-theme" })
   ], FFBoxSwitch.prototype, "theme", 2);
   __decorateClass$3([
-    e(".switch-slipper")
+    e$2(".switch-slipper")
   ], FFBoxSwitch.prototype, "slipperEl", 2);
   FFBoxSwitch = __decorateClass$3([
-    t("ffbox-switch")
+    t$1("ffbox-switch")
   ], FFBoxSwitch);
   var __defProp$2 = Object.defineProperty;
   var __getOwnPropDesc$2 = Object.getOwnPropertyDescriptor;
@@ -1043,7 +1284,7 @@
     if (kind && result) __defProp$2(target, key, result);
     return result;
   };
-  let FFBoxCheckbox = class extends i {
+  let FFBoxCheckbox = class extends i$1 {
     constructor() {
       super(...arguments);
       this.checked = false;
@@ -1071,17 +1312,21 @@
       if (this.disabled) return;
       const newValue = this.checked === true ? false : true;
       this.checked = newValue;
-      this.dispatchEvent(new CustomEvent("ffbox-change", {
+      this.dispatchEvent(new CustomEvent("change", {
         detail: newValue,
         bubbles: true,
         composed: true
       }));
     }
   };
-  FFBoxCheckbox.styles = i$3`
+  FFBoxCheckbox.styles = i$4`
 		:host {
 			display: inline-block;
 		}
+
+		// :host([data-theme="dark"]) {
+		// 	outline: red 1px solid;	// 测试 theme 响应
+		// }
 
 		.box {
 			position: relative;
@@ -1120,7 +1365,7 @@
 		}
 	`;
   __decorateClass$2([
-    n({
+    n$1({
       reflect: true,
       converter: {
         fromAttribute: (value) => {
@@ -1137,13 +1382,14 @@
     })
   ], FFBoxCheckbox.prototype, "checked", 2);
   __decorateClass$2([
-    n({ type: Boolean, reflect: true })
+    n$1({ type: Boolean, reflect: true })
   ], FFBoxCheckbox.prototype, "disabled", 2);
   __decorateClass$2([
-    n({ reflect: true, attribute: "data-theme" })
+    c({ context: themeContext, subscribe: true }),
+    n$1({ reflect: true, attribute: "data-theme" })
   ], FFBoxCheckbox.prototype, "theme", 2);
   FFBoxCheckbox = __decorateClass$2([
-    t("ffbox-checkbox")
+    t$1("ffbox-checkbox")
   ], FFBoxCheckbox);
   var __defProp$1 = Object.defineProperty;
   var __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor;
@@ -1155,7 +1401,7 @@
     if (kind && result) __defProp$1(target, key, result);
     return result;
   };
-  let FFBoxRadio = class extends i {
+  let FFBoxRadio = class extends i$1 {
     constructor() {
       super(...arguments);
       this.checked = false;
@@ -1178,17 +1424,21 @@
       if (this.disabled) return;
       const newValue = this.checked === true ? false : true;
       this.checked = newValue;
-      this.dispatchEvent(new CustomEvent("ffbox-change", {
+      this.dispatchEvent(new CustomEvent("change", {
         detail: newValue,
         bubbles: true,
         composed: true
       }));
     }
   };
-  FFBoxRadio.styles = i$3`
+  FFBoxRadio.styles = i$4`
 		:host {
 			display: inline-block;
 		}
+
+		// :host([data-theme="dark"]) {
+		// 	outline: red 1px solid;	// 测试 theme 响应
+		// }
 
 		.box {
 			position: relative;
@@ -1228,7 +1478,7 @@
 		}
 	`;
   __decorateClass$1([
-    n({
+    n$1({
       reflect: true,
       converter: {
         fromAttribute: (value) => {
@@ -1245,13 +1495,14 @@
     })
   ], FFBoxRadio.prototype, "checked", 2);
   __decorateClass$1([
-    n({ type: Boolean, reflect: true })
+    n$1({ type: Boolean, reflect: true })
   ], FFBoxRadio.prototype, "disabled", 2);
   __decorateClass$1([
-    n({ reflect: true, attribute: "data-theme" })
+    c({ context: themeContext, subscribe: true }),
+    n$1({ reflect: true, attribute: "data-theme" })
   ], FFBoxRadio.prototype, "theme", 2);
   FFBoxRadio = __decorateClass$1([
-    t("ffbox-radio")
+    t$1("ffbox-radio")
   ], FFBoxRadio);
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -1263,7 +1514,7 @@
     if (kind && result) __defProp(target, key, result);
     return result;
   };
-  let FFBoxRockerSwitch = class extends i {
+  let FFBoxRockerSwitch = class extends i$1 {
     constructor() {
       super(...arguments);
       this.size = "s";
@@ -1291,7 +1542,7 @@
       this.dispatchEvent(new CustomEvent("ffbox-right", { bubbles: true, composed: true }));
     }
   };
-  FFBoxRockerSwitch.styles = i$3`
+  FFBoxRockerSwitch.styles = i$4`
 		:host {
 			display: inline-flex;
 			align-items: center;
@@ -1299,6 +1550,10 @@
 			isolation: isolate;
 			opacity: 0.7;
 		}
+
+		// :host([data-theme="dark"]) {
+		// 	outline: red 1px solid;	// 测试 theme 响应
+		// }
 
 		.rockerSwitch {
 			position: relative;
@@ -1369,19 +1624,20 @@
 		:host([size="m"]) .label { font-size: 13.5px; padding: 0 30px; }
 	`;
   __decorateClass([
-    n({ reflect: true })
+    n$1({ reflect: true })
   ], FFBoxRockerSwitch.prototype, "size", 2);
   __decorateClass([
-    n({ type: Boolean, attribute: "disabled-left" })
+    n$1({ type: Boolean, attribute: "disabled-left" })
   ], FFBoxRockerSwitch.prototype, "disabledLeft", 2);
   __decorateClass([
-    n({ type: Boolean, attribute: "disabled-right" })
+    n$1({ type: Boolean, attribute: "disabled-right" })
   ], FFBoxRockerSwitch.prototype, "disabledRight", 2);
   __decorateClass([
-    n({ reflect: true, attribute: "data-theme" })
+    c({ context: themeContext, subscribe: true }),
+    n$1({ reflect: true, attribute: "data-theme" })
   ], FFBoxRockerSwitch.prototype, "theme", 2);
   FFBoxRockerSwitch = __decorateClass([
-    t("ffbox-rocker-switch")
+    t$1("ffbox-rocker-switch")
   ], FFBoxRockerSwitch);
 })();
 //# sourceMappingURL=ffbox-ui.iife.js.map

@@ -42,6 +42,7 @@
 <body class="themeLight">
   <button class="theme-toggle" id="themeToggle">切换暗色主题</button>
 
+  <ffbox-theme-provider id="themeProvider" data-theme="light">
   <h1>FFBox-UI Playground</h1>
   <p style="margin-bottom: 32px;">基于 Lit Web Components 的组件库演示</p>
 
@@ -139,6 +140,7 @@
     </div>
     <div class="event-log" id="rocker-log"></div>
   </div>
+  </ffbox-theme-provider>
 
   <!-- 非 Vite 环境的 fallback，Vite 会忽略这段 -->
   <script type="importmap">
@@ -151,24 +153,19 @@
   </script>
   
   <script type="module">
-    import 'ffbox-ui';  // Vite → 重写为源文件; 无 Vite → importmap 解析
-    // import 'ffbox-button';  // 独立引入示例
+    import 'ffbox-ui';  // 全量引入（非 Vite 环境取上面的 importmap 中的路径，Vite 环境取 vite config 的 resolve.alias）
+    // import 'ffbox-button';  // 单组件引入（自动包含 theme-provider）
 
-    document.body.classList.add('themeLight');
-
+    const themeProvider = document.getElementById('themeProvider');
     const themeToggle = document.getElementById('themeToggle');
     let isDark = false;
 
     themeToggle.addEventListener('click', () => {
       isDark = !isDark;
+      const theme = isDark ? 'dark' : 'light';
       document.body.className = isDark ? 'themeDark' : 'themeLight';
       themeToggle.textContent = isDark ? '切换亮色主题' : '切换暗色主题';
-      document.querySelectorAll('[data-theme]').forEach(el => {
-        el.setAttribute('data-theme', isDark ? 'dark' : 'light');
-      });
-      document.querySelectorAll('ffbox-button, ffbox-switch, ffbox-checkbox, ffbox-radio, ffbox-rocker-switch').forEach(el => {
-        el.setAttribute('data-theme', isDark ? 'dark' : 'light');
-      });
+      themeProvider.theme = theme;
     });
 
     function logEvent(sectionId, msg) {
@@ -177,26 +174,26 @@
     }
 
     document.querySelectorAll('ffbox-button').forEach(btn => {
-      btn.addEventListener('ffbox-click', e => logEvent('button-log', `Button clicked: ${btn.textContent.trim()}`));
+      btn.addEventListener('click', e => logEvent('button-log', `Button clicked: ${btn.textContent.trim()}`));
     });
 
     const switchA = document.getElementById('switchA');
     const switchB = document.getElementById('switchB');
-    switchA.addEventListener('ffbox-change', e => {
+    switchA.addEventListener('change', e => {
       document.getElementById('switchA-value').textContent = e.detail;
       logEvent('switch-log', `Switch A → ${e.detail}`);
     });
-    switchB.addEventListener('ffbox-change', e => {
+    switchB.addEventListener('change', e => {
       document.getElementById('switchB-value').textContent = e.detail;
       logEvent('switch-log', `Switch B → ${e.detail}`);
     });
 
     document.querySelectorAll('ffbox-checkbox').forEach(cb => {
-      cb.addEventListener('ffbox-change', e => logEvent('checkbox-log', `Checkbox → ${e.detail}`));
+      cb.addEventListener('change', e => logEvent('checkbox-log', `Checkbox → ${e.detail}`));
     });
 
     document.querySelectorAll('ffbox-radio').forEach(r => {
-      r.addEventListener('ffbox-change', e => logEvent('radio-log', `Radio → ${e.detail}`));
+      r.addEventListener('change', e => logEvent('radio-log', `Radio → ${e.detail}`));
     });
 
     document.querySelectorAll('ffbox-rocker-switch').forEach(rs => {

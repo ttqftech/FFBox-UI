@@ -12,7 +12,9 @@ await rm(distDir, { recursive: true, force: true });
 
 const componentDirs = await readdir(resolve(root, 'src/components'));
 
-logMsg(`1. 打包 ${componentDirs.length} 个组件`);
+const entries = {};
+
+logMsg(`收集组件入口`);
 
 for (const dir of componentDirs) {
 	const dirPath = resolve(root, 'src/components', dir);
@@ -24,64 +26,42 @@ for (const dir of componentDirs) {
 	if (!entryFile) continue;
 
 	const entryPath = resolve(dirPath, entryFile);
-	const outDir = resolve(root, 'dist/esm/components', dir);
-
+	entries[`components/${dir}/${entryFile.replace('.ts', '')}`] = entryPath;
 	console.log(`  ${dir}/${entryFile}`);
-
-	await build({
-		root,
-		logLevel: 'warn',
-		build: {
-			lib: {
-				entry: entryPath,
-				formats: ['es'],
-				fileName: () => entryFile.replace('.ts', '.js'),
-			},
-			outDir,
-			emptyOutDir: true,
-			sourcemap: true,
-			minify: false,
-		},
-	});
 }
 
-logMsg('2. 打包主 ESM 模块');
+entries['ffbox-ui'] = resolve(root, 'src/ffbox-ui.ts');
+entries['ffbox-ui-autoregister'] = resolve(root, 'src/ffbox-ui-autoregister.ts');
+
+logMsg(`打包 ESM 模块 (${Object.keys(entries).length} 个入口 + Lit 框架)`);
 
 await build({
 	root,
 	logLevel: 'warn',
 	build: {
 		lib: {
-			entry: resolve(root, 'src/ffbox-ui.ts'),
+			entry: entries,
 			formats: ['es'],
-			fileName: () => 'ffbox-ui.js',
+			fileName: (_format, entryName) => `${entryName}.js`,
 		},
 		outDir: resolve(root, 'dist/esm'),
-		emptyOutDir: false,
+		emptyOutDir: true,
 		sourcemap: true,
 		minify: false,
+		rollupOptions: {
+			output: {
+				manualChunks(id) {
+					// 如果索引到的模块的名称名包含 Lit，就指定这个模块打包到 lit chunk
+					if (/node_modules[\\/](@?lit|@lit-labs)[\\/]/.test(id)) {
+						return 'lit';
+					}
+				},
+			},
+		},
 	},
 });
 
-logMsg('3. 打包自动注册 ESM 模块');
-
-await build({
-	root,
-	logLevel: 'warn',
-	build: {
-		lib: {
-			entry: resolve(root, 'src/ffbox-ui-autoregister.ts'),
-			formats: ['es'],
-			fileName: () => 'ffbox-ui-autoregister.js',
-		},
-		outDir: resolve(root, 'dist/esm'),
-		emptyOutDir: false,
-		sourcemap: true,
-		minify: false,
-	},
-});
-
-logMsg('4. 复制主题文件');
+logMsg('复制主题文件');
 
 const themesDir = resolve(root, 'dist/themes');
 await mkdir(themesDir, { recursive: true });
