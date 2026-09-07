@@ -24,6 +24,7 @@
     }
     .row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
     .label { font-size: 13px; color: var(--66); min-width: 80px; }
+    #slider-section .row span:nth-child(3) { width: 40px; } /* 避免数字长度变化导致跳动 */
     .theme-toggle {
       position: fixed; top: 12px; right: 12px;
       padding: 6px 14px; border-radius: 6px; border: 1px solid hwb(var(--bg90, 0 90% 10%));
@@ -140,6 +141,85 @@
     </div>
     <div class="event-log" id="rocker-log"></div>
   </div>
+
+  <!-- Slider -->
+  <h2>Slider 滑块</h2>
+  <div class="section" id="slider-section">
+    <div class="row">
+      <span class="label">基础:</span>
+      <ffbox-slider id="sliderA" value="0.5" min="0" max="1" style="flex:1; min-width:200px;"></ffbox-slider>
+      <span id="sliderA-value">0.5</span>
+    </div>
+    <div class="row">
+      <span class="label">整数:</span>
+      <ffbox-slider id="sliderB" value="5" min="0" max="10" adsorption="int" style="flex:1; min-width:200px;"></ffbox-slider>
+      <span id="sliderB-value">5</span>
+    </div>
+    <div class="row">
+      <span class="label">标签模式:</span>
+      <ffbox-slider id="sliderC" value="1" min="0" max="4" mode="string" style="flex:1; min-width:200px;"></ffbox-slider>
+      <span id="sliderC-value">1</span>
+    </div>
+    <div class="row">
+      <span class="label">整数+标签:</span>
+      <ffbox-slider id="sliderD" value="50" min="0" max="100" adsorption="int" style="flex:1; min-width:200px;"></ffbox-slider>
+      <span id="sliderD-value">50</span>
+    </div>
+    <div class="row">
+      <span class="label">比特率:</span>
+      <ffbox-slider id="sliderE" value="6" min="0" max="12" style="flex:1; min-width:200px;"></ffbox-slider>
+      <span id="sliderE-value">4 Mbps</span>
+    </div>
+    <div class="event-log" id="slider-log"></div>
+  </div>
+
+  <!-- NormalInput -->
+  <h2>NormalInput 文本输入框</h2>
+  <div class="section" id="input-section">
+    <div class="row">
+      <span class="label">普通:</span>
+      <ffbox-normal-input id="inputA" value="hello" style="flex:1; min-width:200px;"></ffbox-normal-input>
+    </div>
+    <div class="row">
+      <span class="label">占位:</span>
+      <ffbox-normal-input id="inputB" placeholder="请输入内容" style="flex:1; min-width:200px;"></ffbox-normal-input>
+    </div>
+    <div class="row">
+      <span class="label">整数校验:</span>
+      <ffbox-normal-input id="inputD" value="42" style="flex:1; min-width:200px;"></ffbox-normal-input>
+    </div>
+    <div class="row">
+      <span class="label">数字校验:</span>
+      <ffbox-normal-input id="inputE" value="3.14a" style="flex:1; min-width:200px;"></ffbox-normal-input>
+    </div>
+    <div class="row">
+      <span class="label">正整数修正:</span>
+      <ffbox-normal-input id="inputF" value="5" placeholder="1" style="flex:1; min-width:200px;"></ffbox-normal-input>
+    </div>
+    <div class="row">
+      <span class="label">禁用:</span>
+      <ffbox-normal-input id="inputC" value="不可编辑" disabled style="flex:1; min-width:200px;"></ffbox-normal-input>
+    </div>
+    <div class="row">
+      <span class="label">禁用+校验:</span>
+      <ffbox-normal-input id="inputG" value="abc" disabled style="flex:1; min-width:200px;"></ffbox-normal-input>
+    </div>
+    <div class="event-log" id="input-log"></div>
+  </div>
+
+  <!-- InputAutoSize -->
+  <h2>InputAutoSize 自适应输入框</h2>
+  <div class="section" id="autosize-section">
+    <div class="row">
+      <span class="label">自适应:</span>
+      <ffbox-input-auto-size id="autoA" value="abc" style="font-size:14px;"></ffbox-input-auto-size>
+    </div>
+    <div class="row">
+      <span class="label">空值:</span>
+      <ffbox-input-auto-size id="autoB" value="" style="font-size:14px;"></ffbox-input-auto-size>
+    </div>
+    <div class="event-log" id="autosize-log"></div>
+  </div>
   </ffbox-theme-provider>
 
   <!-- 非 Vite 环境的 fallback，Vite 会忽略这段 -->
@@ -197,8 +277,66 @@
     });
 
     document.querySelectorAll('ffbox-rocker-switch').forEach(rs => {
-      rs.addEventListener('ffbox-left', () => logEvent('rocker-log', `Rocker ← left`));
-      rs.addEventListener('ffbox-right', () => logEvent('rocker-log', `Rocker → right`));
+      rs.addEventListener('left', () => logEvent('rocker-log', `Rocker ← left`));
+      rs.addEventListener('right', () => logEvent('rocker-log', `Rocker → right`));
+    });
+
+    const sliderA = document.getElementById('sliderA');
+    const sliderB = document.getElementById('sliderB');
+    const sliderC = document.getElementById('sliderC');
+    const sliderD = document.getElementById('sliderD');
+    const sliderE = document.getElementById('sliderE');
+    sliderC.tags = [[0, '低'], [1, '中'], [2, '高'], [3, '极高'], [4, '无损']];
+    sliderD.tags = [[0, '0'], [25, '25'], [50, '50'], [75, '75'], [100, '100']];
+    sliderE.tags = [[0, '62.5 Kbps'], [3, '500 Kbps'], [6, '4 Mbps'], [9, '32 Mbps'], [12, '256 Mbps']];
+    sliderE.valueToDisplay = { base: 62500, type: 'bitrate' };
+    sliderA.addEventListener('change', e => {
+      document.getElementById('sliderA-value').textContent = e.detail.toFixed(2);
+      logEvent('slider-log', `Slider A → ${e.detail.toFixed(2)}`);
+    });
+    sliderB.addEventListener('change', e => {
+      document.getElementById('sliderB-value').textContent = e.detail;
+      logEvent('slider-log', `Slider B → ${e.detail}`);
+    });
+    sliderC.addEventListener('change', e => {
+      document.getElementById('sliderC-value').textContent = e.detail;
+      logEvent('slider-log', `Slider C → ${e.detail}`);
+    });
+    sliderD.addEventListener('change', e => {
+      document.getElementById('sliderD-value').textContent = e.detail;
+      logEvent('slider-log', `Slider D → ${e.detail}`);
+    });
+    sliderE.addEventListener('change', e => {
+      const bps = Math.round(62500 * Math.pow(2, e.detail));
+      const display = bps >= 10 * 1000 ** 2
+        ? (bps / 1000 ** 2).toFixed(1) + ' Mbps'
+        : (bps / 1000).toFixed(0) + ' Kbps';
+      document.getElementById('sliderE-value').textContent = display;
+      logEvent('slider-log', `Slider E → ${e.detail.toFixed(2)} (${display})`);
+    });
+
+    document.querySelectorAll('ffbox-normal-input').forEach(inp => {
+      inp.addEventListener('change', e => logEvent('input-log', `Input → "${e.detail}"`));
+      inp.addEventListener('enter', () => logEvent('input-log', `Input Enter`));
+    });
+
+    const inputD = document.getElementById('inputD');
+    inputD.validator = (value) => value.match(/^-?\d+$/) ? undefined : '请输入整数';
+
+    const inputE = document.getElementById('inputE');
+    inputE.validator = (value) => value.match(/^-?\d+(.\d+)?$/) ? undefined : '请输入数字';
+
+    const inputF = document.getElementById('inputF');
+    inputF.inputFixer = (value) => value.replace(/[^0-9]/g, '');
+
+    const inputG = document.getElementById('inputG');
+    inputG.validator = (value) => value.match(/^-?\d+$/) ? undefined : '请输入整数';
+
+    document.querySelectorAll('ffbox-input-auto-size').forEach(inp => {
+      inp.addEventListener('input', e => logEvent('autosize-log', `AutoSize input → "${e.target.value}"`));
+      // inp.addEventListener('change', e => logEvent('autosize-log', `AutoSize change → "${e.detail}"`));
+      // inp.addEventListener('keydown', e => logEvent('autosize-log', `AutoSize keydown → "${e}"`));
+      inp.addEventListener('press-enter', e => logEvent('autosize-log', `AutoSize Enter → "${e.detail}"`));
     });
   </script>
 </body>

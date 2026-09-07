@@ -21,6 +21,8 @@ export class FFBoxRockerSwitch extends LitElement {
 
 		.rockerSwitch {
 			position: relative;
+			// height: 取决于尺寸;
+			// flex: 0 0 auto;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -52,16 +54,16 @@ export class FFBoxRockerSwitch extends LitElement {
 		}
 
 		.arrow:hover:not(:disabled) {
-			background-color: hwb(var(--bg99, 0 99% 1%) / 0.4);
+			background-color: hwb(var(--bg99) / 0.4);
 			box-shadow:
-				0 1px 4px hwb(var(--hoverShadow, 0 0% 100%) / 0.2),
-				0 4px 2px -2px hwb(var(--highlight, 0 100% 0%) / 0.5) inset;
+				0 1px 4px hwb(var(--hoverShadow) / 0.2),
+				0 4px 2px -2px hwb(var(--highlight) / 0.5) inset;
 		}
 
 		.arrow:active:not(:disabled) {
 			box-shadow:
-				0 0px 1px hwb(var(--hoverShadow, 0 0% 100%) / 0.2),
-				0 20px 15px -10px hwb(var(--hoverShadow, 0 0% 100%) / 0.15) inset;
+				0 0px 1px hwb(var(--hoverShadow) / 0.2),
+				0 20px 15px -10px hwb(var(--hoverShadow) / 0.15) inset;
 			transform: translateY(0.25px);
 		}
 
@@ -108,12 +110,12 @@ export class FFBoxRockerSwitch extends LitElement {
 
 	private _goLeft() {
 		if (this.disabledLeft) return;
-		this.dispatchEvent(new CustomEvent('ffbox-left', { bubbles: true, composed: true }));
+		this.dispatchEvent(new CustomEvent('left', { bubbles: true, composed: true }));
 	}
 
 	private _goRight() {
 		if (this.disabledRight) return;
-		this.dispatchEvent(new CustomEvent('ffbox-right', { bubbles: true, composed: true }));
+		this.dispatchEvent(new CustomEvent('right', { bubbles: true, composed: true }));
 	}
 }
 

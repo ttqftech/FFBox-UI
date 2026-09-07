@@ -6,3 +6,6 @@ export { FFBoxSwitch } from './components/switch/ffbox-switch.js';
 export { FFBoxCheckbox } from './components/checkbox/ffbox-checkbox.js';
 export { FFBoxRadio } from './components/radio/ffbox-radio.js';
 export { FFBoxRockerSwitch } from './components/rocker-switch/ffbox-rocker-switch.js';
+export { FFBoxSlider } from './components/slider/ffbox-slider.js';
+export { FFBoxNormalInput } from './components/normal-input/ffbox-normal-input.js';
+export { FFBoxInputAutoSize } from './components/input-auto-size/ffbox-input-auto-size.js';

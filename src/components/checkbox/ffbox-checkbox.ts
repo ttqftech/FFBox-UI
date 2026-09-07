@@ -21,11 +21,10 @@ export class FFBoxCheckbox extends LitElement {
 			width: 18px;
 			height: 18px;
 			display: inline-block;
-			background-color: hwb(var(--bg98, 0 98% 2%) / 0.8);
+			background-color: hwb(var(--bg98) / 0.8);
 			border: hwb(0 80% 20%) 1px solid;
 			border-radius: 3px;
 			box-shadow: 0 2px 2px hwb(0 80% 20% / 0.2);
-			cursor: pointer;
 		}
 
 		:host([disabled]) .box {

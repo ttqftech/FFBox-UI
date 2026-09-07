@@ -206,6 +206,7 @@ export class FFBoxButton extends LitElement {
 
 	constructor() {
 		super();
+		// 根据 HTML Button 的规则，disabled 状态下的点击事件就像一堵墙，点了也无事发生，也不能默认穿透
 		this.addEventListener('click', (e: Event) => {
 			if (this.disabled) {
 				e.stopImmediatePropagation();

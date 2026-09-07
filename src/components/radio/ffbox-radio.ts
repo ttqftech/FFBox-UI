@@ -21,11 +21,10 @@ export class FFBoxRadio extends LitElement {
 			width: 20px;
 			height: 20px;
 			display: inline-block;
-			background-color: hwb(var(--bg98, 0 98% 2%) / 0.8);
+			background-color: hwb(var(--bg98) / 0.8);
 			border: hwb(0 80% 20%) 1px solid;
 			border-radius: 10px;
 			box-shadow: 0 2px 2px hwb(0 80% 20% / 0.2);
-			cursor: pointer;
 		}
 
 		:host([disabled]) .box {
