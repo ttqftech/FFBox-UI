@@ -98,7 +98,8 @@ export class FFBoxInputAutoSize extends LitElement {
 		// 事件会自动穿透 Shadow DOM 冒泡到外部
 	}
 
-	private _handleBlur() {
+	private _handleBlur(e: FocusEvent) {
+		e.stopPropagation();
 		this.dispatchEvent(new CustomEvent('blur', {
 			detail: this.value,
 			bubbles: true,
@@ -106,7 +107,8 @@ export class FFBoxInputAutoSize extends LitElement {
 		}));
 	}
 
-	private _handleChange() {
+	private _handleChange(e: Event) {
+		e.stopPropagation();	// 似乎不太有效。表现为：直接调用 InputAutoSize 时，无论有无这句都不会把原生 input change 事件触发出去
 		this.dispatchEvent(new CustomEvent('change', {
 			detail: this.value,
 			bubbles: true,

@@ -9,7 +9,7 @@ test('ffbox-rocker-switch', async ({ page }) => {
 
   // renders with label text
   const rs1 = page.locator('#rs1');
-  await expect(rs1).toContainText('帧率');
+  await expect(rs1).toContainText('小船型按钮');
 
   // clicking left arrow fires left
   await rs1.locator('.arrowLeft').click();

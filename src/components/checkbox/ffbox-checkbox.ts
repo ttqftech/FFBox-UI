@@ -1,8 +1,10 @@
 import '../theme-provider/ffbox-theme-provider.js';
 import { LitElement, html, css } from 'lit';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 import { customElement, property } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { themeContext, Theme } from '../../contexts/theme-context.js';
+import checkIcon from './check.svg?raw';
 
 @customElement('ffbox-checkbox')
 export class FFBoxCheckbox extends LitElement {
@@ -78,12 +80,7 @@ export class FFBoxCheckbox extends LitElement {
 				@click=${this._handleClick}
 				style="cursor: ${this.disabled ? 'not-allowed' : 'pointer'}"
 			>
-				<svg viewBox="0 0 1024 1024" width="200" height="200">
-					<path
-						d="M911.018667 181.973333a64 64 0 0 1 16.341333 89.045334l-426.666667 618.666666a64 64 0 0 1-99.584 7.210667l-277.333333-298.666667a64 64 0 0 1 93.781333-87.125333l223.061334 240.213333 381.354666-552.96a64 64 0 0 1 89.045334-16.384z"
-						fill="currentColor"
-					/>
-				</svg>
+				${unsafeSVG(checkIcon)}
 			</div>
 		`;
 	}

@@ -22,9 +22,26 @@
       padding-bottom: 8px;
       border-bottom: 1px solid hwb(var(--opposite80) / 0.2);
     }
-    .row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 36px;
+    }
+    .row {
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 12px;
+      width: 100%;
+      /* margin-bottom: 12px; */
+    }
+    .gridItem {
+      display: flex; align-items: center; flex-wrap: wrap;
+      gap: 12px;
+    }
+    .row .gridItem {
+      margin-right: 28px;
+    }
     .label { font-size: 13px; color: var(--66); min-width: 80px; }
-    #slider-section .row span:nth-child(3) { width: 40px; } /* 避免数字长度变化导致跳动 */
+    #slider-section .row span:nth-child(3), .gridItem span:nth-child(3) { width: 40px; } /* 避免数字长度变化导致跳动 */
     .theme-toggle {
       position: fixed; top: 12px; right: 12px;
       padding: 6px 14px; border-radius: 6px; border: 1px solid hwb(var(--bg90, 0 90% 10%));
@@ -64,6 +81,7 @@
     <div class="row">
       <ffbox-button disabled>禁用按钮</ffbox-button>
       <ffbox-button type="primary" disabled>禁用主要</ffbox-button>
+      <ffbox-button type="noBg" disabled>禁用无背景</ffbox-button>
     </div>
     <div class="event-log" id="button-log"></div>
   </div>
@@ -71,12 +89,12 @@
   <!-- Switch -->
   <h2>Switch 开关</h2>
   <div class="section" id="switch-section">
-    <div class="row">
+    <div class="gridItem">
       <span class="label">开关 A:</span>
       <ffbox-switch id="switchA"></ffbox-switch>
       <span id="switchA-value">false</span>
     </div>
-    <div class="row">
+    <div class="gridItem">
       <span class="label">开关 B:</span>
       <ffbox-switch id="switchB" checked></ffbox-switch>
       <span id="switchB-value">true</span>
@@ -88,21 +106,25 @@
   <h2>Checkbox 复选框</h2>
   <div class="section" id="checkbox-section">
     <div class="row">
-      <span class="label">未选中:</span>
-      <ffbox-checkbox id="cb1"></ffbox-checkbox>
+      <div class="gridItem">
+        <span class="label">未选中:</span>
+        <ffbox-checkbox id="cb1"></ffbox-checkbox>
+      </div>
+      <div class="gridItem">
+        <span class="label">已选中:</span>
+        <ffbox-checkbox id="cb2" checked></ffbox-checkbox>
+      </div>
     </div>
     <div class="row">
-      <span class="label">已选中:</span>
-      <ffbox-checkbox id="cb2" checked></ffbox-checkbox>
-    </div>
-    <div class="row">
-      <span class="label">部分选中:</span>
-      <ffbox-checkbox id="cb3" checked="partial"></ffbox-checkbox>
-    </div>
-    <div class="row">
-      <span class="label">禁用:</span>
-      <ffbox-checkbox disabled></ffbox-checkbox>
-      <ffbox-checkbox checked disabled></ffbox-checkbox>
+      <div class="gridItem">
+        <span class="label">部分选中:</span>
+        <ffbox-checkbox id="cb3" checked="partial"></ffbox-checkbox>
+      </div>
+      <div class="gridItem">
+        <span class="label">禁用:</span>
+        <ffbox-checkbox disabled></ffbox-checkbox>
+        <ffbox-checkbox checked disabled></ffbox-checkbox>
+      </div>
     </div>
     <div class="event-log" id="checkbox-log"></div>
   </div>
@@ -111,12 +133,14 @@
   <h2>Radio 单选框</h2>
   <div class="section" id="radio-section">
     <div class="row">
-      <span class="label">未选中:</span>
-      <ffbox-radio id="r1"></ffbox-radio>
-    </div>
-    <div class="row">
-      <span class="label">已选中:</span>
-      <ffbox-radio id="r2" checked></ffbox-radio>
+      <div class="gridItem">
+        <span class="label">未选中:</span>
+        <ffbox-radio id="r1"></ffbox-radio>
+      </div>
+      <div class="gridItem">
+        <span class="label">已选中:</span>
+        <ffbox-radio id="r2" checked></ffbox-radio>
+      </div>
     </div>
     <div class="row">
       <span class="label">禁用:</span>
@@ -127,13 +151,11 @@
   </div>
 
   <!-- RockerSwitch -->
-  <h2>RockerSwitch 摇杆开关</h2>
+  <h2>RockerSwitch 船型按钮</h2>
   <div class="section" id="rocker-section">
     <div class="row">
-      <ffbox-rocker-switch id="rs1">帧率</ffbox-rocker-switch>
-    </div>
-    <div class="row">
-      <ffbox-rocker-switch id="rs2" size="m">分辨率</ffbox-rocker-switch>
+      <ffbox-rocker-switch id="rs1">小船型按钮</ffbox-rocker-switch>
+      <ffbox-rocker-switch id="rs2" size="m">中船型按钮</ffbox-rocker-switch>
     </div>
     <div class="row">
       <ffbox-rocker-switch disabled-left>左禁用</ffbox-rocker-switch>
@@ -208,7 +230,7 @@
   </div>
 
   <!-- InputAutoSize -->
-  <h2>InputAutoSize 自适应输入框</h2>
+  <h2>InputAutoSize 自适应宽度输入框</h2>
   <div class="section" id="autosize-section">
     <div class="row">
       <span class="label">自适应:</span>
@@ -220,6 +242,42 @@
     </div>
     <div class="event-log" id="autosize-log"></div>
   </div>
+
+  <!-- ControlBox -->
+  <h2>ControlBox 控制盒</h2>
+  <div class="section" id="controlbox-section">
+    <ffbox-control-box id="ctrlbox1" title="普通">
+      <ffbox-normal-input value="30" style="flex:1; min-width:120px;"></ffbox-normal-input>
+    </ffbox-control-box>
+    <ffbox-control-box id="ctrlbox2" title="带开关" description="带开关" optional has-value>
+      <ffbox-normal-input value="1080p" style="flex:1; min-width:120px;"></ffbox-normal-input>
+    </ffbox-control-box>
+    <ffbox-control-box id="ctrlbox3" title="长选项" long>
+      <ffbox-slider value="0.5" min="0" max="1" style="flex:1; min-width:200px;"></ffbox-slider>
+    </ffbox-control-box>
+    <div class="event-log" id="controlbox-log"></div>
+  </div>
+
+  <!-- RadioList -->
+  <h2>RadioList 单选列表</h2>
+  <div class="section" id="radiolist-section">
+    <div class="gridItem">
+      <ffbox-radio-list id="rl1" value="普通1" placeholder="空白项 placeholder" style="min-height:120px;"></ffbox-radio-list>
+    </div>
+    <div class="event-log" id="radiolist-log"></div>
+  </div>
+
+  <!-- Tooltip -->
+  <h2>Tooltip 工具提示</h2>
+  <div class="section" id="tooltip-section">
+    <div class="row" style="position:relative; height:60px; gap:12px;">
+      <button id="tooltipShowBtn" style="padding:6px 14px; border-radius:6px; border:1px solid #AAA; cursor:pointer;">Tooltip.show 调用</button>
+      <button id="tooltipUseBtn" style="padding:6px 14px; border-radius:6px; border:1px solid #AAA; cursor:pointer;">useTooltip 包裹</button>
+      <button id="tooltipUseBtn2" style="padding:6px 14px; border-radius:6px; border:1px solid #AAA; cursor:pointer;">useTooltip 上方</button>
+    </div>
+    <div class="event-log" id="tooltip-log"></div>
+  </div>
+
   </ffbox-theme-provider>
 
   <!-- 非 Vite 环境的 fallback，Vite 会忽略这段 -->
@@ -338,6 +396,44 @@
       // inp.addEventListener('keydown', e => logEvent('autosize-log', `AutoSize keydown → "${e}"`));
       inp.addEventListener('press-enter', e => logEvent('autosize-log', `AutoSize Enter → "${e.detail}"`));
     });
+
+    // ControlBox
+    document.querySelectorAll('ffbox-control-box').forEach(cb => {
+      cb.addEventListener('enabledChange', e => logEvent('controlbox-log', `ControlBox enabled → ${e.detail}`));
+    });
+
+    // RadioList
+    const rl1 = document.getElementById('rl1');
+    rl1.list = [
+      { value: '普通 1', caption: '普通 1（自定义 caption）' },
+      { value: '普通 2' },
+      { value: '可删除', caption: '可删除', deletable: true },
+      { value: '可编辑', editable: true },
+      { value: '可删除且可编辑', deletable: true, editable: true },
+      { value: '禁用项', caption: '禁用项', disabled: true },
+      { value: '', editable: true },
+    ];
+    rl1.addEventListener('change', e => logEvent('radiolist-log', `RadioList → ${e.detail.value} (index ${e.detail.index})`));
+    rl1.addEventListener('delete', e => logEvent('radiolist-log', `RadioList delete → ${e.detail.value}`));
+    rl1.addEventListener('edit', e => logEvent('radiolist-log', `RadioList edit → "${e.detail.oldValue}" → "${e.detail.newValue}"`));
+
+    // Tooltip
+    const { FFBoxTooltip, useTooltip } = await import('../src/ffbox-ui.js');
+
+    // 用法一：Tooltip.show / Tooltip.hide
+    const showBtn = document.getElementById('tooltipShowBtn');
+    showBtn.addEventListener('mouseenter', () => {
+      const rect = showBtn.getBoundingClientRect();
+      FFBoxTooltip.show({
+        content: '通过 Tooltip.show 调用\n支持多行显示',
+        style: { top: `${rect.top + rect.height}px`, left: `${rect.left}px` },
+      });
+    });
+    showBtn.addEventListener('mouseleave', () => { FFBoxTooltip.hide(); });
+
+    // 用法二：useTooltip 包裹
+    Object.assign(document.getElementById('tooltipUseBtn'), useTooltip('useTooltip 包裹', 'br'));
+    Object.assign(document.getElementById('tooltipUseBtn2'), useTooltip('useTooltip 上方', 't'));
   </script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 export { FFBoxThemeProvider } from './components/theme-provider/ffbox-theme-provider.js';
-export { themeContext } from './contexts/theme-context.js';
-export type { Theme } from './contexts/theme-context.js';
+export { themeContext, type Theme } from './contexts/theme-context.js';
 export { FFBoxButton } from './components/button/ffbox-button.js';
 export { FFBoxSwitch } from './components/switch/ffbox-switch.js';
 export { FFBoxCheckbox } from './components/checkbox/ffbox-checkbox.js';
@@ -9,3 +8,7 @@ export { FFBoxRockerSwitch } from './components/rocker-switch/ffbox-rocker-switc
 export { FFBoxSlider } from './components/slider/ffbox-slider.js';
 export { FFBoxNormalInput } from './components/normal-input/ffbox-normal-input.js';
 export { FFBoxInputAutoSize } from './components/input-auto-size/ffbox-input-auto-size.js';
+export { FFBoxControlBox } from './components/control-box/ffbox-control-box.js';
+export { FFBoxRadioList, type RadioListItem } from './components/radio-list/ffbox-radio-list.js';
+export { FFBoxTooltip, type TooltipOptions } from './components/tooltip/ffbox-tooltip.js';
+export { tooltip, useTooltip, type TooltipPosition, type TooltipStyleName } from './components/tooltip/use-tooltip.js';

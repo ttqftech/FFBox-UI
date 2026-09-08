@@ -6,4 +6,7 @@ import './components/rocker-switch/ffbox-rocker-switch.js';
 import './components/slider/ffbox-slider.js';
 import './components/normal-input/ffbox-normal-input.js';
 import './components/input-auto-size/ffbox-input-auto-size.js';
+import './components/control-box/ffbox-control-box.js';
+import './components/radio-list/ffbox-radio-list.js';
+import './components/tooltip/ffbox-tooltip.js';
 import './components/theme-provider/ffbox-theme-provider.js';

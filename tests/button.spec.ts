@@ -11,7 +11,7 @@ test('ffbox-button', async ({ page }) => {
 
   // renders different types
   const buttons = page.locator('ffbox-button');
-  await expect(buttons).toHaveCount(9);
+  await expect(buttons).toHaveCount(10);
 
   // disabled button does not fire click
   const disabledBtn = page.locator('ffbox-button[disabled]').first();
