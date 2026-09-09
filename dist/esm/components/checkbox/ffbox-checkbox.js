@@ -1,5 +1,6 @@
-import { t as themeContext } from "../../ffbox-theme-provider-D8JQVOkC.js";
-import { i, n, c, a as i$1, b, t } from "../../lit-WUgPma2W.js";
+import { t as themeContext } from "../../ffbox-theme-provider-2ZhrYeYK.js";
+import { a as i, n, c, d as i$1, h as o, f as b, g as t } from "../../lit-Dfi9bTsN.js";
+const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="200" height="200"><path d="M911.018667 181.973333a64 64 0 0 1 16.341333 89.045334l-426.666667 618.666666a64 64 0 0 1-99.584 7.210667l-277.333333-298.666667a64 64 0 0 1 93.781333-87.125333l223.061334 240.213333 381.354666-552.96a64 64 0 0 1 89.045334-16.384z" fill="currentColor"></path></svg>';
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __decorateClass = (decorators, target, key, kind) => {
@@ -25,12 +26,7 @@ let FFBoxCheckbox = class extends i$1 {
 				@click=${this._handleClick}
 				style="cursor: ${this.disabled ? "not-allowed" : "pointer"}"
 			>
-				<svg viewBox="0 0 1024 1024" width="200" height="200">
-					<path
-						d="M911.018667 181.973333a64 64 0 0 1 16.341333 89.045334l-426.666667 618.666666a64 64 0 0 1-99.584 7.210667l-277.333333-298.666667a64 64 0 0 1 93.781333-87.125333l223.061334 240.213333 381.354666-552.96a64 64 0 0 1 89.045334-16.384z"
-						fill="currentColor"
-					/>
-				</svg>
+				${o(checkIcon)}
 			</div>
 		`;
   }
@@ -60,11 +56,10 @@ FFBoxCheckbox.styles = i`
 			width: 18px;
 			height: 18px;
 			display: inline-block;
-			background-color: hwb(var(--bg98, 0 98% 2%) / 0.8);
+			background-color: hwb(var(--bg98) / 0.8);
 			border: hwb(0 80% 20%) 1px solid;
 			border-radius: 3px;
 			box-shadow: 0 2px 2px hwb(0 80% 20% / 0.2);
-			cursor: pointer;
 		}
 
 		:host([disabled]) .box {

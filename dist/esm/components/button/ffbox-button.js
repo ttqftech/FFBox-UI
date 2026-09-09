@@ -1,5 +1,5 @@
-import { t as themeContext } from "../../ffbox-theme-provider-D8JQVOkC.js";
-import { i, n, c, a as i$1, b, t } from "../../lit-WUgPma2W.js";
+import { t as themeContext } from "../../ffbox-theme-provider-2ZhrYeYK.js";
+import { a as i, n, c, d as i$1, f as b, g as t } from "../../lit-Dfi9bTsN.js";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __decorateClass = (decorators, target, key, kind) => {
@@ -62,7 +62,6 @@ FFBoxButton.styles = i`
 			border-radius: 8px;
 			border: none;
 			outline: none;
-			cursor: pointer;
 			transition: box-shadow 0.3s cubic-bezier(0, 1.5, 0.3, 1);
 		}
 

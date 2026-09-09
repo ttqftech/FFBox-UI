@@ -68,7 +68,7 @@
   <h2>Button 按钮</h2>
   <div class="section" id="button-section">
     <div class="row">
-      <ffbox-button>普通按钮</ffbox-button>
+      <ffbox-button style="width: 240px;">普通按钮</ffbox-button>
       <ffbox-button type="primary">主要按钮</ffbox-button>
       <ffbox-button type="danger">危险按钮</ffbox-button>
       <ffbox-button type="noBg">无背景按钮</ffbox-button>
@@ -278,6 +278,74 @@
     <div class="event-log" id="tooltip-log"></div>
   </div>
 
+  <!-- AutoSizeWrapper -->
+  <h2>AutoSizeWrapper 自适应尺寸容器</h2>
+  <div class="section" id="autosize-wrapper-section">
+    <div class="row">
+      <span class="label">折叠/展开:</span>
+      <ffbox-button id="aswToggle">展开内容</ffbox-button>
+    </div>
+    <div class="row">
+      <span class="label">手动更新:</span>
+      <ffbox-auto-size-wrapper id="asw1" style="width: 320px;">
+        <div id="aswContent1" style="padding: 8px; border: 1px dashed var(--66); font-size: 13px;">
+          这段内容的高度会被测量，并驱动外层容器的高度过渡动画。
+        </div>
+      </ffbox-auto-size-wrapper>
+      <span id="asw-size">0 × 0</span>
+      <span class="event-log" id="asw1-log"></span>
+    </div>
+    <div class="row">
+      <span class="label">自动监听:</span>
+      <ffbox-auto-size-wrapper id="asw2" use-resize-observer style="width: 320px;">
+        <div id="aswContent2" style="padding: 8px; border: 1px dashed var(--66); font-size: 13px;">
+          开启 use-resize-observer 后，内容尺寸变化会自动重新测量。
+        </div>
+      </ffbox-auto-size-wrapper>
+      <span id="asw2-size">0 × 0</span>
+      <span class="event-log" id="asw2-log"></span>
+    </div>
+  </div>
+
+  <!-- CutTimeInput -->
+  <h2>CutTimeInput 裁切时间输入</h2>
+  <div class="section" id="cuttime-section">
+    <div class="row">
+      <span class="label">可编辑:</span>
+      <ffbox-cut-time-input id="cti1" style="flex:1; min-width:320px;"></ffbox-cut-time-input>
+    </div>
+    <div class="row">
+      <span class="label">禁用:</span>
+      <ffbox-cut-time-input id="cti2" disabled style="flex:1; min-width:320px;"></ffbox-cut-time-input>
+    </div>
+    <div class="event-log" id="cuttime-log"></div>
+  </div>
+
+  <!-- Msgbox -->
+  <h2>Msgbox 对话框</h2>
+  <div class="section" id="msgbox-section">
+    <div class="row">
+      <ffbox-button id="msgboxSingle" type="primary">单按钮</ffbox-button>
+      <ffbox-button id="msgboxConfirm">确认 / 取消</ffbox-button>
+      <ffbox-button id="msgboxAsync">异步回调</ffbox-button>
+      <ffbox-button id="msgboxStack">同时打开两个</ffbox-button>
+    </div>
+    <div class="event-log" id="msgbox-log"></div>
+  </div>
+
+  <!-- Popup -->
+  <h2>Popup 气泡通知</h2>
+  <div class="section" id="popup-section">
+    <div class="row">
+      <ffbox-button id="popupNormal">普通</ffbox-button>
+      <ffbox-button id="popupOk" type="primary">成功（绿）</ffbox-button>
+      <ffbox-button id="popupWarning">警告（黄）</ffbox-button>
+      <ffbox-button id="popupError" type="danger">错误（红）</ffbox-button>
+      <ffbox-button id="popupBatch100" type="primary">批量 100 条</ffbox-button>
+    </div>
+    <div class="event-log" id="popup-log"></div>
+  </div>
+
   </ffbox-theme-provider>
 
   <!-- 非 Vite 环境的 fallback，Vite 会忽略这段 -->
@@ -311,9 +379,15 @@
       if (log) log.textContent = msg;
     }
 
+    // #region ffbox-button
+  
     document.querySelectorAll('ffbox-button').forEach(btn => {
       btn.addEventListener('click', e => logEvent('button-log', `Button clicked: ${btn.textContent.trim()}`));
     });
+
+    // #endregion
+
+    // #region ffbox-switch
 
     const switchA = document.getElementById('switchA');
     const switchB = document.getElementById('switchB');
@@ -326,6 +400,10 @@
       logEvent('switch-log', `Switch B → ${e.detail}`);
     });
 
+    // #endregion
+
+    // #region ffbox-checkbox, ffbox-radio
+
     document.querySelectorAll('ffbox-checkbox').forEach(cb => {
       cb.addEventListener('change', e => logEvent('checkbox-log', `Checkbox → ${e.detail}`));
     });
@@ -334,10 +412,18 @@
       r.addEventListener('change', e => logEvent('radio-log', `Radio → ${e.detail}`));
     });
 
+    // #endregion
+
+    // #region ffbox-rocker-switch
+
     document.querySelectorAll('ffbox-rocker-switch').forEach(rs => {
       rs.addEventListener('left', () => logEvent('rocker-log', `Rocker ← left`));
       rs.addEventListener('right', () => logEvent('rocker-log', `Rocker → right`));
     });
+
+    // #endregion
+
+    // #region ffbox-slider
 
     const sliderA = document.getElementById('sliderA');
     const sliderB = document.getElementById('sliderB');
@@ -373,6 +459,10 @@
       logEvent('slider-log', `Slider E → ${e.detail.toFixed(2)} (${display})`);
     });
 
+    // #endregion
+
+    // #region ffbox-normal-input
+
     document.querySelectorAll('ffbox-normal-input').forEach(inp => {
       inp.addEventListener('change', e => logEvent('input-log', `Input → "${e.detail}"`));
       inp.addEventListener('enter', () => logEvent('input-log', `Input Enter`));
@@ -390,6 +480,10 @@
     const inputG = document.getElementById('inputG');
     inputG.validator = (value) => value.match(/^-?\d+$/) ? undefined : '请输入整数';
 
+    // #endregion
+
+    // #region ffbox-input-auto-size
+
     document.querySelectorAll('ffbox-input-auto-size').forEach(inp => {
       inp.addEventListener('input', e => logEvent('autosize-log', `AutoSize input → "${e.target.value}"`));
       // inp.addEventListener('change', e => logEvent('autosize-log', `AutoSize change → "${e.detail}"`));
@@ -397,12 +491,18 @@
       inp.addEventListener('press-enter', e => logEvent('autosize-log', `AutoSize Enter → "${e.detail}"`));
     });
 
-    // ControlBox
+    // #endregion
+
+    // #region ffbox-control-box
+
     document.querySelectorAll('ffbox-control-box').forEach(cb => {
       cb.addEventListener('enabledChange', e => logEvent('controlbox-log', `ControlBox enabled → ${e.detail}`));
     });
 
-    // RadioList
+    // #endregion
+
+    // #region ffbox-radio-list
+
     const rl1 = document.getElementById('rl1');
     rl1.list = [
       { value: '普通 1', caption: '普通 1（自定义 caption）' },
@@ -417,9 +517,12 @@
     rl1.addEventListener('delete', e => logEvent('radiolist-log', `RadioList delete → ${e.detail.value}`));
     rl1.addEventListener('edit', e => logEvent('radiolist-log', `RadioList edit → "${e.detail.oldValue}" → "${e.detail.newValue}"`));
 
-    // Tooltip
-    const { FFBoxTooltip, useTooltip } = await import('../src/ffbox-ui.js');
+    // #endregion
 
+    // #region ffbox-tooltip
+
+    const { FFBoxTooltip, useTooltip } = await import('../src/ffbox-ui.js');
+  
     // 用法一：Tooltip.show / Tooltip.hide
     const showBtn = document.getElementById('tooltipShowBtn');
     showBtn.addEventListener('mouseenter', () => {
@@ -434,6 +537,152 @@
     // 用法二：useTooltip 包裹
     Object.assign(document.getElementById('tooltipUseBtn'), useTooltip('useTooltip 包裹', 'br'));
     Object.assign(document.getElementById('tooltipUseBtn2'), useTooltip('useTooltip 上方', 't'));
+
+    // #endregion
+
+    // #region ffbox-auto-size-wrapper
+
+    const asw1 = document.getElementById('asw1');
+    const asw2 = document.getElementById('asw2'); // use-resize-observer
+    const aswContent1 = document.getElementById('aswContent1');
+    const aswContent2 = document.getElementById('aswContent2');
+    const aswToggle = document.getElementById('aswToggle');
+    const aswSize = document.getElementById('asw-size');
+    const asw2Size = document.getElementById('asw2-size');
+    asw1.customStyle = ({ height }) => ({
+      height: `${height}px`,
+      overflow: 'hidden',
+      transition: 'height 0.4s cubic-bezier(0.35, 1.4, 0.2, 0.95)',
+      border: '1px solid hwb(var(--bg90))',
+      borderRadius: '8px',
+    });
+    asw2.customStyle = asw1.customStyle;
+
+    const logSize = (el, span, logId, label) => {
+      span.textContent = `${Math.round(el.width)} × ${Math.round(el.height)}`;
+      logEvent(logId, `${label} → ${Math.round(el.width)} × ${Math.round(el.height)}`);
+    };
+    asw1.addEventListener('resize', () => logSize(asw1, aswSize, 'asw1-log', 'AutoSizeWrapper 1'));
+    asw2.addEventListener('resize', () => logSize(asw2, asw2Size, 'asw2-log', 'AutoSizeWrapper 2'));
+    if (asw1.width || asw1.height) logSize(asw1, aswSize, 'asw1-log', 'AutoSizeWrapper 1');
+    if (asw2.width || asw2.height) logSize(asw2, asw2Size, 'asw2-log', 'AutoSizeWrapper 2');
+
+    let aswExpanded = false;
+    aswToggle.addEventListener('click', () => {
+      aswExpanded = !aswExpanded;
+      aswToggle.textContent = aswExpanded ? '收起内容' : '展开内容';
+      aswContent1.textContent = aswExpanded
+        ? '这段内容的高度在首次渲染时会被测量，并驱动外层容器的高度过渡动画。\n展开后又多了三行文字，\n于是外层容器的高度会随之变化。\n这里的高度变化需要手动调用 updateSize()'
+        : '这段内容的高度在首次渲染时会被测量，并驱动外层容器的高度过渡动画。';
+      aswContent2.textContent = aswExpanded
+        ? '开启 use-resize-observer 后，内容尺寸变化会自动重新测量。\n展开后又多了两行文字，\n于是外层容器的高度会随之变化。'
+        : '开启 use-resize-observer 后，内容尺寸变化会自动重新测量。';
+      asw1.updateSize();	// 未开启 ResizeObserver 时需手动触发重新测量
+    });
+
+    // #endregion
+
+    // #region ffbox-cut-time-input
+
+    const cti1 = document.getElementById('cti1');
+    const cti2 = document.getElementById('cti2');
+    cti1.value = ['00:00:10.00', '00:00:20.00'];
+    cti1.placeholder = ['开始时间', '结束时间'];
+    cti2.value = ['00:01:00', '00:02:00'];
+    [cti1, cti2].forEach(cti => {
+      cti.addEventListener('change', e => logEvent('cuttime-log', `CutTimeInput → [${e.detail.join(', ')}]`));
+      cti.addEventListener('enter', () => logEvent('cuttime-log', 'CutTimeInput Enter'));
+      cti.addEventListener('button-click', () => logEvent('cuttime-log', 'CutTimeInput 编辑按钮'));
+    });
+
+    // #endregion
+
+    // #region ffbox-msgbox
+
+    const { FFBoxMsgbox, FFBoxPopup } = await import('../src/ffbox-ui.js');
+    const { html } = await import('lit');
+
+    document.getElementById('msgboxSingle').addEventListener('click', () => {
+      FFBoxMsgbox.show({
+        title: '提示',
+        content: '这是一个只有一个按钮的对话框，Enter 或 Esc 都会触发它',
+        buttons: [{ text: '好嘅', callback: () => logEvent('msgbox-log', 'Msgbox 单按钮 → 确定') }],
+      });
+    });
+    document.getElementById('msgboxConfirm').addEventListener('click', () => {
+      FFBoxMsgbox.show({
+        title: '确认操作',
+        content: '确定要执行这个操作吗？\n（Esc 触发取消，Enter 触发确认）',
+        buttons: [
+          { text: '取消', role: 'cancel', callback: () => logEvent('msgbox-log', 'Msgbox → 取消') },
+          { text: '确定', type: 'primary', role: 'confirm', callback: () => logEvent('msgbox-log', 'Msgbox → 确定') },
+        ],
+      });
+    });
+    document.getElementById('msgboxAsync').addEventListener('click', () => {
+      FFBoxMsgbox.show({
+        image: html`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="height:100%"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg>`,
+        title: '异步操作',
+        content: '回调返回 Promise 时，对话框会在 Promise resolve 后关闭',
+        buttons: [
+          { text: '取消', role: 'cancel' },
+          {
+            text: '删除',
+            type: 'danger',
+            role: 'confirm',
+            callback: () => new Promise(resolve => setTimeout(() => {
+              logEvent('msgbox-log', 'Msgbox 异步回调完成');
+              resolve();
+            }, 400)),
+          },
+        ],
+      });
+    });
+    document.getElementById('msgboxStack').addEventListener('click', () => {
+      FFBoxMsgbox.show({
+        title: '底层弹窗',
+        content: '这是先打开的弹窗，关闭上层后焦点应回到这里',
+        buttons: [
+          { text: '取消', role: 'cancel', callback: () => logEvent('msgbox-log', '底层弹窗 → 取消') },
+          { text: '确定', type: 'primary', role: 'confirm', callback: () => logEvent('msgbox-log', '底层弹窗 → 确定') },
+        ],
+      });
+      FFBoxMsgbox.show({
+        title: '上层弹窗',
+        content: '这是后打开的弹窗，按 Esc 或 Enter 应先关闭此弹窗',
+        buttons: [
+          { text: '取消', role: 'cancel', callback: () => logEvent('msgbox-log', '上层弹窗 → 取消') },
+          { text: '确定', type: 'primary', role: 'confirm', callback: () => logEvent('msgbox-log', '上层弹窗 → 确定') },
+        ],
+      });
+    });
+
+    // #endregion
+
+    // #region ffbox-popup
+
+    let popupCount = 0;
+    const popups = [
+      ['popupNormal', 0, '这是一条普通气泡通知'],
+      ['popupOk', 1, '操作成功'],
+      ['popupWarning', 2, '这个参数可能不符合预期'],
+      ['popupError', 3, '转码失败，请检查输入文件'],
+    ];
+    for (const [id, level, message] of popups) {
+      document.getElementById(id).addEventListener('click', () => {
+        FFBoxPopup.show({ message: `${message}（第 ${++popupCount} 条）\n支持多行`, level });
+        logEvent('popup-log', `Popup level=${level} 弹出，共 ${popupCount} 条`);
+      });
+    }
+    document.getElementById('popupBatch100').addEventListener('click', async () => {
+      for (let i = 0; i < 100; i++) {
+        FFBoxPopup.show({ message: `批量气泡 #${i + 1}`, level: (i % 4)});
+        await new Promise(resolve => setTimeout(resolve, 10));
+      }
+      logEvent('popup-log', '批量弹出 100 条');
+    });
+
+    // #endregion
   </script>
 </body>
 </html>

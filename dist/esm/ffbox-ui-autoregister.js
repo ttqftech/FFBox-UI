@@ -3,5 +3,15 @@ import "./components/switch/ffbox-switch.js";
 import "./components/checkbox/ffbox-checkbox.js";
 import "./components/radio/ffbox-radio.js";
 import "./components/rocker-switch/ffbox-rocker-switch.js";
-import "./ffbox-theme-provider-D8JQVOkC.js";
+import "./components/slider/ffbox-slider.js";
+import "./components/normal-input/ffbox-normal-input.js";
+import "./components/input-auto-size/ffbox-input-auto-size.js";
+import "./components/control-box/ffbox-control-box.js";
+import "./components/radio-list/ffbox-radio-list.js";
+import "./components/auto-size-wrapper/ffbox-auto-size-wrapper.js";
+import "./ffbox-cut-time-input-CcC95Qxj.js";
+import "./components/msgbox/ffbox-msgbox.js";
+import "./components/popup/ffbox-popup.js";
+import "./components/tooltip/ffbox-tooltip.js";
+import "./ffbox-theme-provider-2ZhrYeYK.js";
 //# sourceMappingURL=ffbox-ui-autoregister.js.map

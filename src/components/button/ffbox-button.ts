@@ -34,7 +34,6 @@ export class FFBoxButton extends LitElement {
 			border-radius: 8px;
 			border: none;
 			outline: none;
-			cursor: pointer;
 			transition: box-shadow 0.3s cubic-bezier(0, 1.5, 0.3, 1);
 		}
 

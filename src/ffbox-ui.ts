@@ -10,5 +10,10 @@ export { FFBoxNormalInput } from './components/normal-input/ffbox-normal-input.j
 export { FFBoxInputAutoSize } from './components/input-auto-size/ffbox-input-auto-size.js';
 export { FFBoxControlBox } from './components/control-box/ffbox-control-box.js';
 export { FFBoxRadioList, type RadioListItem } from './components/radio-list/ffbox-radio-list.js';
+export { FFBoxAutoSizeWrapper, type Size } from './components/auto-size-wrapper/ffbox-auto-size-wrapper.js';
+export { FFBoxCutTimeInput, type CutTimeValue } from './components/cut-time-input/ffbox-cut-time-input.js';
+export { FFBoxMsgbox, type MsgboxButton, type MsgboxOptions } from './components/msgbox/ffbox-msgbox.js';
+export { FFBoxPopup, type PopupOptions } from './components/popup/ffbox-popup.js';
 export { FFBoxTooltip, type TooltipOptions } from './components/tooltip/ffbox-tooltip.js';
 export { tooltip, useTooltip, type TooltipPosition, type TooltipStyleName } from './components/tooltip/use-tooltip.js';
+export { durationValidator, durationFixer, numberValidator, notEmptyValidator } from './utils/validatorAndFixer.js';

@@ -1,5 +1,5 @@
-import { t as themeContext } from "../../ffbox-theme-provider-D8JQVOkC.js";
-import { i, n, c, a as i$1, b, t } from "../../lit-WUgPma2W.js";
+import { t as themeContext } from "../../ffbox-theme-provider-2ZhrYeYK.js";
+import { a as i, n, c, d as i$1, f as b, g as t } from "../../lit-Dfi9bTsN.js";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __decorateClass = (decorators, target, key, kind) => {
@@ -31,11 +31,11 @@ let FFBoxRockerSwitch = class extends i$1 {
   }
   _goLeft() {
     if (this.disabledLeft) return;
-    this.dispatchEvent(new CustomEvent("ffbox-left", { bubbles: true, composed: true }));
+    this.dispatchEvent(new CustomEvent("left", { bubbles: true, composed: true }));
   }
   _goRight() {
     if (this.disabledRight) return;
-    this.dispatchEvent(new CustomEvent("ffbox-right", { bubbles: true, composed: true }));
+    this.dispatchEvent(new CustomEvent("right", { bubbles: true, composed: true }));
   }
 };
 FFBoxRockerSwitch.styles = i`
@@ -53,6 +53,8 @@ FFBoxRockerSwitch.styles = i`
 
 		.rockerSwitch {
 			position: relative;
+			// height: 取决于尺寸;
+			// flex: 0 0 auto;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -84,16 +86,16 @@ FFBoxRockerSwitch.styles = i`
 		}
 
 		.arrow:hover:not(:disabled) {
-			background-color: hwb(var(--bg99, 0 99% 1%) / 0.4);
+			background-color: hwb(var(--bg99) / 0.4);
 			box-shadow:
-				0 1px 4px hwb(var(--hoverShadow, 0 0% 100%) / 0.2),
-				0 4px 2px -2px hwb(var(--highlight, 0 100% 0%) / 0.5) inset;
+				0 1px 4px hwb(var(--hoverShadow) / 0.2),
+				0 4px 2px -2px hwb(var(--highlight) / 0.5) inset;
 		}
 
 		.arrow:active:not(:disabled) {
 			box-shadow:
-				0 0px 1px hwb(var(--hoverShadow, 0 0% 100%) / 0.2),
-				0 20px 15px -10px hwb(var(--hoverShadow, 0 0% 100%) / 0.15) inset;
+				0 0px 1px hwb(var(--hoverShadow) / 0.2),
+				0 20px 15px -10px hwb(var(--hoverShadow) / 0.15) inset;
 			transform: translateY(0.25px);
 		}
 
