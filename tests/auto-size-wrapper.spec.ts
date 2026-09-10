@@ -1,60 +1,76 @@
 import { test, expect } from '@playwright/test';
+import { openPlayground } from './utils';
 
-test('ffbox-auto-size-wrapper 测量 slot 尺寸', async ({ page }) => {
-  await page.goto('/playground/');
+// 软断言：单个测试项失败不会中断后续步骤，一次跑完所有测试项
+const softExpect = expect.configure({ soft: true });
 
-  const asw = page.locator('#asw1');
-  await expect(asw).toBeVisible();
+test.describe('ffbox-auto-size-wrapper', () => {
+  test('测量 slot 尺寸', async ({ page }) => {
+    await openPlayground(page);
 
-  // 挂载后完成首次测量并派发 resize 事件
-  const log = page.locator('#asw1-log');
-  await expect(log).toContainText('AutoSizeWrapper 1 →');
-  const sizeSpan = page.locator('#asw-size');
-  await expect(sizeSpan).not.toHaveText('0 × 0');
+    await test.step('挂载后可见', async () => {
+      await softExpect(page.locator('#asw1')).toBeVisible();
+    });
 
-  // 宽度与容器一致（320px），高度大于 0
-  const [width, height] = (await sizeSpan.textContent() ?? '').split('×').map(s => Number(s.trim()));
-  expect(width).toBeGreaterThan(300);
-  expect(height).toBeGreaterThan(0);
-});
+    await test.step('完成首次测量并派发 resize 事件', async () => {
+      await softExpect(page.locator('#asw1-log')).toContainText('AutoSizeWrapper 1 →');
+      await softExpect(page.locator('#asw-size')).not.toHaveText('0 × 0');
+    });
 
-test('ffbox-auto-size-wrapper customStyle 驱动容器高度', async ({ page }) => {
-  await page.goto('/playground/');
+    await test.step('宽度与容器一致（320px），高度大于 0', async () => {
+      const sizeText = (await page.locator('#asw-size').textContent()) ?? '';
+      const [width, height] = sizeText.split('×').map(s => Number(s.trim()));
+      softExpect(width).toBeGreaterThan(300);
+      softExpect(height).toBeGreaterThan(0);
+    });
+  });
 
-  const wrapper = page.locator('#asw1 .autoSizeWrapper');
-  await expect(wrapper).toBeVisible();
+  test('customStyle 驱动容器高度', async ({ page }) => {
+    await openPlayground(page);
+    const wrapper = page.locator('#asw1 .autoSizeWrapper');
 
-  const heightBefore = await wrapper.evaluate(el => el.getBoundingClientRect().height);
+    await test.step('容器可见并记录初始高度', async () => {
+      await softExpect(wrapper).toBeVisible();
+    });
+    const heightBefore = await wrapper.evaluate(el => el.getBoundingClientRect().height);
 
-  // 展开内容 → 手动 updateSize → 容器高度变大（带过渡）
-  await page.locator('#aswToggle').click();
-  await page.waitForTimeout(700);
-  const heightAfter = await wrapper.evaluate(el => el.getBoundingClientRect().height);
-  expect(heightAfter).toBeGreaterThan(heightBefore);
+    // test.step 的返回值会被透传出来，方便后续步骤复用
+    const heightAfter = await test.step('展开内容后容器高度变大（带过渡）', async () => {
+      await page.locator('#aswToggle').click();
+      await page.waitForTimeout(700);
+      const height = await wrapper.evaluate(el => el.getBoundingClientRect().height);
+      softExpect(height).toBeGreaterThan(heightBefore);
+      return height;
+    });
 
-  // 收起 → 高度回落
-  await page.locator('#aswToggle').click();
-  await page.waitForTimeout(700);
-  const heightCollapsed = await wrapper.evaluate(el => el.getBoundingClientRect().height);
-  expect(heightCollapsed).toBeLessThan(heightAfter);
-});
+    await test.step('收起后高度回落', async () => {
+      await page.locator('#aswToggle').click();
+      await page.waitForTimeout(700);
+      const heightCollapsed = await wrapper.evaluate(el => el.getBoundingClientRect().height);
+      softExpect(heightCollapsed).toBeLessThan(heightAfter);
+    });
+  });
 
-test('ffbox-auto-size-wrapper use-resize-observer 自动重测', async ({ page }) => {
-  await page.goto('/playground/');
+  test('use-resize-observer 自动重测', async ({ page }) => {
+    await openPlayground(page);
+    const wrapper = page.locator('#asw2 .autoSizeWrapper');
+    const sizeSpan = page.locator('#asw2-size');
 
-  const asw2 = page.locator('#asw2');
-  const wrapper = asw2.locator('.autoSizeWrapper');
-  const sizeSpan = page.locator('#asw2-size');
+    await test.step('初始测量完成', async () => {
+      await softExpect(sizeSpan).not.toHaveText('0 × 0');
+    });
+    const heightBefore = await wrapper.evaluate(el => el.getBoundingClientRect().height);
 
-  await expect(sizeSpan).not.toHaveText('0 × 0');
-  const heightBefore = await wrapper.evaluate(el => el.getBoundingClientRect().height);
+    // 开启 ResizeObserver 后内容变化应自动反映
+    await test.step('内容变化后自动重测（高度变大）', async () => {
+      await page.locator('#aswToggle').click();
+      await expect.poll(async () => {
+        return await wrapper.evaluate(el => el.getBoundingClientRect().height);
+      }, { timeout: 3000 }).toBeGreaterThan(heightBefore);
+    });
 
-  // 未开启 ResizeObserver 时不会自动重测，开启后内容变化应自动反映
-  await page.locator('#aswToggle').click();
-  await expect.poll(async () => {
-    return await wrapper.evaluate(el => el.getBoundingClientRect().height);
-  }, { timeout: 3000 }).toBeGreaterThan(heightBefore);
-
-  // 日志中记录了 asw2 的重新测量
-  await expect(page.locator('#asw2-log')).toContainText('AutoSizeWrapper 2 →');
+    await test.step('日志记录 asw2 的重新测量', async () => {
+      await softExpect(page.locator('#asw2-log')).toContainText('AutoSizeWrapper 2 →');
+    });
+  });
 });

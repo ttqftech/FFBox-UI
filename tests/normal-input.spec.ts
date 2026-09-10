@@ -1,81 +1,88 @@
 import { test, expect } from '@playwright/test';
+import { openPlayground } from './utils';
 
-test('ffbox-normal-input', async ({ page }) => {
-  await page.goto('/playground/');
+// 软断言：单个测试项失败不会中断后续步骤，一次跑完所有测试项
+const softExpect = expect.configure({ soft: true });
 
-  // renders with initial value
-  const inputA = page.locator('#inputA');
-  await expect(inputA).toBeVisible();
-  const innerA = inputA.locator('input');
-  await expect(innerA).toHaveValue('hello');
+test.describe('ffbox-normal-input', () => {
+  test('渲染、事件与校验器', async ({ page }) => {
+    await openPlayground(page);
+    const log = page.locator('#input-log');
 
-  // enter fires enter event
-  const log = page.locator('#input-log');
-  await innerA.click();
-  await innerA.press('Enter');
-  await expect(log).toContainText('Input Enter');
+    await test.step('初始值正确渲染', async () => {
+      await softExpect(page.locator('#inputA')).toBeVisible();
+      await softExpect(page.locator('#inputA input')).toHaveValue('hello');
+    });
 
-  // placeholder is visible
-  const inputB = page.locator('#inputB');
-  const innerB = inputB.locator('input');
-  await expect(innerB).toHaveAttribute('placeholder', '请输入内容');
+    await test.step('回车触发 enter 事件', async () => {
+      const innerA = page.locator('#inputA input');
+      await innerA.click();
+      await innerA.press('Enter');
+      await softExpect(log).toContainText('Input Enter');
+    });
 
-  // typing fires change event
-  await innerB.click();
-  await innerB.fill('test');
-  await expect(log).toContainText('Input → "test"');
+    await test.step('placeholder 正确显示', async () => {
+      await softExpect(page.locator('#inputB input')).toHaveAttribute('placeholder', '请输入内容');
+    });
 
-  // disabled does not accept input
-  const inputC = page.locator('#inputC');
-  const innerC = inputC.locator('input');
-  await expect(innerC).toBeDisabled();
+    await test.step('输入触发 change 事件', async () => {
+      const innerB = page.locator('#inputB input');
+      await innerB.click();
+      await innerB.fill('test');
+      await softExpect(log).toContainText('Input → "test"');
+    });
 
-  // integer validator passes for valid input
-  const inputD = page.locator('#inputD');
-  const innerD = inputD.locator('input');
-  const wrapperD = inputD.locator('.inputbox-selector');
-  await expect(innerD).toHaveValue('42');
-  await expect(wrapperD).not.toHaveClass(/invalid/);
+    await test.step('禁用输入框不接受输入', async () => {
+      await softExpect(page.locator('#inputC input')).toBeDisabled();
+    });
 
-  // integer validator fails for non-integer
-  await innerD.click();
-  await innerD.fill('3.14');
-  await innerD.blur();
-  await expect(wrapperD).toHaveClass(/invalid/);
+    await test.step('整数校验器：合法值不带 invalid', async () => {
+      await softExpect(page.locator('#inputD input')).toHaveValue('42');
+      await softExpect(page.locator('#inputD .inputbox-selector')).not.toHaveClass(/invalid/);
+    });
 
-  // number validator shows error on initial invalid value
-  const inputE = page.locator('#inputE');
-  const innerE = inputE.locator('input');
-  const wrapperE = inputE.locator('.inputbox-selector');
-  await expect(innerE).toHaveValue('3.14a');
-  await expect(wrapperE).toHaveClass(/invalid/);
+    await test.step('整数校验器：非整数标红', async () => {
+      const innerD = page.locator('#inputD input');
+      await innerD.click();
+      await innerD.fill('3.14');
+      await innerD.blur();
+      await softExpect(page.locator('#inputD .inputbox-selector')).toHaveClass(/invalid/);
+    });
 
-  // number validator passes after correcting value
-  await innerE.click();
-  await innerE.fill('3.14');
-  await innerE.blur();
-  await expect(wrapperE).not.toHaveClass(/invalid/);
+    await test.step('数字校验器：初始非法值标红，修正后恢复', async () => {
+      const innerE = page.locator('#inputE input');
+      await softExpect(innerE).toHaveValue('3.14a');
+      await softExpect(page.locator('#inputE .inputbox-selector')).toHaveClass(/invalid/);
 
-  // number validator fails for non-number
-  await innerE.click();
-  await innerE.fill('abc');
-  await innerE.blur();
-  await expect(wrapperE).toHaveClass(/invalid/);
+      await innerE.click();
+      await innerE.fill('3.14');
+      await innerE.blur();
+      await softExpect(page.locator('#inputE .inputbox-selector')).not.toHaveClass(/invalid/);
+    });
 
-  // inputFixer strips non-digits
-  const inputF = page.locator('#inputF');
-  const innerF = inputF.locator('input');
-  await innerF.click();
-  await innerF.fill('a3b5c');
-  await expect(log).toContainText('Input → "35"');
+    await test.step('数字校验器：非数字标红', async () => {
+      const innerE = page.locator('#inputE input');
+      await innerE.click();
+      await innerE.fill('abc');
+      await innerE.blur();
+      await softExpect(page.locator('#inputE .inputbox-selector')).toHaveClass(/invalid/);
+    });
 
-  // disabled with invalid value shows both states
-  const inputG = page.locator('#inputG');
-  const innerG = inputG.locator('input');
-  const wrapperG = inputG.locator('.inputbox-selector');
-  await expect(innerG).toBeDisabled();
-  await expect(innerG).toHaveValue('abc');
-  await expect(wrapperG).toHaveClass(/invalid/);
-  const opacity = await wrapperG.evaluate(el => getComputedStyle(el).opacity);
-  expect(Number(opacity)).toBeLessThan(1);
+    await test.step('inputFixer 剔除非数字字符', async () => {
+      const innerF = page.locator('#inputF input');
+      await innerF.click();
+      await innerF.fill('a3b5c');
+      await softExpect(log).toContainText('Input → "35"');
+    });
+
+    await test.step('禁用 + 非法值：同时呈现禁用态与标红且半透明', async () => {
+      const innerG = page.locator('#inputG input');
+      const wrapperG = page.locator('#inputG .inputbox-selector');
+      await softExpect(innerG).toBeDisabled();
+      await softExpect(innerG).toHaveValue('abc');
+      await softExpect(wrapperG).toHaveClass(/invalid/);
+      const opacity = await wrapperG.evaluate(el => getComputedStyle(el).opacity);
+      softExpect(Number(opacity)).toBeLessThan(1);
+    });
+  });
 });

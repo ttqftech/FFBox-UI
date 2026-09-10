@@ -1,97 +1,116 @@
 import { test, expect } from '@playwright/test';
+import { openPlayground } from './utils';
 
-test('ffbox-cut-time-input 渲染与初值', async ({ page }) => {
-  await page.goto('/playground/');
+// 软断言：单个测试项失败不会中断后续步骤，一次跑完所有测试项
+const softExpect = expect.configure({ soft: true });
 
-  const cti = page.locator('#cti1');
-  await expect(cti).toBeVisible();
+test.describe('ffbox-cut-time-input', () => {
+  test('渲染与初值', async ({ page }) => {
+    await openPlayground(page);
 
-  const inputs = cti.locator('input');
-  await expect(inputs).toHaveCount(2);
-  await expect(inputs.nth(0)).toHaveValue('00:00:10.00');
-  await expect(inputs.nth(1)).toHaveValue('00:00:20.00');
+    await test.step('渲染两个时间输入框并带初值', async () => {
+      const cti = page.locator('#cti1');
+      await softExpect(cti).toBeVisible();
+      const inputs = cti.locator('input');
+      await softExpect(inputs).toHaveCount(2);
+      await softExpect(inputs.nth(0)).toHaveValue('00:00:10.00');
+      await softExpect(inputs.nth(1)).toHaveValue('00:00:20.00');
+    });
 
-  // placeholder 取自 placeholder 属性
-  const cti2 = page.locator('#cti2');
-  await expect(cti2.locator('input').nth(0)).toHaveValue('00:01:00');
-  // 禁用状态下输入框不可编辑
-  await expect(cti2.locator('input').nth(0)).toBeDisabled();
-});
+    await test.step('placeholder 属性生效（cti1 配置了开始/结束占位）', async () => {
+      await softExpect(page.locator('#cti1 input').nth(0)).toHaveAttribute('placeholder', '开始时间');
+      await softExpect(page.locator('#cti1 input').nth(1)).toHaveAttribute('placeholder', '结束时间');
+    });
 
-test('ffbox-cut-time-input 输入触发 change', async ({ page }) => {
-  await page.goto('/playground/');
+    await test.step('禁用状态下输入框不可编辑', async () => {
+      await softExpect(page.locator('#cti2 input').nth(0)).toBeDisabled();
+      await softExpect(page.locator('#cti2 input').nth(1)).toBeDisabled();
+    });
+  });
 
-  const cti = page.locator('#cti1');
-  const log = page.locator('#cuttime-log');
+  test('输入触发 change 与非法字符清理', async ({ page }) => {
+    await openPlayground(page);
+    const cti = page.locator('#cti1');
+    const log = page.locator('#cuttime-log');
 
-  await cti.locator('input').nth(0).fill('00:01:30');
-  await expect(log).toContainText('CutTimeInput → [00:01:30, 00:00:20.00]');
+    await test.step('修改第一个时间', async () => {
+      await cti.locator('input').nth(0).fill('00:01:30');
+      await softExpect(log).toContainText('CutTimeInput → [00:01:30, 00:00:20.00]');
+    });
 
-  await cti.locator('input').nth(1).fill('00:02:45.5');
-  await expect(log).toContainText('CutTimeInput → [00:01:30, 00:02:45.5]');
-});
+    await test.step('修改第二个时间', async () => {
+      await cti.locator('input').nth(1).fill('00:02:45.5');
+      await softExpect(log).toContainText('CutTimeInput → [00:01:30, 00:02:45.5]');
+    });
 
-test('ffbox-cut-time-input durationFixer 清理非法字符', async ({ page }) => {
-  await page.goto('/playground/');
+    await test.step('durationFixer 剔除输入的字母', async () => {
+      const first = cti.locator('input').nth(0);
+      await first.fill('00:0a1:30');
+      await softExpect(first).toHaveValue('00:01:30');
+    });
+  });
 
-  const first = page.locator('#cti1 input').nth(0);
-  // durationFixer 会剔除小写字母，输入后的值应为清理结果
-  await first.fill('00:0a1:30');
-  await expect(first).toHaveValue('00:01:30');
-});
+  test('非法时间高亮', async ({ page }) => {
+    await openPlayground(page);
+    const input = page.locator('#cti1 input').nth(0);
+    const background = page.locator('#cti1 .inputbox-selectorBackground-wrapper > div');
 
-test('ffbox-cut-time-input 非法时间高亮', async ({ page }) => {
-  await page.goto('/playground/');
+    await test.step('合法输入不带 errorBorder', async () => {
+      await input.fill('00:01:30');
+      await softExpect(background).not.toHaveAttribute('style', /errorBorder/);
+    });
 
-  const cti = page.locator('#cti1');
-  const background = cti.locator('.inputbox-selectorBackground-wrapper > div');
+    await test.step('非法输入（分秒越界）加红边红影', async () => {
+      await input.fill('99:99:99');
+      await softExpect(background).toHaveCSS('border-top-color', 'rgb(238, 119, 119)');
+      await softExpect(background).toHaveCSS('box-shadow', /rgba\(255, 51, 51, 0\.3\)/);
+    });
 
-  // 合法输入：不带 errorBorder
-  await cti.locator('input').nth(0).fill('00:01:30');
-  await expect(background).not.toHaveAttribute('style', /errorBorder/);
+    await test.step('修正后恢复', async () => {
+      await input.fill('00:00:01');
+      await softExpect(background).not.toHaveAttribute('style', /errorBorder/);
+    });
+  });
 
-  // 非法输入（分秒越界）：背景层加红边红影（--errorBorder = #E77）
-  await cti.locator('input').nth(0).fill('99:99:99');
-  await expect(background).toHaveCSS('border-top-color', 'rgb(238, 119, 119)');
-  await expect(background).toHaveCSS('box-shadow', /rgba\(255, 51, 51, 0\.3\)/);
+  test('清空按钮', async ({ page }) => {
+    await openPlayground(page);
+    const cti = page.locator('#cti1');
+    const clearWrapper = cti.locator('.hiddenButton');
+    const clear = clearWrapper.locator('ffbox-button');
+    const log = page.locator('#cuttime-log');
 
-  // 修正后恢复
-  await cti.locator('input').nth(0).fill('00:00:01');
-  await expect(background).not.toHaveAttribute('style', /errorBorder/);
-});
+    await test.step('未悬停时透明且不拦截事件', async () => {
+      await softExpect(clearWrapper).toHaveCSS('opacity', '0');
+      await softExpect(clearWrapper).toHaveCSS('pointer-events', 'none');
+    });
 
-test('ffbox-cut-time-input 清空按钮', async ({ page }) => {
-  await page.goto('/playground/');
+    await test.step('悬停操作区后滑出并可点击', async () => {
+      await cti.locator('.opButton').hover();
+      await softExpect(clearWrapper).toHaveCSS('opacity', '1');
+      await softExpect(clearWrapper).toHaveCSS('pointer-events', 'auto');
+    });
 
-  const cti = page.locator('#cti1');
-  const clearWrapper = cti.locator('.hiddenButton');
-  const clear = clearWrapper.locator('ffbox-button');
-  const log = page.locator('#cuttime-log');
+    await test.step('点击清空两个输入框', async () => {
+      await clear.click();
+      await softExpect(log).toContainText('CutTimeInput → [, ]');
+      await softExpect(cti.locator('input').nth(0)).toHaveValue('');
+      await softExpect(cti.locator('input').nth(1)).toHaveValue('');
+    });
+  });
 
-  // 悬停前不可点击（透明层不拦截事件）
-  await expect(clearWrapper).toHaveCSS('opacity', '0');
-  await expect(clearWrapper).toHaveCSS('pointer-events', 'none');
+  test('编辑按钮与 Enter', async ({ page }) => {
+    await openPlayground(page);
+    const cti = page.locator('#cti1');
+    const log = page.locator('#cuttime-log');
 
-  // 悬停操作区后清空按钮滑出并可点击
-  await cti.locator('.opButton').hover();
-  await expect(clearWrapper).toHaveCSS('opacity', '1');
-  await expect(clearWrapper).toHaveCSS('pointer-events', 'auto');
+    await test.step('点击编辑按钮触发回调', async () => {
+      await cti.locator('.opButton ffbox-button').last().click();
+      await softExpect(log).toContainText('CutTimeInput 编辑按钮');
+    });
 
-  await clear.click();
-  await expect(log).toContainText('CutTimeInput → [, ]');
-  await expect(cti.locator('input').nth(0)).toHaveValue('');
-  await expect(cti.locator('input').nth(1)).toHaveValue('');
-});
-
-test('ffbox-cut-time-input 编辑按钮与 Enter', async ({ page }) => {
-  await page.goto('/playground/');
-
-  const cti = page.locator('#cti1');
-  const log = page.locator('#cuttime-log');
-
-  await cti.locator('.opButton ffbox-button').last().click();
-  await expect(log).toContainText('CutTimeInput 编辑按钮');
-
-  await cti.locator('input').nth(0).press('Enter');
-  await expect(log).toContainText('CutTimeInput Enter');
+    await test.step('输入框内回车触发 enter', async () => {
+      await cti.locator('input').nth(0).press('Enter');
+      await softExpect(log).toContainText('CutTimeInput Enter');
+    });
+  });
 });

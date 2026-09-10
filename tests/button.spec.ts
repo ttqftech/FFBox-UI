@@ -1,36 +1,46 @@
 import { test, expect } from '@playwright/test';
+import { openPlayground } from './utils';
 
-test('ffbox-button', async ({ page }) => {
-  await page.goto('/playground/');
+// 软断言：单个测试项失败不会中断后续步骤，一次跑完所有测试项
+const softExpect = expect.configure({ soft: true });
 
-  // renders with default text
-  const button = page.locator('ffbox-button').first();
-  await expect(button).toBeVisible();
-  const text = await button.evaluate((el: HTMLElement) => el.textContent?.trim());
-  expect(text).toBe('普通按钮');
+test.describe('ffbox-button', () => {
+  test('基础渲染与交互', async ({ page }) => {
+    await openPlayground(page);
 
-  // renders different types（限定在 Button 区块内，其他组件内部也用到了 ffbox-button）
-  const buttons = page.locator('#button-section ffbox-button');
-  await expect(buttons).toHaveCount(10);
+    await test.step('默认渲染：按钮可见且带默认文案', async () => {
+      const button = page.locator('ffbox-button').first();
+      await softExpect(button).toBeVisible();
+      const text = await button.evaluate((el: HTMLElement) => el.textContent?.trim());
+      softExpect(text).toBe('普通按钮');
+    });
 
-  // disabled button does not fire click
-  const disabledBtn = page.locator('ffbox-button[disabled]').first();
-  await disabledBtn.click();
-  const log = page.locator('#button-log');
-  await expect(log).toHaveText('');
+    // 限定在 Button 区块内，其他组件内部也用到了 ffbox-button
+    await test.step('渲染出全部 10 个按钮', async () => {
+      await softExpect(page.locator('#button-section ffbox-button')).toHaveCount(10);
+    });
 
-  // clicking normal button fires click
-  const btn = page.locator('ffbox-button').first();
-  await btn.click();
-  await expect(log).toContainText('Button clicked');
+    await test.step('禁用按钮点击后不触发 click 事件', async () => {
+      await page.locator('ffbox-button[disabled]').first().click();
+      await softExpect(page.locator('#button-log')).toHaveText('');
+    });
 
-  // renders primary type with correct class
-  const primaryBtn = page.locator('#button-section ffbox-button[type="primary"]').first();
-  const innerBtn = primaryBtn.locator('button');
-  await expect(innerBtn).toHaveClass(/primary/);
+    await test.step('普通按钮点击后触发 click 事件', async () => {
+      await page.locator('ffbox-button').first().click();
+      await softExpect(page.locator('#button-log')).toContainText('Button clicked');
+    });
 
-  // renders small size with correct class
-  const smallBtn = page.locator('#button-section ffbox-button[size="small"]').first();
-  const innerSmallBtn = smallBtn.locator('button');
-  await expect(innerSmallBtn).toHaveClass(/small/);
+    await test.step('type 变体渲染出对应类（primary / danger / noBg）', async () => {
+      const byType = (type: string) => page.locator(`#button-section ffbox-button[type="${type}"]`).first().locator('button');
+      await softExpect(byType('primary')).toHaveClass(/primary/);
+      await softExpect(byType('danger')).toHaveClass(/danger/);
+      await softExpect(byType('noBg')).toHaveClass(/noBg/);
+    });
+
+    await test.step('size 变体渲染出对应类（small / large）', async () => {
+      const bySize = (size: string) => page.locator(`#button-section ffbox-button[size="${size}"]`).first().locator('button');
+      await softExpect(bySize('small')).toHaveClass(/small/);
+      await softExpect(bySize('large')).toHaveClass(/large/);
+    });
+  });
 });

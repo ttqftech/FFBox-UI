@@ -2,12 +2,18 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
+  // 预热 dev server，避免并发 worker 冷启动时互相拖慢导致随机超时
+  globalSetup: './tests/global-setup.ts',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : '100%',
-  reporter: process.env.CI ? 'html' : 'list',
-  timeout: 15000,
+  // 本地限制并发：dev server 是单进程按需编译的，worker 越多越容易互相拖垮
+  workers: process.env.CI ? 1 : '50%',
+  // printSteps：在终端逐行打印 test.step 的名称与结果（也可用环境变量 PLAYWRIGHT_LIST_PRINT_STEPS=1 临时开启）
+  reporter: process.env.CI
+    ? [['list', { printSteps: true }], ['html']]
+    : [['list', { printSteps: true }]],
+  timeout: 10000,
   expect: {
     timeout: 3000,
   },
