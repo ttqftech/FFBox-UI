@@ -346,6 +346,54 @@
     <div class="event-log" id="popup-log"></div>
   </div>
 
+  <!-- Menu -->
+  <h2>Menu 菜单</h2>
+  <div class="section" id="menu-section">
+    <div class="row">
+      <ffbox-button id="menuAction">动作菜单</ffbox-button>
+      <ffbox-button id="menuSelect">选项菜单</ffbox-button>
+      <ffbox-button id="menuCheck">复选 / 单选</ffbox-button>
+      <ffbox-button id="menuLong">超长列表</ffbox-button>
+      <ffbox-button id="menuSub">多级子菜单</ffbox-button>
+    </div>
+    <div class="event-log" id="menu-log"></div>
+  </div>
+
+  <!-- DropdownInput -->
+  <h2>DropdownInput 下拉输入框</h2>
+  <div class="section" id="dropdown-section">
+    <div class="row">
+      <span class="label">可选:</span>
+      <ffbox-dropdown-input id="dd1" style="flex:1; min-width:200px;"></ffbox-dropdown-input>
+    </div>
+    <div class="row">
+      <span class="label">只读:</span>
+      <ffbox-dropdown-input id="dd2" readonly style="flex:1; min-width:200px;"></ffbox-dropdown-input>
+    </div>
+    <div class="row">
+      <span class="label">禁用:</span>
+      <ffbox-dropdown-input id="dd3" disabled style="flex:1; min-width:200px;"></ffbox-dropdown-input>
+    </div>
+    <div class="row">
+      <span class="label">整数校验:</span>
+      <ffbox-dropdown-input id="dd4" style="flex:1; min-width:200px;"></ffbox-dropdown-input>
+    </div>
+    <div class="row">
+      <span class="label">超长列表:</span>
+      <ffbox-dropdown-input id="dd5" style="flex:1; min-width:200px;"></ffbox-dropdown-input>
+    </div>
+    <div class="row">
+      <span class="label">多级子菜单:</span>
+      <ffbox-dropdown-input id="dd6" style="flex:1; min-width:200px;"></ffbox-dropdown-input>
+    </div>
+    <div class="row">
+      <span class="label">受控写法:</span>
+      <ffbox-dropdown-input id="dd7" style="flex:1; min-width:200px;"></ffbox-dropdown-input>
+      <span id="dd7-mirror" style="color:var(--66); font-size:12px;"></span>
+    </div>
+    <div class="event-log" id="dropdown-log"></div>
+  </div>
+
   </ffbox-theme-provider>
 
   <!-- 非 Vite 环境的 fallback，Vite 会忽略这段 -->
@@ -664,9 +712,9 @@
     let popupCount = 0;
     const popups = [
       ['popupNormal', 0, '这是一条普通气泡通知'],
-      ['popupOk', 1, '操作成功'],
-      ['popupWarning', 2, '这个参数可能不符合预期'],
-      ['popupError', 3, '转码失败，请检查输入文件'],
+      ['popupOk', 1, '这是一条成功信息气泡'],
+      ['popupWarning', 2, '这是一条警告信息气泡'],
+      ['popupError', 3, '这是一条错误信息气泡'],
     ];
     for (const [id, level, message] of popups) {
       document.getElementById(id).addEventListener('click', () => {
@@ -680,6 +728,231 @@
         await new Promise(resolve => setTimeout(resolve, 10));
       }
       logEvent('popup-log', '批量弹出 100 条');
+    });
+
+    // #endregion
+
+    // #region ffbox-menu
+
+    const { FFBoxMenu, getMenuItemByValue } = await import('../src/ffbox-ui.js');
+
+    const menuActionList = [
+      { type: 'normal', label: '打开文件…', value: 'open' },
+      { type: 'normal', label: '保存项目', value: 'save', tooltip: 'Ctrl+S' },
+      { type: 'separator' },
+      { type: 'normal', label: '重命名', value: 'rename', disabled: true },
+      {
+        type: 'normal', label: '导出为…', value: 'export',
+        icon: html`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:inherit"><path d="M12 4v10m0 0l-4-4m4 4l4-4M5 19h14" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+      },
+      {
+        type: 'submenu', label: '分享到…',
+        subMenu: [
+          { type: 'normal', label: '复制链接', value: 'copyLink' },
+          { type: 'normal', label: '邮件', value: 'mail', disabled: true },
+        ],
+      },
+    ];
+
+    document.getElementById('menuAction').addEventListener('click', (e) => {
+      FFBoxMenu.showMenu({
+        menu: menuActionList,
+        triggerElem: e.currentTarget,
+        onSelect: (e, value) => logEvent('menu-log', `Menu 动作 → ${value}`),
+      });
+      logEvent('menu-log', 'Menu 动作已打开：↑↓ 移动、→ 进子菜单、← 返回、Enter 确认、Esc 关闭');
+    });
+
+    const menuSelectList = [
+      { type: 'normal', label: '1080p', value: '1080p' },
+      { type: 'normal', label: '720p', value: '720p' },
+      { type: 'normal', label: '480p', value: '480p' },
+    ];
+    document.getElementById('menuSelect').addEventListener('click', (e) => {
+      FFBoxMenu.showMenu({
+        menu: menuSelectList,
+        triggerElem: e.currentTarget,
+        type: 'select',
+        selectedValue: '720p',
+        onSelect: (e, value) => logEvent('menu-log', `Menu 选项 → ${value}`),
+      });
+      logEvent('menu-log', 'Menu 选项打开，当前选中 720p（↑↓ 选择、Enter/点击确认、Esc 关闭）');
+    });
+
+    const menuCheckList = [
+      { type: 'checkbox', label: '循环播放', value: 'loop', checked: false },
+      { type: 'checkbox', label: '静音', value: 'mute', checked: true },
+      { type: 'separator' },
+      { type: 'radio', label: '速度优先', value: 'fast', checked: true },
+      { type: 'radio', label: '质量优先', value: 'quality', checked: false },
+    ];
+    document.getElementById('menuCheck').addEventListener('click', (e) => {
+      FFBoxMenu.showMenu({
+        menu: menuCheckList,
+        triggerElem: e.currentTarget,
+        onSelect: (e, value) => {
+          const item = getMenuItemByValue(menuCheckList, value);
+          if (item && item.type === 'checkbox') item.checked = !item.checked;
+          if (item && item.type === 'radio') {
+            menuCheckList.forEach((m) => { if (m.type === 'radio') m.checked = m.value === value; });
+          }
+          logEvent('menu-log', `Menu 复选/单选 → ${value}（重新打开可见状态已更新）`);
+        },
+      });
+    });
+
+    const menuLongList = Array.from({ length: 100 }, (_, i) => ({
+      type: 'normal', label: `菜单项 ${String(i + 1).padStart(3, '0')}`, value: `item-${i + 1}`,
+    }));
+    document.getElementById('menuLong').addEventListener('click', (e) => {
+      FFBoxMenu.showMenu({
+        menu: menuLongList,
+        triggerElem: e.currentTarget,
+        onSelect: (e, value) => logEvent('menu-log', `Menu 超长列表 → ${value}`),
+      });
+      logEvent('menu-log', 'Menu 超长列表已打开（100 项）：↑↓ 连续导航、Home/End 跳转首尾');
+    });
+
+    const menuSubList = [
+      {
+        type: 'submenu', label: '视频',
+        subMenu: [
+          { type: 'normal', label: 'MP4', value: 'mp4' },
+          { type: 'normal', label: 'FLV', value: 'flv' },
+          {
+            type: 'submenu', label: 'MKV 编码…',
+            subMenu: [
+              { type: 'normal', label: 'H.264', value: 'h264' },
+              { type: 'normal', label: 'H.265', value: 'h265' },
+              {
+                type: 'submenu', label: '试验性…',
+                subMenu: [
+                  { type: 'normal', label: 'AV1', value: 'av1' },
+                  { type: 'normal', label: 'VP9', value: 'vp9' },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'submenu', label: '音频',
+        subMenu: [
+          { type: 'normal', label: 'MP3', value: 'mp3' },
+          { type: 'normal', label: 'FLAC', value: 'flac' },
+        ],
+      },
+      { type: 'separator' },
+      { type: 'normal', label: '复制命令行', value: 'copyCmd', disabled: true },
+    ];
+    document.getElementById('menuSub').addEventListener('click', (e) => {
+      FFBoxMenu.showMenu({
+        menu: menuSubList,
+        triggerElem: e.currentTarget,
+        onSelect: (e, value) => logEvent('menu-log', `Menu 子菜单 → ${value}`),
+      });
+      logEvent('menu-log', 'Menu 多级子菜单已打开（最深三层）：hover 或 → 逐级展开、← 返回上级');
+    });
+
+    // #endregion
+
+    // #region ffbox-dropdown-input
+
+    const dd1 = document.getElementById('dd1');
+    dd1.text = '1080p';
+    dd1.list = [
+      { type: 'normal', label: '1080p', value: '1080p' },
+      { type: 'normal', label: '720p', value: '720p' },
+      { type: 'normal', label: '480p', value: '480p' },
+      { type: 'normal', label: '跟随源', value: 'source' },
+    ];
+
+    const dd2 = document.getElementById('dd2');
+    dd2.text = '快速';
+    dd2.list = [
+      { type: 'normal', label: '快速', value: 'fast' },
+      { type: 'normal', label: '均衡', value: 'balanced' },
+      { type: 'normal', label: '慢速', value: 'slow' },
+    ];
+
+    const dd3 = document.getElementById('dd3');
+    dd3.text = '不可编辑';
+    dd3.list = [
+      { type: 'normal', label: '不可编辑', value: '不可编辑' },
+    ];
+
+    const dd4 = document.getElementById('dd4');
+    dd4.text = '1024';
+    dd4.list = [
+      { type: 'normal', label: '自动', value: 'auto' },
+      { type: 'normal', label: '1024', value: '1024' },
+      { type: 'normal', label: '2048', value: '2048' },
+    ];
+    dd4.validator = (value) => value.match(/^-?\d+$/) ? undefined : '请输入整数';
+
+    const dd5 = document.getElementById('dd5');
+    dd5.text = '1000';
+    dd5.list = Array.from({ length: 60 }, (_, i) => ({
+      type: 'normal', label: `${(i + 1) * 100} kbps`, value: `${(i + 1) * 100}`,
+    }));
+
+    const dd6 = document.getElementById('dd6');
+    dd6.text = 'H.264';
+    dd6.list = [
+      {
+        type: 'submenu', label: '视频编码…',
+        subMenu: [
+          { type: 'normal', label: 'H.264', value: 'H.264' },
+          { type: 'normal', label: 'H.265', value: 'H.265' },
+          {
+            type: 'submenu', label: '试验性…',
+            subMenu: [
+              { type: 'normal', label: 'AV1', value: 'AV1' },
+              { type: 'normal', label: 'VP9', value: 'VP9' },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'submenu', label: '音频编码…',
+        subMenu: [
+          { type: 'normal', label: 'AAC', value: 'AAC' },
+          { type: 'normal', label: 'Opus', value: 'Opus' },
+        ],
+      },
+      { type: 'normal', label: '跟随源', value: 'source' },
+    ];
+
+    // 受控写法样板：对应原版 Vue 的受控用法——外部持有真值，change 时把值写回 text 属性。
+    // 组件内部也会自行同步 text（漏写回也不会出 bug），此处写回冗余但无害；
+    // 而外部赋值经 willUpdate 覆盖内部值、优先级最高，因此程序化改值会立即反映到输入框与菜单高亮。
+    // 主应用从 Vue 版迁移时，沿用「@change 里写回 :text」的习惯即可无缝衔接
+    const dd7 = document.getElementById('dd7');
+    let dd7State = '跟随源';	// 外部真值（对应 Vue 父组件的 data / store）
+    dd7.text = dd7State;
+    dd7.list = [
+      { type: 'normal', label: '1080p', value: '1080p' },
+      { type: 'normal', label: '720p', value: '720p' },
+      { type: 'normal', label: '跟随源', value: 'source' },
+    ];
+    const dd7Mirror = document.getElementById('dd7-mirror');
+    const syncMirror = () => dd7Mirror.textContent = `外部真值: ${JSON.stringify(dd7State)}`;
+    syncMirror();
+    dd7.addEventListener('change', (e) => {
+      dd7State = e.detail;
+      dd7.text = dd7State;   // 受控写回（即使省略这行，组件内部也会同步 text）
+      syncMirror();
+    });
+    dd7.addEventListener('enter', () => {
+      // 按 enter 时强制组件使用某值，一般不这么用，此处仅做外部赋值演示（受控组件的典型能力）
+      dd7.text = '720p';
+      dd7State = '720p';
+      syncMirror();
+    });
+
+    document.querySelectorAll('ffbox-dropdown-input').forEach(dd => {
+      dd.addEventListener('change', e => logEvent('dropdown-log', `DropdownInput → "${e.detail}"`));
+      dd.addEventListener('enter', () => logEvent('dropdown-log', 'DropdownInput Enter'));
     });
 
     // #endregion

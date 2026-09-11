@@ -1,5 +1,5 @@
-import { t as themeContext } from "../../ffbox-theme-provider-2ZhrYeYK.js";
-import { a as i, n, c, b as e, d as i$1, f as b, g as t } from "../../lit-Dfi9bTsN.js";
+import { t as themeContext } from "../../ffbox-theme-provider-DLHSaw2W.js";
+import { i, n, c, e, a as i$1, b, t } from "../../lit-CCLFh2ru.js";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __decorateClass = (decorators, target, key, kind) => {
@@ -53,14 +53,15 @@ let FFBoxSwitch = class extends i$1 {
       var _a, _b;
       const pageX = e2.pageX ?? ((_b = (_a = e2.touches) == null ? void 0 : _a[0]) == null ? void 0 : _b.pageX) ?? mouseDownX;
       let valueX = Math.floor(pageX) - sliderLeft;
+      let newValue;
       if (valueX < sliderWidth / 2) {
-        valueX = false;
+        newValue = false;
       } else {
-        valueX = true;
+        newValue = true;
       }
-      if (valueX !== lastValue) {
-        this._emitChange(valueX);
-        lastValue = valueX;
+      if (newValue !== lastValue) {
+        this._emitChange(newValue);
+        lastValue = newValue;
       }
     };
     const handleMouseUp = (e2) => {
@@ -97,7 +98,6 @@ let FFBoxSwitch = class extends i$1 {
     }
   }
   _emitChange(value) {
-    this.checked;
     this.checked = value;
     this.dispatchEvent(new CustomEvent("change", {
       detail: value,

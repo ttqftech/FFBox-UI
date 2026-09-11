@@ -25,6 +25,8 @@ html,
 	--hoverShadow: 0 0% 100%;
 	--opposite: 0 100% 0%;
 	--opposite80: 0 80% 20%;
+	--menuItemHovered: 210 20% 60%;
+	--menuItemSelected: 210 10% 30%;
 	--errorBorder: #D66;
 	--errorBg: #472727;
 	--errorBgActive: #522;

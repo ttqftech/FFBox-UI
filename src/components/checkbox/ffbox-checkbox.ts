@@ -11,6 +11,7 @@ export class FFBoxCheckbox extends LitElement {
 	static styles = css`
 		:host {
 			display: inline-block;
+			font-size: 0; /* 纯 HTML 状态下，代码中的换行会被渲染出来，需要设置为 0 来屏蔽 */
 		}
 
 		// :host([data-theme="dark"]) {

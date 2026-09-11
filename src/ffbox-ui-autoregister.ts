@@ -13,4 +13,6 @@ import './components/cut-time-input/ffbox-cut-time-input.js';
 import './components/msgbox/ffbox-msgbox.js';
 import './components/popup/ffbox-popup.js';
 import './components/tooltip/ffbox-tooltip.js';
+import './components/menu/ffbox-menu.js';
+import './components/dropdown-input/ffbox-dropdown-input.js';
 import './components/theme-provider/ffbox-theme-provider.js';

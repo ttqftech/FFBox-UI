@@ -101,19 +101,20 @@ export class FFBoxSwitch extends LitElement {
 			sliderWidth = target.offsetWidth;
 		}
 
-		let lastValue = NaN;
+		let lastValue: boolean | number = NaN;
 
 		const handleMouseMove = (e: MouseEvent | TouchEvent) => {
 			const pageX = (e as MouseEvent).pageX ?? (e as TouchEvent).touches?.[0]?.pageX ?? mouseDownX;
-			let valueX: boolean | number = Math.floor(pageX) - sliderLeft;
+			let valueX = Math.floor(pageX) - sliderLeft;
+			let newValue: boolean;
 			if (valueX < sliderWidth / 2) {
-				valueX = false;
+				newValue = false;
 			} else {
-				valueX = true;
+				newValue = true;
 			}
-			if (valueX !== lastValue) {
-				this._emitChange(valueX);
-				lastValue = valueX;
+			if (newValue !== lastValue) {
+				this._emitChange(newValue);
+				lastValue = newValue;
 			}
 		};
 
@@ -154,7 +155,7 @@ export class FFBoxSwitch extends LitElement {
 	}
 
 	private _emitChange(value: boolean) {
-		const old = this.checked;
+		// const old = this.checked;
 		this.checked = value;
 		this.dispatchEvent(new CustomEvent('change', {
 			detail: value,

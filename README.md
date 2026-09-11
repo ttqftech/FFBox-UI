@@ -280,6 +280,77 @@ FFBoxPopup.show({ message: '转码完成', level: 1 });
 - 悬停后进度环变为关闭按钮，点击或鼠标中键点击可立即关闭
 - 同屏超过 30 条会淘汰最旧的一条
 
+### ffbox-menu
+
+命令式菜单。通过 `FFBoxMenu.showMenu()` 创建（对应主程序 `src/renderer/src/components/Menu` 导出的 `showMenu`），支持动作菜单 / 选项菜单两种模式、多级子菜单、复选/单选菜单项、tooltip 与完整的键盘导航。
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `menu` | `MenuItem[]` | — | 菜单数据 |
+| `type` | `'action' \| 'select'` | `'action'` | `select` 类型在键盘方向键操作时也会触发 `onSelect` |
+| `selectedValue` | `any` | — | 当前选中值（选项菜单） |
+| `container` | `HTMLElement` | `document.body` | 挂载容器 |
+| `triggerRect` | `{ xMin, yMin, xMax, yMax }` | — | 触发控件的坐标，用于计算弹出方向和大小 |
+| `trigger` | `HTMLElement` | — | 触发控件元素；未显式传入 `triggerRect` 时，自动以 `getBoundingClientRect()` 计算（弹出位置锚定到该控件） |
+| `onSelect` | `(event, value, checked?) => void \| false` | — | 选择时触发；action 模式下返回 `false` 则转而触发 menuItem 的 `onClick` |
+| `onCancel` | `(event) => void \| false` | — | 遮罩点击 / Esc 时触发，返回 `false` 不关闭 |
+| `onClose` | `() => void` | — | 关闭时触发 |
+| `onKeyDown` | `(event) => void` | — | 未被菜单消费的按键冒泡到上层 |
+| `returnFocus` | `(event) => void` | — | 定义后菜单不监听全局键盘事件，被 focus 时调用此函数归还焦点 |
+
+`MenuItem`：`{ type: 'normal', value, label, icon?, tooltip?, disabled?, onClick?, extra? }` | `{ type: 'separator' }` | `{ type: 'submenu', label, subMenu, tooltip?, disabled? }` | `{ type: 'checkbox' \| 'radio', value, checked, label, ... }`（由 `ffbox-ui` 导出，`icon` 为 Lit `TemplateResult`）
+
+`FFBoxMenu.showMenu()` 返回句柄：`{ menu, close(), triggerKeyboardEvent(event), setSelectedValue(value) }`。
+
+```js
+import { FFBoxMenu } from 'ffbox-ui';
+
+FFBoxMenu.showMenu({
+  trigger: buttonElement,	// 菜单从该控件位置弹出；也可直接传 triggerRect
+  menu: [
+    { type: 'normal', label: '打开文件…', value: 'open' },
+    { type: 'separator' },
+    { type: 'submenu', label: '导出为…', subMenu: [
+      { type: 'normal', label: 'MP4', value: 'mp4' },
+    ]},
+    { type: 'checkbox', label: '循环播放', value: 'loop', checked: false },
+  ],
+  onSelect: (event, value) => console.log(value),
+});
+```
+
+键盘：↑↓ 移动焦点、→ 进入子菜单、← 返回上级、Enter 确认、Esc 关闭。
+
+### ffbox-dropdown-input
+
+下拉输入框，可输入亦可下拉选择。点击或 ↑ / ↓ / Enter 打开菜单（内部使用 `FFBoxMenu.showMenu`，以自身为 `trigger`），选中项回填输入框。输入与选中回填时即时校验，非法值背景与边框转红。
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `text` | `string \| number` | — | 当前值（同时驱动菜单的选中高亮）。组件内部会在选中 / 输入时把当前值同步回该属性（对应原版受控用法中由父组件写回的动作），因此消费者无需在 `change` 中手动写回；外部赋值依然优先生效，可按受控方式使用 |
+| `list` | `MenuItem[]` | `[]` | 下拉列表 |
+| `readonly` | `boolean` | `false` | 不允许输入，但允许下拉选择 |
+| `disabled` | `boolean` | `false` | 不允许更改 |
+| `placeholder` | `string` | `''` | 占位文本 |
+| `validator` | `(value) => string \| undefined` | — | 校验函数，非法时背景与边框转红 |
+| `inputFixer` | `(value) => string` | — | 输入修正函数 |
+
+| 事件 | 详情 | 说明 |
+|------|------|------|
+| `change` | `string` | 输入或选中时触发，detail 为 menuItem 的 value |
+| `enter` | — | 未打开菜单时按下 Enter |
+
+```js
+const dd = document.querySelector('ffbox-dropdown-input');
+dd.text = '1080p';
+dd.list = [
+  { type: 'normal', label: '1080p', value: '1080p' },
+  { type: 'normal', label: '720p', value: '720p' },
+];
+dd.validator = (value) => value.length ? undefined : '不能为空';
+dd.addEventListener('change', (e) => console.log(e.detail));
+```
+
 ## 主题系统
 
 ### 工作原理

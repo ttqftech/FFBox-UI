@@ -1,5 +1,5 @@
 import '../theme-provider/ffbox-theme-provider.js';
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { consume } from '@lit/context';
 import { themeContext, Theme } from '../../contexts/theme-context.js';

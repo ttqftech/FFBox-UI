@@ -9,9 +9,11 @@ import "./components/input-auto-size/ffbox-input-auto-size.js";
 import "./components/control-box/ffbox-control-box.js";
 import "./components/radio-list/ffbox-radio-list.js";
 import "./components/auto-size-wrapper/ffbox-auto-size-wrapper.js";
-import "./ffbox-cut-time-input-CcC95Qxj.js";
+import "./ffbox-cut-time-input-C3gwJWwW.js";
 import "./components/msgbox/ffbox-msgbox.js";
 import "./components/popup/ffbox-popup.js";
 import "./components/tooltip/ffbox-tooltip.js";
-import "./ffbox-theme-provider-2ZhrYeYK.js";
+import "./components/menu/ffbox-menu.js";
+import "./components/dropdown-input/ffbox-dropdown-input.js";
+import "./ffbox-theme-provider-DLHSaw2W.js";
 //# sourceMappingURL=ffbox-ui-autoregister.js.map

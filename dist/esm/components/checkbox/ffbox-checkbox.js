@@ -1,5 +1,5 @@
-import { t as themeContext } from "../../ffbox-theme-provider-2ZhrYeYK.js";
-import { a as i, n, c, d as i$1, h as o, f as b, g as t } from "../../lit-Dfi9bTsN.js";
+import { t as themeContext } from "../../ffbox-theme-provider-DLHSaw2W.js";
+import { i, n, c, a as i$1, h as o, b, t } from "../../lit-CCLFh2ru.js";
 const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="200" height="200"><path d="M911.018667 181.973333a64 64 0 0 1 16.341333 89.045334l-426.666667 618.666666a64 64 0 0 1-99.584 7.210667l-277.333333-298.666667a64 64 0 0 1 93.781333-87.125333l223.061334 240.213333 381.354666-552.96a64 64 0 0 1 89.045334-16.384z" fill="currentColor"></path></svg>';
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -44,6 +44,7 @@ let FFBoxCheckbox = class extends i$1 {
 FFBoxCheckbox.styles = i`
 		:host {
 			display: inline-block;
+			font-size: 0; /* 纯 HTML 状态下，代码中的换行会被渲染出来，需要设置为 0 来屏蔽 */
 		}
 
 		// :host([data-theme="dark"]) {

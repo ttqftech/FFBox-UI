@@ -6,10 +6,10 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */
   var _a;
-  const t$5 = globalThis, e$8 = t$5.ShadowRoot && (void 0 === t$5.ShadyCSS || t$5.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, s$5 = Symbol(), o$6 = /* @__PURE__ */ new WeakMap();
-  let n$5 = class n {
+  const t$5 = globalThis, e$8 = t$5.ShadowRoot && (void 0 === t$5.ShadyCSS || t$5.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, s$6 = Symbol(), o$8 = /* @__PURE__ */ new WeakMap();
+  let n$7 = class n {
     constructor(t2, e2, o2) {
-      if (this._$cssResult$ = true, o2 !== s$5) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+      if (this._$cssResult$ = true, o2 !== s$6) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
       this.cssText = t2, this.t = e2;
     }
     get styleSheet() {
@@ -17,7 +17,7 @@
       const s2 = this.t;
       if (e$8 && void 0 === t2) {
         const e2 = void 0 !== s2 && 1 === s2.length;
-        e2 && (t2 = o$6.get(s2)), void 0 === t2 && ((this.o = t2 = new CSSStyleSheet()).replaceSync(this.cssText), e2 && o$6.set(s2, t2));
+        e2 && (t2 = o$8.get(s2)), void 0 === t2 && ((this.o = t2 = new CSSStyleSheet()).replaceSync(this.cssText), e2 && o$8.set(s2, t2));
       }
       return t2;
     }
@@ -25,30 +25,30 @@
       return this.cssText;
     }
   };
-  const r$4 = (t2) => new n$5("string" == typeof t2 ? t2 : t2 + "", void 0, s$5), i$6 = (t2, ...e2) => {
+  const r$6 = (t2) => new n$7("string" == typeof t2 ? t2 : t2 + "", void 0, s$6), i$6 = (t2, ...e2) => {
     const o2 = 1 === t2.length ? t2[0] : e2.reduce((e3, s2, o3) => e3 + ((t3) => {
       if (true === t3._$cssResult$) return t3.cssText;
       if ("number" == typeof t3) return t3;
       throw Error("Value passed to 'css' function must be a 'css' function result: " + t3 + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
     })(s2) + t2[o3 + 1], t2[0]);
-    return new n$5(o2, t2, s$5);
+    return new n$7(o2, t2, s$6);
   }, S$1 = (s2, o2) => {
     if (e$8) s2.adoptedStyleSheets = o2.map((t2) => t2 instanceof CSSStyleSheet ? t2 : t2.styleSheet);
     else for (const e2 of o2) {
       const o3 = document.createElement("style"), n2 = t$5.litNonce;
       void 0 !== n2 && o3.setAttribute("nonce", n2), o3.textContent = e2.cssText, s2.appendChild(o3);
     }
-  }, c$3 = e$8 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
+  }, c$4 = e$8 ? (t2) => t2 : (t2) => t2 instanceof CSSStyleSheet ? ((t3) => {
     let e2 = "";
     for (const s2 of t3.cssRules) e2 += s2.cssText;
-    return r$4(e2);
+    return r$6(e2);
   })(t2) : t2;
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const { is: i$5, defineProperty: e$7, getOwnPropertyDescriptor: h$1, getOwnPropertyNames: r$3, getOwnPropertySymbols: o$5, getPrototypeOf: n$4 } = Object, a$1 = globalThis, c$2 = a$1.trustedTypes, l$1 = c$2 ? c$2.emptyScript : "", p$1 = a$1.reactiveElementPolyfillSupport, d$1 = (t2, s2) => t2, u$1 = { toAttribute(t2, s2) {
+  const { is: i$5, defineProperty: e$7, getOwnPropertyDescriptor: h$2, getOwnPropertyNames: r$5, getOwnPropertySymbols: o$7, getPrototypeOf: n$6 } = Object, a$1 = globalThis, c$3 = a$1.trustedTypes, l$1 = c$3 ? c$3.emptyScript : "", p$1 = a$1.reactiveElementPolyfillSupport, d$1 = (t2, s2) => t2, u$1 = { toAttribute(t2, s2) {
     switch (s2) {
       case Boolean:
         t2 = t2 ? l$1 : null;
@@ -76,7 +76,7 @@
         }
     }
     return i2;
-  } }, f$1 = (t2, s2) => !i$5(t2, s2), b$1 = { attribute: true, type: String, converter: u$1, reflect: false, useDefault: false, hasChanged: f$1 };
+  } }, f$2 = (t2, s2) => !i$5(t2, s2), b$1 = { attribute: true, type: String, converter: u$1, reflect: false, useDefault: false, hasChanged: f$2 };
   Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), a$1.litPropertyMetadata ?? (a$1.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
   let y$1 = class y extends HTMLElement {
     static addInitializer(t2) {
@@ -92,7 +92,7 @@
       }
     }
     static getPropertyDescriptor(t2, s2, i2) {
-      const { get: e2, set: r2 } = h$1(this.prototype, t2) ?? { get() {
+      const { get: e2, set: r2 } = h$2(this.prototype, t2) ?? { get() {
         return this[s2];
       }, set(t3) {
         this[s2] = t3;
@@ -107,13 +107,13 @@
     }
     static _$Ei() {
       if (this.hasOwnProperty(d$1("elementProperties"))) return;
-      const t2 = n$4(this);
+      const t2 = n$6(this);
       t2.finalize(), void 0 !== t2.l && (this.l = [...t2.l]), this.elementProperties = new Map(t2.elementProperties);
     }
     static finalize() {
       if (this.hasOwnProperty(d$1("finalized"))) return;
       if (this.finalized = true, this._$Ei(), this.hasOwnProperty(d$1("properties"))) {
-        const t3 = this.properties, s2 = [...r$3(t3), ...o$5(t3)];
+        const t3 = this.properties, s2 = [...r$5(t3), ...o$7(t3)];
         for (const i2 of s2) this.createProperty(i2, t3[i2]);
       }
       const t2 = this[Symbol.metadata];
@@ -132,8 +132,8 @@
       const i2 = [];
       if (Array.isArray(s2)) {
         const e2 = new Set(s2.flat(1 / 0).reverse());
-        for (const s3 of e2) i2.unshift(c$3(s3));
-      } else void 0 !== s2 && i2.push(c$3(s2));
+        for (const s3 of e2) i2.unshift(c$4(s3));
+      } else void 0 !== s2 && i2.push(c$4(s2));
       return i2;
     }
     static _$Eu(t2, s2) {
@@ -205,7 +205,7 @@
       var _a2;
       if (void 0 !== t2) {
         const r2 = this.constructor;
-        if (false === e2 && (h2 = this[t2]), i2 ?? (i2 = r2.getPropertyOptions(t2)), !((i2.hasChanged ?? f$1)(h2, s2) || i2.useDefault && i2.reflect && h2 === ((_a2 = this._$Ej) == null ? void 0 : _a2.get(t2)) && !this.hasAttribute(r2._$Eu(t2, i2)))) return;
+        if (false === e2 && (h2 = this[t2]), i2 ?? (i2 = r2.getPropertyOptions(t2)), !((i2.hasChanged ?? f$2)(h2, s2) || i2.useDefault && i2.reflect && h2 === ((_a2 = this._$Ej) == null ? void 0 : _a2.get(t2)) && !this.hasAttribute(r2._$Eu(t2, i2)))) return;
         this.C(t2, s2, i2);
       }
       false === this.isUpdatePending && (this._$ES = this._$EP());
@@ -287,7 +287,7 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$4 = globalThis, i$4 = (t2) => t2, s$4 = t$4.trustedTypes, e$6 = s$4 ? s$4.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, h = "$lit$", o$4 = `lit$${Math.random().toFixed(9).slice(2)}$`, n$3 = "?" + o$4, r$2 = `<${n$3}>`, l = document, c$1 = () => l.createComment(""), a = (t2) => null === t2 || "object" != typeof t2 && "function" != typeof t2, u = Array.isArray, d = (t2) => u(t2) || "function" == typeof (t2 == null ? void 0 : t2[Symbol.iterator]), f = "[ 	\n\f\r]", v = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, _ = /-->/g, m = />/g, p = RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ 	
+  const t$4 = globalThis, i$4 = (t2) => t2, s$5 = t$4.trustedTypes, e$6 = s$5 ? s$5.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, h$1 = "$lit$", o$6 = `lit$${Math.random().toFixed(9).slice(2)}$`, n$5 = "?" + o$6, r$4 = `<${n$5}>`, l = document, c$2 = () => l.createComment(""), a = (t2) => null === t2 || "object" != typeof t2 && "function" != typeof t2, u = Array.isArray, d = (t2) => u(t2) || "function" == typeof (t2 == null ? void 0 : t2[Symbol.iterator]), f$1 = "[ 	\n\f\r]", v = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, _ = /-->/g, m = />/g, p = RegExp(`>|${f$1}(?:([^\\s"'>=/]+)(${f$1}*=${f$1}*(?:[^ 	
 \f\r"'\`<>=]|("|')|))|$)`, "g"), g = /'/g, $ = /"/g, y = /^(?:script|style|textarea|title)$/i, x = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), b = x(1), E = Symbol.for("lit-noChange"), A = Symbol.for("lit-nothing"), C = /* @__PURE__ */ new WeakMap(), P = l.createTreeWalker(l, 129);
   function V(t2, i2) {
     if (!u(t2) || !t2.hasOwnProperty("raw")) throw Error("invalid template strings array");
@@ -301,7 +301,7 @@
       let a2, u2, d2 = -1, f2 = 0;
       for (; f2 < s3.length && (c2.lastIndex = f2, u2 = c2.exec(s3), null !== u2); ) f2 = c2.lastIndex, c2 === v ? "!--" === u2[1] ? c2 = _ : void 0 !== u2[1] ? c2 = m : void 0 !== u2[2] ? (y.test(u2[2]) && (n2 = RegExp("</" + u2[2], "g")), c2 = p) : void 0 !== u2[3] && (c2 = p) : c2 === p ? ">" === u2[0] ? (c2 = n2 ?? v, d2 = -1) : void 0 === u2[1] ? d2 = -2 : (d2 = c2.lastIndex - u2[2].length, a2 = u2[1], c2 = void 0 === u2[3] ? p : '"' === u2[3] ? $ : g) : c2 === $ || c2 === g ? c2 = p : c2 === _ || c2 === m ? c2 = v : (c2 = p, n2 = void 0);
       const x2 = c2 === p && t2[i3 + 1].startsWith("/>") ? " " : "";
-      l2 += c2 === v ? s3 + r$2 : d2 >= 0 ? (e2.push(a2), s3.slice(0, d2) + h + s3.slice(d2) + o$4 + x2) : s3 + o$4 + (-2 === d2 ? i3 : x2);
+      l2 += c2 === v ? s3 + r$4 : d2 >= 0 ? (e2.push(a2), s3.slice(0, d2) + h$1 + s3.slice(d2) + o$6 + x2) : s3 + o$6 + (-2 === d2 ? i3 : x2);
     }
     return [V(t2, l2 + (t2[s2] || "<?>") + (2 === i2 ? "</svg>" : 3 === i2 ? "</math>" : "")), e2];
   };
@@ -317,22 +317,22 @@
       }
       for (; null !== (r2 = P.nextNode()) && d2.length < u2; ) {
         if (1 === r2.nodeType) {
-          if (r2.hasAttributes()) for (const t3 of r2.getAttributeNames()) if (t3.endsWith(h)) {
-            const i3 = v2[a2++], s2 = r2.getAttribute(t3).split(o$4), e3 = /([.?@])?(.*)/.exec(i3);
+          if (r2.hasAttributes()) for (const t3 of r2.getAttributeNames()) if (t3.endsWith(h$1)) {
+            const i3 = v2[a2++], s2 = r2.getAttribute(t3).split(o$6), e3 = /([.?@])?(.*)/.exec(i3);
             d2.push({ type: 1, index: l2, name: e3[2], strings: s2, ctor: "." === e3[1] ? I : "?" === e3[1] ? L : "@" === e3[1] ? z : H }), r2.removeAttribute(t3);
-          } else t3.startsWith(o$4) && (d2.push({ type: 6, index: l2 }), r2.removeAttribute(t3));
+          } else t3.startsWith(o$6) && (d2.push({ type: 6, index: l2 }), r2.removeAttribute(t3));
           if (y.test(r2.tagName)) {
-            const t3 = r2.textContent.split(o$4), i3 = t3.length - 1;
+            const t3 = r2.textContent.split(o$6), i3 = t3.length - 1;
             if (i3 > 0) {
-              r2.textContent = s$4 ? s$4.emptyScript : "";
-              for (let s2 = 0; s2 < i3; s2++) r2.append(t3[s2], c$1()), P.nextNode(), d2.push({ type: 2, index: ++l2 });
-              r2.append(t3[i3], c$1());
+              r2.textContent = s$5 ? s$5.emptyScript : "";
+              for (let s2 = 0; s2 < i3; s2++) r2.append(t3[s2], c$2()), P.nextNode(), d2.push({ type: 2, index: ++l2 });
+              r2.append(t3[i3], c$2());
             }
           }
-        } else if (8 === r2.nodeType) if (r2.data === n$3) d2.push({ type: 2, index: l2 });
+        } else if (8 === r2.nodeType) if (r2.data === n$5) d2.push({ type: 2, index: l2 });
         else {
           let t3 = -1;
-          for (; -1 !== (t3 = r2.data.indexOf(o$4, t3 + 1)); ) d2.push({ type: 7, index: l2 }), t3 += o$4.length - 1;
+          for (; -1 !== (t3 = r2.data.indexOf(o$6, t3 + 1)); ) d2.push({ type: 7, index: l2 }), t3 += o$6.length - 1;
         }
         l2++;
       }
@@ -425,7 +425,7 @@
       u(this._$AH) || (this._$AH = [], this._$AR());
       const i2 = this._$AH;
       let s2, e2 = 0;
-      for (const h2 of t2) e2 === i2.length ? i2.push(s2 = new k(this.O(c$1()), this.O(c$1()), this, this.options)) : s2 = i2[e2], s2._$AI(h2), e2++;
+      for (const h2 of t2) e2 === i2.length ? i2.push(s2 = new k(this.O(c$2()), this.O(c$2()), this, this.options)) : s2 = i2[e2], s2._$AI(h2), e2++;
       e2 < i2.length && (this._$AR(s2 && s2._$AB.nextSibling, e2), i2.length = e2);
     }
     _$AR(t2 = this._$AA.nextSibling, s2) {
@@ -513,7 +513,7 @@
     let h2 = e2._$litPart$;
     if (void 0 === h2) {
       const t3 = (s2 == null ? void 0 : s2.renderBefore) ?? null;
-      e2._$litPart$ = h2 = new k(i2.insertBefore(c$1(), t3), t3, void 0, s2 ?? {});
+      e2._$litPart$ = h2 = new k(i2.insertBefore(c$2(), t3), t3, void 0, s2 ?? {});
     }
     return h2._$AI(t2), h2;
   };
@@ -522,7 +522,7 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const s$3 = globalThis;
+  const s$4 = globalThis;
   let i$3 = class i extends y$1 {
     constructor() {
       super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
@@ -548,10 +548,10 @@
       return E;
     }
   };
-  i$3._$litElement$ = true, i$3["finalized"] = true, (_a = s$3.litElementHydrateSupport) == null ? void 0 : _a.call(s$3, { LitElement: i$3 });
-  const o$3 = s$3.litElementPolyfillSupport;
-  o$3 == null ? void 0 : o$3({ LitElement: i$3 });
-  (s$3.litElementVersions ?? (s$3.litElementVersions = [])).push("4.2.2");
+  i$3._$litElement$ = true, i$3["finalized"] = true, (_a = s$4.litElementHydrateSupport) == null ? void 0 : _a.call(s$4, { LitElement: i$3 });
+  const o$5 = s$4.litElementPolyfillSupport;
+  o$5 == null ? void 0 : o$5({ LitElement: i$3 });
+  (s$4.litElementVersions ?? (s$4.litElementVersions = [])).push("4.2.2");
   /**
    * @license
    * Copyright 2017 Google LLC
@@ -567,7 +567,7 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const o$2 = { attribute: true, type: String, converter: u$1, reflect: false, hasChanged: f$1 }, r$1 = (t2 = o$2, e2, r2) => {
+  const o$4 = { attribute: true, type: String, converter: u$1, reflect: false, hasChanged: f$2 }, r$3 = (t2 = o$4, e2, r2) => {
     const { kind: n2, metadata: i2 } = r2;
     let s2 = globalThis.litPropertyMetadata.get(i2);
     if (void 0 === s2 && globalThis.litPropertyMetadata.set(i2, s2 = /* @__PURE__ */ new Map()), "setter" === n2 && ((t2 = Object.create(t2)).wrapped = true), s2.set(r2.name, t2), "accessor" === n2) {
@@ -588,8 +588,8 @@
     }
     throw Error("Unsupported decorator location: " + n2);
   };
-  function n$2(t2) {
-    return (e2, o2) => "object" == typeof o2 ? r$1(t2, e2, o2) : ((t3, e3, o3) => {
+  function n$4(t2) {
+    return (e2, o2) => "object" == typeof o2 ? r$3(t2, e2, o2) : ((t3, e3, o3) => {
       const r2 = e3.hasOwnProperty(o3);
       return e3.constructor.createProperty(o3, t3), r2 ? Object.getOwnPropertyDescriptor(e3, o3) : void 0;
     })(t2, e2, o2);
@@ -599,8 +599,8 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  function r(r2) {
-    return n$2({ ...r2, state: true, attribute: false });
+  function r$2(r2) {
+    return n$4({ ...r2, state: true, attribute: false });
   }
   /**
    * @license
@@ -629,7 +629,7 @@
    * Copyright 2021 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  let s$2 = class s extends Event {
+  let s$3 = class s extends Event {
     constructor(s2, t2, e2, o2) {
       super("context-request", { bubbles: true, composed: true }), this.context = s2, this.contextTarget = t2, this.callback = e2, this.subscribe = o2 ?? false;
     }
@@ -639,7 +639,7 @@
    * Copyright 2021 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  function n$1(n2) {
+  function n$3(n2) {
     return n2;
   }
   /**
@@ -647,7 +647,7 @@
    * Copyright 2021 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  let s$1 = class s {
+  let s$2 = class s {
     constructor(t2, s2, i2, h2) {
       if (this.subscribe = false, this.provided = false, this.value = void 0, this.t = (t3, s3) => {
         this.unsubscribe && (this.unsubscribe !== s3 && (this.provided = false, this.unsubscribe()), this.subscribe || this.unsubscribe()), this.value = t3, this.host.requestUpdate(), this.provided && !this.subscribe || (this.provided = true, this.callback && this.callback(t3, s3)), this.unsubscribe = s3;
@@ -664,7 +664,7 @@
       this.unsubscribe && (this.unsubscribe(), this.unsubscribe = void 0);
     }
     dispatchRequest() {
-      this.host.dispatchEvent(new s$2(this.context, this.host, this.t, this.subscribe));
+      this.host.dispatchEvent(new s$3(this.context, this.host, this.t, this.subscribe));
     }
   };
   /**
@@ -672,7 +672,7 @@
    * Copyright 2021 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  class s {
+  let s$1 = class s {
     get value() {
       return this.o;
     }
@@ -699,7 +699,7 @@
     clearCallbacks() {
       this.subscriptions.clear();
     }
-  }
+  };
   /**
    * @license
    * Copyright 2021 Google LLC
@@ -710,7 +710,7 @@
       super("context-provider", { bubbles: true, composed: true }), this.context = t2, this.contextTarget = s2;
     }
   };
-  let i$2 = class i extends s {
+  let i$2 = class i extends s$1 {
     constructor(s2, e2, i2) {
       var _a2, _b;
       super(void 0 !== e2.context ? e2.initialValue : i2), this.onContextRequest = (t2) => {
@@ -721,7 +721,7 @@
         if (s3.context !== this.context) return;
         if ((s3.contextTarget ?? s3.composedPath()[0]) === this.host) return;
         const e3 = /* @__PURE__ */ new Set();
-        for (const [s4, { consumerHost: i3 }] of this.subscriptions) e3.has(s4) || (e3.add(s4), i3.dispatchEvent(new s$2(this.context, i3, s4, true)));
+        for (const [s4, { consumerHost: i3 }] of this.subscriptions) e3.has(s4) || (e3.add(s4), i3.dispatchEvent(new s$3(this.context, i3, s4, true)));
         s3.stopPropagation();
       }, this.host = s2, void 0 !== e2.context ? this.context = e2.context : this.context = e2, this.attachListeners(), (_b = (_a2 = this.host).addController) == null ? void 0 : _b.call(_a2, this);
     }
@@ -746,7 +746,7 @@
         const { requests: o2 } = s2;
         for (const { elementRef: s3, callbackRef: n2 } of o2) {
           const o3 = s3.deref(), c2 = n2.deref();
-          void 0 === o3 || void 0 === c2 || o3.dispatchEvent(new s$2(t2.context, o3, c2, true));
+          void 0 === o3 || void 0 === c2 || o3.dispatchEvent(new s$3(t2.context, o3, c2, true));
         }
       }, this.onContextRequest = (e2) => {
         if (true !== e2.subscribe) return;
@@ -807,28 +807,28 @@
    * Copyright 2022 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  function c({ context: c2, subscribe: e2 }) {
+  function c$1({ context: c2, subscribe: e2 }) {
     return (o2, n2) => {
       "object" == typeof n2 ? n2.addInitializer((function() {
-        new s$1(this, { context: c2, callback: (t2) => {
+        new s$2(this, { context: c2, callback: (t2) => {
           o2.set.call(this, t2);
         }, subscribe: e2 });
       })) : o2.constructor.addInitializer(((o3) => {
-        new s$1(o3, { context: c2, callback: (t2) => {
+        new s$2(o3, { context: c2, callback: (t2) => {
           o3[n2] = t2;
         }, subscribe: e2 });
       }));
     };
   }
-  const themeContext = n$1("ffbox-theme");
-  var __defProp$f = Object.defineProperty;
-  var __getOwnPropDesc$f = Object.getOwnPropertyDescriptor;
-  var __decorateClass$f = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$f(target, key) : target;
+  const themeContext = n$3("ffbox-theme");
+  var __defProp$h = Object.defineProperty;
+  var __getOwnPropDesc$h = Object.getOwnPropertyDescriptor;
+  var __decorateClass$h = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$h(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$f(target, key, result);
+    if (kind && result) __defProp$h(target, key, result);
     return result;
   };
   if (typeof globalThis.__ffbox_context_root_attached === "undefined") {
@@ -856,21 +856,21 @@
       return b`<slot></slot>`;
     }
   };
-  __decorateClass$f([
+  __decorateClass$h([
     e$2({ context: themeContext }),
-    n$2({ reflect: true, attribute: "data-theme" })
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxThemeProvider.prototype, "theme", 2);
-  FFBoxThemeProvider = __decorateClass$f([
+  FFBoxThemeProvider = __decorateClass$h([
     t$3("ffbox-theme-provider")
   ], FFBoxThemeProvider);
-  var __defProp$e = Object.defineProperty;
-  var __getOwnPropDesc$e = Object.getOwnPropertyDescriptor;
-  var __decorateClass$e = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$e(target, key) : target;
+  var __defProp$g = Object.defineProperty;
+  var __getOwnPropDesc$g = Object.getOwnPropertyDescriptor;
+  var __decorateClass$g = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$g(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$e(target, key, result);
+    if (kind && result) __defProp$g(target, key, result);
     return result;
   };
   let FFBoxButton = class extends i$3 {
@@ -1093,30 +1093,30 @@
 				0 6px 18px hwb(var(--hoverShadow, 0 0% 100%) / 0.4) inset;
 		}
 	`;
-  __decorateClass$e([
-    n$2({ reflect: true })
+  __decorateClass$g([
+    n$4({ reflect: true })
   ], FFBoxButton.prototype, "type", 2);
-  __decorateClass$e([
-    n$2({ reflect: true })
+  __decorateClass$g([
+    n$4({ reflect: true })
   ], FFBoxButton.prototype, "size", 2);
-  __decorateClass$e([
-    n$2({ reflect: true, type: Boolean })
+  __decorateClass$g([
+    n$4({ reflect: true, type: Boolean })
   ], FFBoxButton.prototype, "disabled", 2);
-  __decorateClass$e([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$g([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxButton.prototype, "theme", 2);
-  FFBoxButton = __decorateClass$e([
+  FFBoxButton = __decorateClass$g([
     t$3("ffbox-button")
   ], FFBoxButton);
-  var __defProp$d = Object.defineProperty;
-  var __getOwnPropDesc$d = Object.getOwnPropertyDescriptor;
-  var __decorateClass$d = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$d(target, key) : target;
+  var __defProp$f = Object.defineProperty;
+  var __getOwnPropDesc$f = Object.getOwnPropertyDescriptor;
+  var __decorateClass$f = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$f(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$d(target, key, result);
+    if (kind && result) __defProp$f(target, key, result);
     return result;
   };
   let FFBoxSwitch = class extends i$3 {
@@ -1162,14 +1162,15 @@
         var _a2, _b;
         const pageX = e2.pageX ?? ((_b = (_a2 = e2.touches) == null ? void 0 : _a2[0]) == null ? void 0 : _b.pageX) ?? mouseDownX;
         let valueX = Math.floor(pageX) - sliderLeft;
+        let newValue;
         if (valueX < sliderWidth / 2) {
-          valueX = false;
+          newValue = false;
         } else {
-          valueX = true;
+          newValue = true;
         }
-        if (valueX !== lastValue) {
-          this._emitChange(valueX);
-          lastValue = valueX;
+        if (newValue !== lastValue) {
+          this._emitChange(newValue);
+          lastValue = newValue;
         }
       };
       const handleMouseUp = (e2) => {
@@ -1206,7 +1207,6 @@
       }
     }
     _emitChange(value) {
-      this.checked;
       this.checked = value;
       this.dispatchEvent(new CustomEvent("change", {
         detail: value,
@@ -1268,17 +1268,17 @@
 			background: linear-gradient(180deg, #f0f0f0, #ededed);
 		}
 	`;
-  __decorateClass$d([
-    n$2({ type: Boolean, reflect: true })
+  __decorateClass$f([
+    n$4({ type: Boolean, reflect: true })
   ], FFBoxSwitch.prototype, "checked", 2);
-  __decorateClass$d([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$f([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxSwitch.prototype, "theme", 2);
-  __decorateClass$d([
+  __decorateClass$f([
     e$4(".switch-slipper")
   ], FFBoxSwitch.prototype, "slipperEl", 2);
-  FFBoxSwitch = __decorateClass$d([
+  FFBoxSwitch = __decorateClass$f([
     t$3("ffbox-switch")
   ], FFBoxSwitch);
   /**
@@ -1331,16 +1331,16 @@
   class t extends e {
   }
   t.directiveName = "unsafeSVG", t.resultType = 2;
-  const o$1 = e$1(t);
+  const o$3 = e$1(t);
   const checkIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="200" height="200"><path d="M911.018667 181.973333a64 64 0 0 1 16.341333 89.045334l-426.666667 618.666666a64 64 0 0 1-99.584 7.210667l-277.333333-298.666667a64 64 0 0 1 93.781333-87.125333l223.061334 240.213333 381.354666-552.96a64 64 0 0 1 89.045334-16.384z" fill="currentColor"></path></svg>';
-  var __defProp$c = Object.defineProperty;
-  var __getOwnPropDesc$c = Object.getOwnPropertyDescriptor;
-  var __decorateClass$c = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$c(target, key) : target;
+  var __defProp$e = Object.defineProperty;
+  var __getOwnPropDesc$e = Object.getOwnPropertyDescriptor;
+  var __decorateClass$e = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$e(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$c(target, key, result);
+    if (kind && result) __defProp$e(target, key, result);
     return result;
   };
   let FFBoxCheckbox = class extends i$3 {
@@ -1358,7 +1358,7 @@
 				@click=${this._handleClick}
 				style="cursor: ${this.disabled ? "not-allowed" : "pointer"}"
 			>
-				${o$1(checkIcon)}
+				${o$3(checkIcon)}
 			</div>
 		`;
     }
@@ -1376,6 +1376,7 @@
   FFBoxCheckbox.styles = i$6`
 		:host {
 			display: inline-block;
+			font-size: 0; /* 纯 HTML 状态下，代码中的换行会被渲染出来，需要设置为 0 来屏蔽 */
 		}
 
 		// :host([data-theme="dark"]) {
@@ -1417,8 +1418,8 @@
 			color: #FFF;
 		}
 	`;
-  __decorateClass$c([
-    n$2({
+  __decorateClass$e([
+    n$4({
       reflect: true,
       converter: {
         fromAttribute: (value) => {
@@ -1434,24 +1435,24 @@
       }
     })
   ], FFBoxCheckbox.prototype, "checked", 2);
-  __decorateClass$c([
-    n$2({ type: Boolean, reflect: true })
+  __decorateClass$e([
+    n$4({ type: Boolean, reflect: true })
   ], FFBoxCheckbox.prototype, "disabled", 2);
-  __decorateClass$c([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$e([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxCheckbox.prototype, "theme", 2);
-  FFBoxCheckbox = __decorateClass$c([
+  FFBoxCheckbox = __decorateClass$e([
     t$3("ffbox-checkbox")
   ], FFBoxCheckbox);
-  var __defProp$b = Object.defineProperty;
-  var __getOwnPropDesc$b = Object.getOwnPropertyDescriptor;
-  var __decorateClass$b = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$b(target, key) : target;
+  var __defProp$d = Object.defineProperty;
+  var __getOwnPropDesc$d = Object.getOwnPropertyDescriptor;
+  var __decorateClass$d = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$d(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$b(target, key, result);
+    if (kind && result) __defProp$d(target, key, result);
     return result;
   };
   let FFBoxRadio = class extends i$3 {
@@ -1487,6 +1488,7 @@
   FFBoxRadio.styles = i$6`
 		:host {
 			display: inline-block;
+			font-size: 0; /* 纯 HTML 状态下，代码中的换行会被渲染出来，需要设置为 0 来屏蔽 */
 		}
 
 		// :host([data-theme="dark"]) {
@@ -1529,8 +1531,8 @@
 			background-color: #FFF;
 		}
 	`;
-  __decorateClass$b([
-    n$2({
+  __decorateClass$d([
+    n$4({
       reflect: true,
       converter: {
         fromAttribute: (value) => {
@@ -1546,24 +1548,24 @@
       }
     })
   ], FFBoxRadio.prototype, "checked", 2);
-  __decorateClass$b([
-    n$2({ type: Boolean, reflect: true })
+  __decorateClass$d([
+    n$4({ type: Boolean, reflect: true })
   ], FFBoxRadio.prototype, "disabled", 2);
-  __decorateClass$b([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$d([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxRadio.prototype, "theme", 2);
-  FFBoxRadio = __decorateClass$b([
+  FFBoxRadio = __decorateClass$d([
     t$3("ffbox-radio")
   ], FFBoxRadio);
-  var __defProp$a = Object.defineProperty;
-  var __getOwnPropDesc$a = Object.getOwnPropertyDescriptor;
-  var __decorateClass$a = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$a(target, key) : target;
+  var __defProp$c = Object.defineProperty;
+  var __getOwnPropDesc$c = Object.getOwnPropertyDescriptor;
+  var __decorateClass$c = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$c(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$a(target, key, result);
+    if (kind && result) __defProp$c(target, key, result);
     return result;
   };
   let FFBoxRockerSwitch = class extends i$3 {
@@ -1677,30 +1679,30 @@
 		:host([size="m"]) .arrow { height: 26px; font-size: 13.5px; }
 		:host([size="m"]) .label { font-size: 13.5px; padding: 0 30px; }
 	`;
-  __decorateClass$a([
-    n$2({ reflect: true })
+  __decorateClass$c([
+    n$4({ reflect: true })
   ], FFBoxRockerSwitch.prototype, "size", 2);
-  __decorateClass$a([
-    n$2({ type: Boolean, attribute: "disabled-left" })
+  __decorateClass$c([
+    n$4({ type: Boolean, attribute: "disabled-left" })
   ], FFBoxRockerSwitch.prototype, "disabledLeft", 2);
-  __decorateClass$a([
-    n$2({ type: Boolean, attribute: "disabled-right" })
+  __decorateClass$c([
+    n$4({ type: Boolean, attribute: "disabled-right" })
   ], FFBoxRockerSwitch.prototype, "disabledRight", 2);
-  __decorateClass$a([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$c([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxRockerSwitch.prototype, "theme", 2);
-  FFBoxRockerSwitch = __decorateClass$a([
+  FFBoxRockerSwitch = __decorateClass$c([
     t$3("ffbox-rocker-switch")
   ], FFBoxRockerSwitch);
-  var __defProp$9 = Object.defineProperty;
-  var __getOwnPropDesc$9 = Object.getOwnPropertyDescriptor;
-  var __decorateClass$9 = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$9(target, key) : target;
+  var __defProp$b = Object.defineProperty;
+  var __getOwnPropDesc$b = Object.getOwnPropertyDescriptor;
+  var __decorateClass$b = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$b(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$9(target, key, result);
+    if (kind && result) __defProp$b(target, key, result);
     return result;
   };
   let FFBoxSlider = class extends i$3 {
@@ -2046,48 +2048,48 @@
       return (value == null ? void 0 : value.toString()) ?? null;
     }
   };
-  __decorateClass$9([
-    n$2({ reflect: true, converter: FFBoxSlider._numberOrStringConverter })
+  __decorateClass$b([
+    n$4({ reflect: true, converter: FFBoxSlider._numberOrStringConverter })
   ], FFBoxSlider.prototype, "value", 2);
-  __decorateClass$9([
-    n$2({ type: Number })
+  __decorateClass$b([
+    n$4({ type: Number })
   ], FFBoxSlider.prototype, "min", 2);
-  __decorateClass$9([
-    n$2({ type: Number })
+  __decorateClass$b([
+    n$4({ type: Number })
   ], FFBoxSlider.prototype, "max", 2);
-  __decorateClass$9([
-    n$2({ type: Number })
+  __decorateClass$b([
+    n$4({ type: Number })
   ], FFBoxSlider.prototype, "arrowKeyStep", 2);
-  __decorateClass$9([
-    n$2()
+  __decorateClass$b([
+    n$4()
   ], FFBoxSlider.prototype, "adsorption", 2);
-  __decorateClass$9([
-    n$2({ attribute: false })
+  __decorateClass$b([
+    n$4({ attribute: false })
   ], FFBoxSlider.prototype, "tags", 2);
-  __decorateClass$9([
-    n$2()
+  __decorateClass$b([
+    n$4()
   ], FFBoxSlider.prototype, "mode", 2);
-  __decorateClass$9([
-    n$2({ attribute: false })
+  __decorateClass$b([
+    n$4({ attribute: false })
   ], FFBoxSlider.prototype, "valueToDisplay", 2);
-  __decorateClass$9([
-    n$2({ type: Boolean, attribute: false })
+  __decorateClass$b([
+    n$4({ type: Boolean, attribute: false })
   ], FFBoxSlider.prototype, "useIEC", 2);
-  __decorateClass$9([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$b([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxSlider.prototype, "theme", 2);
-  FFBoxSlider = __decorateClass$9([
+  FFBoxSlider = __decorateClass$b([
     t$3("ffbox-slider")
   ], FFBoxSlider);
-  var __defProp$8 = Object.defineProperty;
-  var __getOwnPropDesc$8 = Object.getOwnPropertyDescriptor;
-  var __decorateClass$8 = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$8(target, key) : target;
+  var __defProp$a = Object.defineProperty;
+  var __getOwnPropDesc$a = Object.getOwnPropertyDescriptor;
+  var __decorateClass$a = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$a(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$8(target, key, result);
+    if (kind && result) __defProp$a(target, key, result);
     return result;
   };
   let FFBoxNormalInput = class extends i$3 {
@@ -2242,39 +2244,39 @@
 			opacity: 0.25;
 		}
 	`;
-  __decorateClass$8([
-    n$2({ reflect: true })
+  __decorateClass$a([
+    n$4({ reflect: true })
   ], FFBoxNormalInput.prototype, "value", 2);
-  __decorateClass$8([
-    n$2({ reflect: true })
+  __decorateClass$a([
+    n$4({ reflect: true })
   ], FFBoxNormalInput.prototype, "type", 2);
-  __decorateClass$8([
-    n$2({ type: Boolean, reflect: true })
+  __decorateClass$a([
+    n$4({ type: Boolean, reflect: true })
   ], FFBoxNormalInput.prototype, "disabled", 2);
-  __decorateClass$8([
-    n$2()
+  __decorateClass$a([
+    n$4()
   ], FFBoxNormalInput.prototype, "placeholder", 2);
-  __decorateClass$8([
-    n$2({ attribute: false })
+  __decorateClass$a([
+    n$4({ attribute: false })
   ], FFBoxNormalInput.prototype, "validator", 2);
-  __decorateClass$8([
-    n$2({ attribute: false })
+  __decorateClass$a([
+    n$4({ attribute: false })
   ], FFBoxNormalInput.prototype, "inputFixer", 2);
-  __decorateClass$8([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$a([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxNormalInput.prototype, "theme", 2);
-  FFBoxNormalInput = __decorateClass$8([
+  FFBoxNormalInput = __decorateClass$a([
     t$3("ffbox-normal-input")
   ], FFBoxNormalInput);
-  var __defProp$7 = Object.defineProperty;
-  var __getOwnPropDesc$7 = Object.getOwnPropertyDescriptor;
-  var __decorateClass$7 = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$7(target, key) : target;
+  var __defProp$9 = Object.defineProperty;
+  var __getOwnPropDesc$9 = Object.getOwnPropertyDescriptor;
+  var __decorateClass$9 = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$9(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$7(target, key, result);
+    if (kind && result) __defProp$9(target, key, result);
     return result;
   };
   let FFBoxInputAutoSize = class extends i$3 {
@@ -2375,33 +2377,33 @@
 			font-family: inherit;
 		}
 	`;
-  __decorateClass$7([
-    n$2({ reflect: true })
+  __decorateClass$9([
+    n$4({ reflect: true })
   ], FFBoxInputAutoSize.prototype, "value", 2);
-  __decorateClass$7([
-    n$2({ type: Boolean, attribute: "focus-on-mounted" })
+  __decorateClass$9([
+    n$4({ type: Boolean, attribute: "focus-on-mounted" })
   ], FFBoxInputAutoSize.prototype, "focusOnMounted", 2);
-  __decorateClass$7([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$9([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxInputAutoSize.prototype, "theme", 2);
-  __decorateClass$7([
+  __decorateClass$9([
     e$4("input")
   ], FFBoxInputAutoSize.prototype, "_inputEl", 2);
-  __decorateClass$7([
+  __decorateClass$9([
     e$4(".hidden-div")
   ], FFBoxInputAutoSize.prototype, "_hiddenDivEl", 2);
-  FFBoxInputAutoSize = __decorateClass$7([
+  FFBoxInputAutoSize = __decorateClass$9([
     t$3("ffbox-input-auto-size")
   ], FFBoxInputAutoSize);
-  var __defProp$6 = Object.defineProperty;
-  var __getOwnPropDesc$6 = Object.getOwnPropertyDescriptor;
-  var __decorateClass$6 = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$6(target, key) : target;
+  var __defProp$8 = Object.defineProperty;
+  var __getOwnPropDesc$8 = Object.getOwnPropertyDescriptor;
+  var __decorateClass$8 = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$8(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$6(target, key, result);
+    if (kind && result) __defProp$8(target, key, result);
     return result;
   };
   let FFBoxControlBox = class extends i$3 {
@@ -2477,37 +2479,37 @@
 			opacity: 0.5;
 		}
 	`;
-  __decorateClass$6([
-    n$2({ reflect: true })
+  __decorateClass$8([
+    n$4({ reflect: true })
   ], FFBoxControlBox.prototype, "title", 2);
-  __decorateClass$6([
-    n$2({ reflect: true })
+  __decorateClass$8([
+    n$4({ reflect: true })
   ], FFBoxControlBox.prototype, "description", 2);
-  __decorateClass$6([
-    n$2({ type: Boolean, reflect: true })
+  __decorateClass$8([
+    n$4({ type: Boolean, reflect: true })
   ], FFBoxControlBox.prototype, "long", 2);
-  __decorateClass$6([
-    n$2({ type: Boolean, reflect: true })
+  __decorateClass$8([
+    n$4({ type: Boolean, reflect: true })
   ], FFBoxControlBox.prototype, "optional", 2);
-  __decorateClass$6([
-    n$2({ type: Boolean, reflect: true, attribute: "has-value" })
+  __decorateClass$8([
+    n$4({ type: Boolean, reflect: true, attribute: "has-value" })
   ], FFBoxControlBox.prototype, "hasValue", 2);
-  __decorateClass$6([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$8([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxControlBox.prototype, "theme", 2);
-  FFBoxControlBox = __decorateClass$6([
+  FFBoxControlBox = __decorateClass$8([
     t$3("ffbox-control-box")
   ], FFBoxControlBox);
   const closeIcon$1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="48" height="48"><path d="M743.2 701.21a37.84 37.84 0 0 1-0.39 52.88l5.51-5.51a36.5 36.5 0 0 1-52.19-0.3L281.64 322.79a37.84 37.84 0 0 1 0.39-52.88l-5.5 5.51a36.5 36.5 0 0 1 52.19 0.3z" fill="currentColor"></path><path d="M701.21 284.3a37.84 37.84 0 0 1 52.88 0.39l-5.51-5.51a36.5 36.5 0 0 1-0.3 52.19L322.79 745.86a37.84 37.84 0 0 1-52.88-0.39l5.51 5.51a36.5 36.5 0 0 1 0.3-52.19z" fill="currentColor"></path></svg>';
-  var __defProp$5 = Object.defineProperty;
-  var __getOwnPropDesc$5 = Object.getOwnPropertyDescriptor;
-  var __decorateClass$5 = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$5(target, key) : target;
+  var __defProp$7 = Object.defineProperty;
+  var __getOwnPropDesc$7 = Object.getOwnPropertyDescriptor;
+  var __decorateClass$7 = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$7(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$5(target, key, result);
+    if (kind && result) __defProp$7(target, key, result);
     return result;
   };
   let FFBoxRadioList = class extends i$3 {
@@ -2545,7 +2547,7 @@
 						focus-on-mounted
 						.value=${item.value}
 						@blur=${(e2) => this._handleEditConfirm(item, e2.detail, index)}
-						@press-enter=${(e2) => this._editingIndex = -1}
+						@press-enter=${(_e) => this._editingIndex = -1}
 						@change=${(e2) => e2.stopPropagation()}
 					></ffbox-input-auto-size>` : b`<span
 						class=${["itemLabel", isEmpty ? "itemLabelEmpty" : ""].filter(Boolean).join(" ")}
@@ -2555,7 +2557,7 @@
 						class="itemDelete"
 						aria-label="删除此项"
 						@click=${(e2) => this._handleDelete(e2, item, index)}
-					>${o$1(closeIcon$1)}</button>` : A}
+					>${o$3(closeIcon$1)}</button>` : A}
 			</button>
 		`;
     }
@@ -2704,23 +2706,23 @@
 			margin: 0 -4px;
 		}
 	`;
-  __decorateClass$5([
-    n$2({ attribute: false })
+  __decorateClass$7([
+    n$4({ attribute: false })
   ], FFBoxRadioList.prototype, "list", 2);
-  __decorateClass$5([
-    n$2({ reflect: true })
+  __decorateClass$7([
+    n$4({ reflect: true })
   ], FFBoxRadioList.prototype, "value", 2);
-  __decorateClass$5([
-    n$2()
+  __decorateClass$7([
+    n$4()
   ], FFBoxRadioList.prototype, "placeholder", 2);
-  __decorateClass$5([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$7([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxRadioList.prototype, "theme", 2);
-  __decorateClass$5([
-    r()
+  __decorateClass$7([
+    r$2()
   ], FFBoxRadioList.prototype, "_editingIndex", 2);
-  FFBoxRadioList = __decorateClass$5([
+  FFBoxRadioList = __decorateClass$7([
     t$3("ffbox-radio-list")
   ], FFBoxRadioList);
   /**
@@ -2728,7 +2730,7 @@
    * Copyright 2018 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const n = "important", i = " !" + n, o = e$1(class extends i$1 {
+  const n$2 = "important", i = " !" + n$2, o$2 = e$1(class extends i$1 {
     constructor(t2) {
       var _a2;
       if (super(t2), t2.type !== t$1.ATTRIBUTE || "style" !== t2.name || ((_a2 = t2.strings) == null ? void 0 : _a2.length) > 2) throw Error("The `styleMap` directive must be used in the `style` attribute and must be the only part in the attribute.");
@@ -2748,20 +2750,20 @@
         if (null != e3) {
           this.ft.add(t2);
           const r3 = "string" == typeof e3 && e3.endsWith(i);
-          t2.includes("-") || r3 ? s2.setProperty(t2, r3 ? e3.slice(0, -11) : e3, r3 ? n : "") : s2[t2] = e3;
+          t2.includes("-") || r3 ? s2.setProperty(t2, r3 ? e3.slice(0, -11) : e3, r3 ? n$2 : "") : s2[t2] = e3;
         }
       }
       return E;
     }
   });
-  var __defProp$4 = Object.defineProperty;
-  var __getOwnPropDesc$4 = Object.getOwnPropertyDescriptor;
-  var __decorateClass$4 = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$4(target, key) : target;
+  var __defProp$6 = Object.defineProperty;
+  var __getOwnPropDesc$6 = Object.getOwnPropertyDescriptor;
+  var __decorateClass$6 = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$6(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$4(target, key, result);
+    if (kind && result) __defProp$6(target, key, result);
     return result;
   };
   let FFBoxAutoSizeWrapper = class extends i$3 {
@@ -2823,7 +2825,7 @@
     render() {
       var _a2;
       return b`
-			<div class="autoSizeWrapper" style=${o(((_a2 = this.customStyle) == null ? void 0 : _a2.call(this, { width: this.width, height: this.height })) || {})}>
+			<div class="autoSizeWrapper" style=${o$2(((_a2 = this.customStyle) == null ? void 0 : _a2.call(this, { width: this.width, height: this.height })) || {})}>
 				<div>
 					<slot></slot>
 				</div>
@@ -2841,26 +2843,26 @@
 			display: block;
 		}
 	`;
-  __decorateClass$4([
-    n$2({ type: Boolean, attribute: "use-resize-observer" })
+  __decorateClass$6([
+    n$4({ type: Boolean, attribute: "use-resize-observer" })
   ], FFBoxAutoSizeWrapper.prototype, "useResizeObserver", 2);
-  __decorateClass$4([
-    n$2({ attribute: false })
+  __decorateClass$6([
+    n$4({ attribute: false })
   ], FFBoxAutoSizeWrapper.prototype, "customStyle", 2);
-  __decorateClass$4([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$6([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxAutoSizeWrapper.prototype, "theme", 2);
-  __decorateClass$4([
-    r()
+  __decorateClass$6([
+    r$2()
   ], FFBoxAutoSizeWrapper.prototype, "width", 2);
-  __decorateClass$4([
-    r()
+  __decorateClass$6([
+    r$2()
   ], FFBoxAutoSizeWrapper.prototype, "height", 2);
-  __decorateClass$4([
+  __decorateClass$6([
     e$4(".autoSizeWrapper")
   ], FFBoxAutoSizeWrapper.prototype, "_containerEl", 2);
-  FFBoxAutoSizeWrapper = __decorateClass$4([
+  FFBoxAutoSizeWrapper = __decorateClass$6([
     t$3("ffbox-auto-size-wrapper")
   ], FFBoxAutoSizeWrapper);
   function parseTime(timeString) {
@@ -2897,14 +2899,14 @@
   function durationFixer(value) {
     return value.replaceAll("：", ":").replaceAll("。", ".").replace(/[a-z]/g, "");
   }
-  var __defProp$3 = Object.defineProperty;
-  var __getOwnPropDesc$3 = Object.getOwnPropertyDescriptor;
-  var __decorateClass$3 = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$3(target, key) : target;
+  var __defProp$5 = Object.defineProperty;
+  var __getOwnPropDesc$5 = Object.getOwnPropertyDescriptor;
+  var __decorateClass$5 = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$5(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$3(target, key, result);
+    if (kind && result) __defProp$5(target, key, result);
     return result;
   };
   let FFBoxCutTimeInput = class extends i$3 {
@@ -2956,7 +2958,7 @@
       return b`
 			<div class="inputbox-selector">
 				<div class="inputbox-selectorBackground-wrapper">
-					<div style=${o(this._selectorStyle)}></div>
+					<div style=${o$2(this._selectorStyle)}></div>
 				</div>
 				<input
 					?disabled=${this.disabled}
@@ -3126,36 +3128,36 @@
 			transition: transform 0.4s, opacity 0.1s;
 		}
 	`;
-  __decorateClass$3([
-    n$2({ attribute: false })
+  __decorateClass$5([
+    n$4({ attribute: false })
   ], FFBoxCutTimeInput.prototype, "value", 2);
-  __decorateClass$3([
-    n$2({ type: Boolean, reflect: true })
+  __decorateClass$5([
+    n$4({ type: Boolean, reflect: true })
   ], FFBoxCutTimeInput.prototype, "disabled", 2);
-  __decorateClass$3([
-    n$2({ attribute: false })
+  __decorateClass$5([
+    n$4({ attribute: false })
   ], FFBoxCutTimeInput.prototype, "placeholder", 2);
-  __decorateClass$3([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$5([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxCutTimeInput.prototype, "theme", 2);
-  __decorateClass$3([
-    r()
+  __decorateClass$5([
+    r$2()
   ], FFBoxCutTimeInput.prototype, "_inputText", 2);
-  __decorateClass$3([
-    r()
+  __decorateClass$5([
+    r$2()
   ], FFBoxCutTimeInput.prototype, "_focused", 2);
-  FFBoxCutTimeInput = __decorateClass$3([
+  FFBoxCutTimeInput = __decorateClass$5([
     t$3("ffbox-cut-time-input")
   ], FFBoxCutTimeInput);
-  var __defProp$2 = Object.defineProperty;
-  var __getOwnPropDesc$2 = Object.getOwnPropertyDescriptor;
-  var __decorateClass$2 = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$2(target, key) : target;
+  var __defProp$4 = Object.defineProperty;
+  var __getOwnPropDesc$4 = Object.getOwnPropertyDescriptor;
+  var __decorateClass$4 = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$4(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$2(target, key, result);
+    if (kind && result) __defProp$4(target, key, result);
     return result;
   };
   const defaultButton = {
@@ -3265,7 +3267,7 @@
 					@mousedown=${() => this._backgroundMouseDown = true}
 					@mouseup=${() => this._backgroundMouseDown = false}
 				></div>
-				<div class=${boxClasses} style=${o(this._mouseDownTransformStyle)}>
+				<div class=${boxClasses} style=${o$2(this._mouseDownTransformStyle)}>
 					${this.image ? b`<div class="image">${this.image}</div>` : ""}
 					${this.title ? b`<div class="title">${this.title}</div>` : ""}
 					${content ? b`<div class="content">${content}</div>` : ""}
@@ -3380,41 +3382,41 @@
 			display: flex;
 		}
 	`;
-  __decorateClass$2([
-    n$2({ reflect: true })
+  __decorateClass$4([
+    n$4({ reflect: true })
   ], FFBoxMsgbox.prototype, "title", 2);
-  __decorateClass$2([
-    n$2({ attribute: false })
+  __decorateClass$4([
+    n$4({ attribute: false })
   ], FFBoxMsgbox.prototype, "image", 2);
-  __decorateClass$2([
-    n$2({ attribute: false })
+  __decorateClass$4([
+    n$4({ attribute: false })
   ], FFBoxMsgbox.prototype, "content", 2);
-  __decorateClass$2([
-    n$2({ attribute: false })
+  __decorateClass$4([
+    n$4({ attribute: false })
   ], FFBoxMsgbox.prototype, "buttons", 2);
-  __decorateClass$2([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$4([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxMsgbox.prototype, "theme", 2);
-  __decorateClass$2([
-    r()
+  __decorateClass$4([
+    r$2()
   ], FFBoxMsgbox.prototype, "_entered", 2);
-  __decorateClass$2([
-    r()
+  __decorateClass$4([
+    r$2()
   ], FFBoxMsgbox.prototype, "_leaving", 2);
-  __decorateClass$2([
-    r()
+  __decorateClass$4([
+    r$2()
   ], FFBoxMsgbox.prototype, "_disable", 2);
-  __decorateClass$2([
-    r()
+  __decorateClass$4([
+    r$2()
   ], FFBoxMsgbox.prototype, "_backgroundMouseDown", 2);
-  __decorateClass$2([
+  __decorateClass$4([
     e$4(".box")
   ], FFBoxMsgbox.prototype, "_boxEl", 2);
-  FFBoxMsgbox = __decorateClass$2([
+  FFBoxMsgbox = __decorateClass$4([
     t$3("ffbox-msgbox")
   ], FFBoxMsgbox);
-  function _detectTheme$2() {
+  function _detectTheme$3() {
     const provider = document.querySelector("ffbox-theme-provider");
     if (provider) return provider.theme === "dark" ? "dark" : "light";
     return "light";
@@ -3425,20 +3427,20 @@
     el.image = options.image;
     el.content = options.content;
     el.buttons = options.buttons;
-    el.theme = _detectTheme$2();
+    el.theme = _detectTheme$3();
     const container2 = options.container || document.body;
     container2.appendChild(el);
     return el;
   };
   const closeIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="48" height="48"><path d="M743.2 701.21a37.84 37.84 0 0 1-0.39 52.88l5.51-5.51a36.5 36.5 0 0 1-52.19-0.3L281.64 322.79a37.84 37.84 0 0 1 0.39-52.88l-5.5 5.51a36.5 36.5 0 0 1 52.19 0.3z" fill="currentColor"></path><path d="M701.21 284.3a37.84 37.84 0 0 1 52.88 0.39l-5.51-5.51a36.5 36.5 0 0 1-0.3 52.19L322.79 745.86a37.84 37.84 0 0 1-52.88-0.39l5.51 5.51a36.5 36.5 0 0 1 0.3-52.19z" fill="currentColor"></path></svg>\n';
-  var __defProp$1 = Object.defineProperty;
-  var __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor;
-  var __decorateClass$1 = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$1(target, key) : target;
+  var __defProp$3 = Object.defineProperty;
+  var __getOwnPropDesc$3 = Object.getOwnPropertyDescriptor;
+  var __decorateClass$3 = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$3(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp$1(target, key, result);
+    if (kind && result) __defProp$3(target, key, result);
     return result;
   };
   const instances = [];
@@ -3554,7 +3556,7 @@
 							r="20"
 						></circle>
 					</svg>
-					<div class="popup-progress-x" style="color: ${this._strokeColor}" @click=${() => this._close(true)}>${o$1(closeIcon)}</div>
+					<div class="popup-progress-x" style="color: ${this._strokeColor}" @click=${() => this._close(true)}>${o$3(closeIcon)}</div>
 				</div>
 				<div class="popup-message">
 					${lines.map((line, i2) => b`${line}${i2 < lines.length - 1 ? b`<br/>` : ""}`)}
@@ -3752,47 +3754,47 @@
 			color: #FFF;
 		}
 	`;
-  __decorateClass$1([
-    n$2({ reflect: true })
+  __decorateClass$3([
+    n$4({ reflect: true })
   ], FFBoxPopup.prototype, "message", 2);
-  __decorateClass$1([
-    n$2({ type: Number })
+  __decorateClass$3([
+    n$4({ type: Number })
   ], FFBoxPopup.prototype, "level", 2);
-  __decorateClass$1([
-    n$2({ type: Number })
+  __decorateClass$3([
+    n$4({ type: Number })
   ], FFBoxPopup.prototype, "verticalOffset", 2);
-  __decorateClass$1([
-    n$2({ type: Number })
+  __decorateClass$3([
+    n$4({ type: Number })
   ], FFBoxPopup.prototype, "index", 2);
-  __decorateClass$1([
-    c({ context: themeContext, subscribe: true }),
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$3([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxPopup.prototype, "theme", 2);
-  __decorateClass$1([
-    r()
+  __decorateClass$3([
+    r$2()
   ], FFBoxPopup.prototype, "_show", 2);
-  __decorateClass$1([
-    r()
+  __decorateClass$3([
+    r$2()
   ], FFBoxPopup.prototype, "_duration", 2);
-  __decorateClass$1([
-    r()
+  __decorateClass$3([
+    r$2()
   ], FFBoxPopup.prototype, "_timeLeft", 2);
-  __decorateClass$1([
-    r()
+  __decorateClass$3([
+    r$2()
   ], FFBoxPopup.prototype, "_mouseIn", 2);
-  __decorateClass$1([
-    r()
+  __decorateClass$3([
+    r$2()
   ], FFBoxPopup.prototype, "_delayedVerticalOffset", 2);
-  __decorateClass$1([
-    r()
+  __decorateClass$3([
+    r$2()
   ], FFBoxPopup.prototype, "_userClosing", 2);
-  __decorateClass$1([
-    r()
+  __decorateClass$3([
+    r$2()
   ], FFBoxPopup.prototype, "_leaving", 2);
-  __decorateClass$1([
+  __decorateClass$3([
     e$4(".popup-box")
   ], FFBoxPopup.prototype, "_boxEl", 2);
-  FFBoxPopup = __decorateClass$1([
+  FFBoxPopup = __decorateClass$3([
     t$3("ffbox-popup")
   ], FFBoxPopup);
   function _getContainer() {
@@ -3803,7 +3805,7 @@
     }
     return container;
   }
-  function _detectTheme$1() {
+  function _detectTheme$2() {
     const provider = document.querySelector("ffbox-theme-provider");
     if (provider) return provider.theme === "dark" ? "dark" : "light";
     return "light";
@@ -3830,7 +3832,7 @@
     el.level = options.level ?? 0;
     el.verticalOffset = 0;
     el.index = instances.length;
-    el.theme = _detectTheme$1();
+    el.theme = _detectTheme$2();
     const id = seed++;
     el.addEventListener("will-close", (e2) => {
       var _a2;
@@ -3849,14 +3851,14 @@
     el.updateComplete.then(_reCalcVerticalOffset);
     return el;
   };
-  var __defProp = Object.defineProperty;
-  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __decorateClass = (decorators, target, key, kind) => {
-    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
+  var __defProp$2 = Object.defineProperty;
+  var __getOwnPropDesc$2 = Object.getOwnPropertyDescriptor;
+  var __decorateClass$2 = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$2(target, key) : target;
     for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
       if (decorator = decorators[i2])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result) __defProp(target, key, result);
+    if (kind && result) __defProp$2(target, key, result);
     return result;
   };
   let FFBoxTooltip = class extends i$3 {
@@ -3928,19 +3930,19 @@
 			text-align: left;
 		}
 	`;
-  __decorateClass([
-    n$2({ reflect: true })
+  __decorateClass$2([
+    n$4({ reflect: true })
   ], FFBoxTooltip.prototype, "content", 2);
-  __decorateClass([
-    n$2({ type: Boolean, reflect: true })
+  __decorateClass$2([
+    n$4({ type: Boolean, reflect: true })
   ], FFBoxTooltip.prototype, "show", 2);
-  __decorateClass([
-    n$2({ reflect: true })
+  __decorateClass$2([
+    n$4({ reflect: true })
   ], FFBoxTooltip.prototype, "className", 2);
-  __decorateClass([
-    n$2({ reflect: true, attribute: "data-theme" })
+  __decorateClass$2([
+    n$4({ reflect: true, attribute: "data-theme" })
   ], FFBoxTooltip.prototype, "theme", 2);
-  FFBoxTooltip = __decorateClass([
+  FFBoxTooltip = __decorateClass$2([
     t$3("ffbox-tooltip")
   ], FFBoxTooltip);
   let _instance = null;
@@ -3951,14 +3953,14 @@
     }
     return _instance;
   }
-  function _detectTheme() {
+  function _detectTheme$1() {
     const provider = document.querySelector("ffbox-theme-provider");
     if (provider) return provider.theme;
     return "light";
   }
   FFBoxTooltip.show = function(options) {
     const el = _getInstance();
-    el.theme = _detectTheme();
+    el.theme = _detectTheme$1();
     el.content = options.content;
     el.className = options.className ?? "";
     el.show = true;
@@ -3976,5 +3978,1097 @@
       _instance.show = false;
     }
   };
+  /**
+   * @license
+   * Copyright 2020 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  const r$1 = (o2) => void 0 === o2.strings;
+  /**
+   * @license
+   * Copyright 2017 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  const s = (i2, t2) => {
+    var _a2;
+    const e2 = i2._$AN;
+    if (void 0 === e2) return false;
+    for (const i3 of e2) (_a2 = i3._$AO) == null ? void 0 : _a2.call(i3, t2, false), s(i3, t2);
+    return true;
+  }, o$1 = (i2) => {
+    let t2, e2;
+    do {
+      if (void 0 === (t2 = i2._$AM)) break;
+      e2 = t2._$AN, e2.delete(i2), i2 = t2;
+    } while (0 === (e2 == null ? void 0 : e2.size));
+  }, r = (i2) => {
+    for (let t2; t2 = i2._$AM; i2 = t2) {
+      let e2 = t2._$AN;
+      if (void 0 === e2) t2._$AN = e2 = /* @__PURE__ */ new Set();
+      else if (e2.has(i2)) break;
+      e2.add(i2), c(t2);
+    }
+  };
+  function h(i2) {
+    void 0 !== this._$AN ? (o$1(this), this._$AM = i2, r(this)) : this._$AM = i2;
+  }
+  function n$1(i2, t2 = false, e2 = 0) {
+    const r2 = this._$AH, h2 = this._$AN;
+    if (void 0 !== h2 && 0 !== h2.size) if (t2) if (Array.isArray(r2)) for (let i3 = e2; i3 < r2.length; i3++) s(r2[i3], false), o$1(r2[i3]);
+    else null != r2 && (s(r2, false), o$1(r2));
+    else s(this, i2);
+  }
+  const c = (i2) => {
+    i2.type == t$1.CHILD && (i2._$AP ?? (i2._$AP = n$1), i2._$AQ ?? (i2._$AQ = h));
+  };
+  class f extends i$1 {
+    constructor() {
+      super(...arguments), this._$AN = void 0;
+    }
+    _$AT(i2, t2, e2) {
+      super._$AT(i2, t2, e2), r(this), this.isConnected = i2._$AU;
+    }
+    _$AO(i2, t2 = true) {
+      var _a2, _b;
+      i2 !== this.isConnected && (this.isConnected = i2, i2 ? (_a2 = this.reconnected) == null ? void 0 : _a2.call(this) : (_b = this.disconnected) == null ? void 0 : _b.call(this)), t2 && (s(this, i2), o$1(this));
+    }
+    setValue(t2) {
+      if (r$1(this._$Ct)) this._$Ct._$AI(t2, this);
+      else {
+        const i2 = [...this._$Ct._$AH];
+        i2[this._$Ci] = t2, this._$Ct._$AI(i2, this, 0);
+      }
+    }
+    disconnected() {
+    }
+    reconnected() {
+    }
+  }
+  const o = /* @__PURE__ */ new WeakMap(), n = e$1(class extends f {
+    render(i2) {
+      return A;
+    }
+    update(i2, [s2]) {
+      var _a2;
+      const e2 = s2 !== this.G;
+      return e2 && this.rt(void 0), (e2 || this.lt !== this.ct) && (this.G = s2, this.ht = (_a2 = i2.options) == null ? void 0 : _a2.host, this.rt(this.ct = i2.element)), A;
+    }
+    rt(t2) {
+      if (void 0 !== this.G) if (this.isConnected || (t2 = void 0), "function" == typeof this.G) {
+        const i2 = this.ht ?? globalThis;
+        let s2 = o.get(i2);
+        void 0 === s2 && (s2 = /* @__PURE__ */ new WeakMap(), o.set(i2, s2)), void 0 !== s2.get(this.G) && this.G.call(this.ht, void 0), s2.set(this.G, t2), void 0 !== t2 && this.G.call(this.ht, t2);
+      } else this.G.value = t2;
+    }
+    get lt() {
+      var _a2, _b;
+      return "function" == typeof this.G ? (_a2 = o.get(this.ht ?? globalThis)) == null ? void 0 : _a2.get(this.G) : (_b = this.G) == null ? void 0 : _b.value;
+    }
+    disconnected() {
+      this.lt === this.ct && this.rt(void 0);
+    }
+    reconnected() {
+      this.rt(this.ct);
+    }
+  });
+  const rightIcon = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1697533442768" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3305" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M761.056 532.128c0.512-0.992 1.344-1.824 1.792-2.848 8.8-18.304 5.92-40.704-9.664-55.424L399.936 139.744a48 48 0 0 0-65.984 69.76l316.96 299.84L335.2 813.632a48 48 0 0 0 66.624 69.12l350.048-337.376c0.672-0.672 0.928-1.6 1.6-2.304 0.512-0.48 1.056-0.832 1.568-1.344 2.72-2.848 4.16-6.336 6.016-9.6z" fill="currentColor" p-id="3306"></path></svg>';
+  var __defProp$1 = Object.defineProperty;
+  var __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor;
+  var __decorateClass$1 = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc$1(target, key) : target;
+    for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
+      if (decorator = decorators[i2])
+        result = (kind ? decorator(target, key, result) : decorator(result)) || result;
+    if (kind && result) __defProp$1(target, key, result);
+    return result;
+  };
+  let FFBoxMenu = class extends i$3 {
+    constructor() {
+      super(...arguments);
+      this.menu = [];
+      this.type = "action";
+      this.theme = "light";
+      this._openedSubMenus = [];
+      this._openedSubMenuItemPos = {};
+      this._currentHoveredItem = void 0;
+      this._currentSelectedItem = void 0;
+      this._leaving = false;
+      this._flattenedMenus = [];
+      this._menuElemRefs = [];
+      this._unmounted = false;
+      this._calcSubMenuPosition = async (menuIndex) => {
+        if (this._openedSubMenuItemPos[menuIndex]) {
+          return;
+        }
+        const menu = this._flattenedMenus[menuIndex];
+        const parentMenu = menu.parent;
+        if (!parentMenu) {
+          return;
+        }
+        if (!this._openedSubMenuItemPos[parentMenu.menuIndex]) {
+          await this._calcSubMenuPosition(parentMenu.menuIndex);
+          await this.updateComplete;
+        }
+        const parentIndexInFlattened = parentMenu.menuIndex;
+        const parentIndexInMenu = parentMenu.menu.findIndex((menuItem) => menuItem.type === "submenu" && menuItem.key === menuIndex);
+        const menuElem = this._menuElemRefs[parentIndexInFlattened];
+        const menuItemElem = menuElem.children[parentIndexInMenu];
+        menuItemElem.scrollIntoView({
+          behavior: "instant",
+          block: "center",
+          inline: "center"
+        });
+        const menuItemElemRect = menuItemElem.getBoundingClientRect();
+        this._openedSubMenuItemPos[menuIndex] = {
+          xMin: menuItemElemRect.x,
+          yMin: menuItemElemRect.y,
+          xMax: menuItemElemRect.x + menuItemElemRect.width,
+          yMax: menuItemElemRect.y + menuItemElemRect.height,
+          preferDirection: "r"
+        };
+        this._openedSubMenuItemPos = { ...this._openedSubMenuItemPos };
+      };
+      this._showTooltip = (menuItem) => {
+        var _a2;
+        if (menuItem.type !== "separator" && menuItem.tooltip) {
+          const { menu: _menu, indexInFlattened, indexInMenu } = this._getMenuByItem(menuItem);
+          let position = {};
+          const menuElem = this._menuElemRefs[indexInFlattened];
+          if (!menuElem) {
+            return;
+          }
+          const menuItemElem = menuElem.children[indexInMenu];
+          const menuItemElemRect = menuItemElem.getBoundingClientRect();
+          const screenHeight = document.documentElement.clientHeight;
+          const leftSpace = menuItemElemRect.left;
+          if (((_a2 = this._openedSubMenuItemPos[indexInFlattened]) == null ? void 0 : _a2.preferDirection) === "l" || leftSpace < 220) {
+            position = {
+              ...position,
+              left: `${menuItemElemRect.left + menuItemElemRect.width + 12}px`
+            };
+          } else {
+            position = {
+              ...position,
+              right: `calc(100% - ${menuItemElemRect.left - 12}px)`
+            };
+          }
+          if (menuItemElemRect.top + menuItemElemRect.height / 2 < screenHeight / 2) {
+            position = {
+              ...position,
+              top: `${menuItemElemRect.top}px`
+            };
+          } else {
+            position = {
+              ...position,
+              bottom: `calc(100% - ${menuItemElemRect.top + menuItemElemRect.height}px)`
+            };
+          }
+          FFBoxTooltip.show({
+            content: menuItem.tooltip,
+            style: position
+          });
+        }
+      };
+      this._onItemSelect = (event, menuItem) => {
+        if (!("value" in menuItem) || menuItem.disabled) {
+          return;
+        }
+        const isClickEvent = event.type === "mouseup" || event.type === "keydown" && event.key === "Enter";
+        if (this.type === "action") {
+          if (isClickEvent) {
+            const result = this.onSelect ? this.onSelect(event, menuItem.value, menuItem.type !== "normal" ? menuItem.checked : void 0) : false;
+            if (result === false) {
+              (menuItem.onClick || (() => {
+              }))(event, menuItem.value);
+            }
+            this.close();
+          }
+        } else if (this.type === "select") {
+          if (menuItem.onClick) {
+            if (isClickEvent) {
+              menuItem.onClick(event, menuItem.value);
+            }
+          } else {
+            (this.onSelect || (() => {
+            }))(event, menuItem.value, menuItem.type !== "normal" ? menuItem.checked : void 0);
+            if (isClickEvent) {
+              this.close();
+            }
+          }
+        }
+      };
+      this._handleSelect = (e2, menuItem) => {
+        e2.stopPropagation();
+        if ("value" in menuItem) {
+          this._onItemSelect(e2, menuItem);
+        }
+      };
+      this._handleMenuItemMouseEnter = (menuItem) => {
+        this._setHoveredItem(menuItem);
+      };
+      this._handleMenuItemMouseLeave = () => {
+        this._setHoveredItem(void 0);
+      };
+      this._handleMenuItemFocused = (e2, menuItem) => {
+        var _a2;
+        this._setHoveredItem(menuItem);
+        (_a2 = this.returnFocus) == null ? void 0 : _a2.call(this, e2);
+      };
+      this._setHoveredItem = (newItem) => {
+        var _a2;
+        const oldItem = this._currentHoveredItem;
+        this._currentHoveredItem = newItem;
+        if (newItem !== void 0) {
+          const found = this._getMenuByItem(newItem);
+          if (!found) {
+            return;
+          }
+          const { menu, indexInFlattened, indexInMenu } = found;
+          const newOpenedKeys = [menu.menuIndex];
+          let current = menu;
+          while (current.parent) {
+            current = current.parent;
+            newOpenedKeys.unshift(current.menuIndex);
+          }
+          if (newItem.type === "submenu") {
+            newOpenedKeys.push(newItem.key);
+            const menuElem = this._menuElemRefs[indexInFlattened];
+            const menuItemElem = menuElem.children[indexInMenu];
+            const menuItemElemRect = menuItemElem.getBoundingClientRect();
+            const currentPreferDirection = ((_a2 = this._openedSubMenuItemPos[menu.menuIndex]) == null ? void 0 : _a2.preferDirection) || "r";
+            this._openedSubMenuItemPos[newItem.key] = {
+              xMin: menuItemElemRect.x,
+              yMin: menuItemElemRect.y,
+              xMax: menuItemElemRect.x + menuItemElemRect.width,
+              yMax: menuItemElemRect.y + menuItemElemRect.height,
+              preferDirection: currentPreferDirection === "r" ? menuItemElemRect.x + menuItemElemRect.width * 1.5 > window.innerWidth ? "l" : "r" : menuItemElemRect.x < menuItemElemRect.width * 0.5 ? "r" : "l"
+            };
+            this._openedSubMenuItemPos = { ...this._openedSubMenuItemPos };
+          }
+          if (JSON.stringify(newOpenedKeys) !== JSON.stringify(this._openedSubMenus)) {
+            this._openedSubMenus = newOpenedKeys;
+            const newPos = { ...this._openedSubMenuItemPos };
+            for (const key of Object.keys(newPos)) {
+              if (!newOpenedKeys.includes(+key)) {
+                delete newPos[+key];
+              }
+            }
+            this._openedSubMenuItemPos = newPos;
+          }
+          setTimeout(() => {
+            this._showTooltip(newItem);
+          }, 0);
+        }
+        if ((newItem === void 0 || !("tooltip" in newItem)) && oldItem !== void 0) {
+          FFBoxTooltip.hide();
+        }
+      };
+      this._keydownListener = (e2) => {
+        var _a2, _b, _c;
+        if (e2.key === "Escape") {
+          this._handleCancel(e2);
+        }
+        let menuItem = this._currentHoveredItem;
+        if (e2.key === "Enter") {
+          if (menuItem) {
+            this._handleSelect(e2, menuItem);
+          }
+        }
+        if (!menuItem) {
+          if (e2.key === "ArrowDown" || e2.key === "Home") {
+            menuItem = Object.values(this._flattenedMenus)[0].menu[Object.values(this._flattenedMenus)[0].menu.length - 1];
+          } else if (e2.key === "ArrowUp" || e2.key === "End") {
+            menuItem = Object.values(this._flattenedMenus)[0].menu[0];
+          } else {
+            (_a2 = this.onKeyDown) == null ? void 0 : _a2.call(this, e2);
+          }
+        }
+        if (!menuItem) {
+          return;
+        }
+        const { menu, indexInFlattened, indexInMenu } = this._getMenuByItem(menuItem);
+        if (e2.key === "ArrowUp" || e2.key === "ArrowDown") {
+          e2.preventDefault();
+          const menuElem = this._menuElemRefs[indexInFlattened];
+          let currentIndex = indexInMenu;
+          do {
+            if (e2.key === "ArrowUp") {
+              currentIndex = currentIndex === 0 ? menu.menu.length - 1 : currentIndex - 1;
+            } else {
+              currentIndex = currentIndex === menu.menu.length - 1 ? 0 : currentIndex + 1;
+            }
+            if (menu.menu[currentIndex].type !== "separator") {
+              break;
+            }
+          } while (currentIndex !== indexInMenu);
+          menuElem.children[currentIndex].focus();
+          if (this.type === "select") {
+            this._handleSelect(e2, menu.menu[currentIndex]);
+          }
+        }
+        if (e2.key === "Home" || e2.key === "End") {
+          const menuElem = this._menuElemRefs[indexInFlattened];
+          const index = e2.key === "Home" ? 0 : menuElem.children.length - 1;
+          menuElem.children[index].focus();
+          if (this.type === "select") {
+            this._handleSelect(e2, menu.menu[index]);
+          }
+        }
+        if (e2.key === "ArrowLeft") {
+          if (menu.parent) {
+            const parentDOM = this._menuElemRefs[menu.parent.menuIndex];
+            const menuItemIndex = menu.parent.menu.findIndex((menuItem2) => menuItem2.type === "submenu" && menuItem2.key === menu.menuIndex);
+            parentDOM.children[menuItemIndex].focus();
+          } else {
+            (_b = this.onKeyDown) == null ? void 0 : _b.call(this, e2);
+          }
+        } else if (e2.key === "ArrowRight") {
+          if (menuItem.type === "submenu") {
+            const childDOM = this._menuElemRefs[menuItem.key];
+            const activeIndex = menuItem.subMenu.findIndex((menuItem2) => "value" in menuItem2 && menuItem2.value === this._currentSelectedItem);
+            const finalIndex = activeIndex !== -1 ? activeIndex : 0;
+            childDOM.children[finalIndex].focus();
+            if (this.type === "select") {
+              this._handleSelect(e2, menuItem.subMenu[finalIndex]);
+            }
+          } else {
+            (_c = this.onKeyDown) == null ? void 0 : _c.call(this, e2);
+          }
+        }
+      };
+      this._handleCancel = (event) => {
+        const result = (this.onCancel || (() => {
+        }))(event);
+        if (result !== false) {
+          this.close();
+        }
+        return result;
+      };
+    }
+    willUpdate(changed) {
+      if (changed.has("menu")) {
+        this._flattenedMenus = this._flattenMenus();
+      }
+    }
+    firstUpdated() {
+      this._currentSelectedItem = this.selectedValue;
+      if (!this.returnFocus) {
+        document.addEventListener("keydown", this._keydownListener);
+      }
+      this._openedSubMenus = [0];
+      const res = this._getMenuAndItemByValue(this.selectedValue);
+      if (res) {
+        const { menu, menuItem } = res;
+        this._setHoveredItem(menuItem);
+        setTimeout(() => {
+          this._calcSubMenuPosition(menu.menuIndex);
+          const { indexInFlattened, indexInMenu } = this._getMenuByItem(menuItem);
+          const menuElem = this._menuElemRefs[indexInFlattened];
+          const menuItemElem = menuElem.children[indexInMenu];
+          menuItemElem.focus();
+        }, 0);
+      }
+    }
+    disconnectedCallback() {
+      if (!this.returnFocus) {
+        document.removeEventListener("keydown", this._keydownListener);
+      }
+      FFBoxTooltip.hide();
+      super.disconnectedCallback();
+    }
+    render() {
+      const menus = Object.values(this._flattenedMenus).filter((menu) => this._openedSubMenus.includes(menu.menuIndex));
+      return b`
+			<div
+				class=${["mask", this._leaving ? "maskLeaving" : ""].filter(Boolean).join(" ")}
+				@click=${(e2) => this._handleCancel(e2)}
+			>
+				${menus.map((menu) => this._renderMenu(menu))}
+			</div>
+		`;
+    }
+    _renderMenu(menu) {
+      return b`
+			<div
+				class="menu"
+				style=${o$2(this._getMenuPosition(menu))}
+				${n((el) => {
+        if (el) this._menuElemRefs[menu.menuIndex] = el;
+      })}
+				@mouseup=${(e2) => e2.stopPropagation()}
+				@click=${(e2) => e2.stopPropagation()}
+			>
+				${menu.menu.map((menuItem, index) => this._renderMenuItem(menuItem, index))}
+			</div>
+		`;
+    }
+    _renderMenuItem(menuItem, _index) {
+      var _a2;
+      return b`
+			<div
+				class=${this._getMenuItemClassName(menuItem)}
+				tabindex=${menuItem.type === "separator" ? -1 : 0}
+				@mouseup=${(e2) => this._handleSelect(e2, menuItem)}
+				@mouseenter=${() => this._handleMenuItemMouseEnter(menuItem)}
+				@mouseleave=${() => this._handleMenuItemMouseLeave()}
+				@focus=${(e2) => this._handleMenuItemFocused(e2, menuItem)}
+			>
+				${menuItem.type !== "separator" ? b`
+					<div class="label">
+						${menuItem.label}
+					</div>
+				` : ""}
+				${menuItem.type === "checkbox" || menuItem.type === "radio" ? b`
+					<div class="iconArea">
+						${menuItem.type === "checkbox" ? b`<ffbox-checkbox .checked=${menuItem.checked}></ffbox-checkbox>` : b`<ffbox-radio .checked=${menuItem.checked}></ffbox-radio>`}
+					</div>
+				` : ""}
+				${"icon" in menuItem && menuItem.icon ? b`
+					<div class="iconArea">
+						${menuItem.icon}
+					</div>
+				` : ""}
+				${menuItem.type === "submenu" ? b`
+					<div class=${["iconRightArea", ((_a2 = this._openedSubMenuItemPos[menuItem.key ?? -1]) == null ? void 0 : _a2.preferDirection) === "l" ? "flipped" : ""].filter(Boolean).join(" ")}>
+						${o$3(rightIcon)}
+					</div>
+				` : ""}
+			</div>
+		`;
+    }
+    // 将所有子菜单打平，这样就能使用一个循环渲染所有菜单
+    // （Vue 版本需 toRaw 解除响应式代理才能做 === 比较，Lit 直接持有原始引用，无需此步骤）
+    _flattenMenus() {
+      const allMenus = [];
+      let i2 = 0;
+      const queue = [{
+        menu: this.menu,
+        menuIndex: i2,
+        parent: null
+      }];
+      while (queue.length) {
+        const menu = queue.shift();
+        allMenus.push(menu);
+        for (const menuItem of menu.menu) {
+          if (menuItem.type === "submenu") {
+            i2++;
+            menuItem.key = i2;
+            queue.push({
+              menu: menuItem.subMenu,
+              menuIndex: i2,
+              parent: menu
+            });
+          }
+        }
+      }
+      const ret = [];
+      for (const menu of allMenus) {
+        ret[menu.menuIndex] = menu;
+      }
+      return ret;
+    }
+    _getMenuItemClassName(menuItem) {
+      if (menuItem.type === "separator") {
+        return "menuSeparator";
+      } else {
+        let retStr = ["menuItem"];
+        if (menuItem.disabled) {
+          retStr.push("menuItemDisabled");
+        }
+        if ("value" in menuItem && this._currentSelectedItem === menuItem.value) {
+          retStr.push("menuItemSelected");
+        } else {
+          if (this._currentHoveredItem === menuItem) {
+            retStr.push("menuItemHovered");
+          }
+          if (menuItem.type === "submenu") {
+            if (this._openedSubMenus.includes(menuItem.key)) {
+              retStr.push("menuItemHovered");
+            }
+          }
+        }
+        return retStr.join(" ");
+      }
+    }
+    _getMenuPosition(menu) {
+      const menuItemHeight = 32;
+      const menuSeparatorHeight = 9;
+      const menuPaddingY = 6;
+      let ScreenWidth = document.documentElement.clientWidth;
+      let ScreenHeight = document.documentElement.clientHeight;
+      const canvas = document.createElement("canvas");
+      canvas.style.position = "fixed";
+      canvas.style.top = "150px";
+      const context = canvas.getContext("2d");
+      context.font = getComputedStyle(document.body).font.replace(/\d+px/, "14px");
+      const listWidth2 = menu.menu.reduce((prev, curr) => {
+        if ("label" in curr) {
+          const metrics = context.measureText(curr.label);
+          context.fillText(curr.label, 0, Math.random() * 150);
+          return Math.max(metrics.width, prev);
+        } else {
+          return prev;
+        }
+      }, 0);
+      const listWidth = Math.min(listWidth2 + 86, Math.min(window.innerWidth, 800));
+      const listHeight = menu.menu.reduce((prev, curr) => prev + (curr.type === "separator" ? menuSeparatorHeight : menuItemHeight), 0) + menuPaddingY * 2;
+      const _triggerRect = this._openedSubMenuItemPos[menu.menuIndex] || this.triggerRect || { xMin: 0, yMin: 0, xMax: listWidth, yMax: 0 };
+      const isHorizontal = this._openedSubMenuItemPos[menu.menuIndex] !== void 0;
+      let finalPosition = {};
+      if (isHorizontal) {
+        const direction = "preferDirection" in _triggerRect && _triggerRect.preferDirection === "l" ? "l" : "r";
+        const finalLeft = direction === "r" ? Math.min(_triggerRect.xMax, ScreenWidth - listWidth) : Math.max(_triggerRect.xMin - listWidth, 0);
+        finalPosition = {
+          left: `${finalLeft}px`,
+          width: `${listWidth}px`
+        };
+      } else {
+        const finalWidth = Math.max(listWidth, _triggerRect.xMax - _triggerRect.xMin);
+        const centralX = Math.max(finalWidth / 2, Math.min((_triggerRect.xMax + _triggerRect.xMin) / 2, ScreenWidth - finalWidth / 2));
+        finalPosition = {
+          left: `${centralX - finalWidth / 2}px`,
+          width: `${finalWidth}px`
+        };
+      }
+      let upperSpace = isHorizontal ? _triggerRect.yMax : _triggerRect.yMin;
+      let lowerSpace = ScreenHeight - (isHorizontal ? _triggerRect.yMin : _triggerRect.yMax);
+      if (upperSpace >= lowerSpace) {
+        if (listHeight <= upperSpace) {
+          finalPosition = { ...finalPosition, height: `${listHeight}px`, bottom: `${ScreenHeight - upperSpace}px` };
+        } else {
+          finalPosition = { ...finalPosition, height: `${upperSpace}px`, top: `${0}px` };
+        }
+      } else {
+        if (listHeight <= lowerSpace) {
+          finalPosition = { ...finalPosition, height: `${listHeight}px`, top: `${ScreenHeight - lowerSpace}px` };
+        } else {
+          finalPosition = { ...finalPosition, height: `${lowerSpace}px`, bottom: `${0}px` };
+        }
+      }
+      return finalPosition;
+    }
+    _getMenuByItem(menuItem) {
+      for (const [keyInFlattened, menu] of Object.entries(this._flattenedMenus)) {
+        for (const [keyInMenu, _menuItem] of Object.entries(menu.menu)) {
+          if (_menuItem === menuItem) {
+            return {
+              menu,
+              indexInFlattened: Number(keyInFlattened),
+              indexInMenu: Number(keyInMenu)
+            };
+          }
+        }
+      }
+    }
+    _getMenuAndItemByValue(value) {
+      for (const menu of Object.values(this._flattenedMenus)) {
+        for (const menuItem of menu.menu) {
+          if ("value" in menuItem && menuItem.value === value) {
+            return {
+              menu,
+              menuItem
+            };
+          }
+        }
+      }
+    }
+    /** 关闭前给个机会展示退出动画（对应 Vue 版 exposed.preClose） */
+    preClose() {
+      this._leaving = true;
+    }
+    /**
+     * 关闭菜单，播完离场动画后组件自行从 DOM 移除
+     * （对应 Vue 版 Menu.tsx 的 handleClose：同一次 render 内第二次调用时，需判断是否已经被卸载）
+     */
+    close() {
+      if (!this._unmounted) {
+        this.preClose();
+        (this.onClose || (() => {
+        }))();
+        this._unmounted = true;
+        setTimeout(() => {
+          this.remove();
+        }, 150);
+      }
+    }
+    /** 由外部（如 DropdownInput）转发键盘事件（对应 Vue 版 exposed.triggerKeyboardEvent） */
+    triggerKeyboardEvent(event) {
+      this._keydownListener(event);
+    }
+    /** 更改选中值并主动反馈至菜单（对应 Vue 版 exposed.setSelectedValue） */
+    setSelectedValue(value) {
+      this._currentSelectedItem = value;
+    }
+  };
+  FFBoxMenu.styles = i$6`
+		:host {
+			display: block;
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			color: inherit;
+			z-index: 10;
+		}
+		.mask {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			// pointer-events: none;
+		}
+		.menu {
+			position: absolute;
+			// width: 200px;
+			box-sizing: border-box;
+			padding: 6px;
+			border-radius: 8px;
+			font-size: 0;
+			text-align: left;
+			overflow-y: auto;
+			background: hwb(var(--bg98));
+			box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+			-webkit-app-region: none;
+			user-select: none;
+			/* 对应 Vue TransitionGroup 的 menuAnimate-enter 动画，原生 animation 在元素插入时自动触发 */
+			animation: menuAnimateEnter cubic-bezier(0.33, 1, 1, 1) 0.15s, menuAnimateEnterOpacity linear 0.1s;
+		}
+		@keyframes menuAnimateEnter {
+			from { transform: scale(0.95); }
+			to { transform: scale(1); }
+		}
+		@keyframes menuAnimateEnterOpacity {
+			from { opacity: 0; }
+			to { opacity: 1; }
+		}
+		/* 对应 menuAnimate-leave 动画。Lit 无 TransitionGroup，由 maskLeaving 类统一驱动离场 */
+		.maskLeaving .menu {
+			transform: scale(0.95);
+			opacity: 0;
+			transition: all linear 0.1s;
+		}
+		.menu::-webkit-scrollbar {
+			position: relative;
+			width: 12px;
+			// background: transparent;
+			box-shadow: 12px 0 12px -12px hwb(0 50% 50% / 0.08) inset;
+		}
+		.menu::-webkit-scrollbar-thumb {
+			border-radius: 12px;
+			background: hwb(0 50% 50% / 0.3);
+			border: 3px solid transparent;
+			background-clip: content-box;
+			// box-shadow: 0 0 4px red;
+		}
+		.menu::-webkit-scrollbar-track {
+			background: none;
+		}
+		.menuItem {
+			display: inline-block;
+			position: relative;
+			box-sizing: border-box;
+			width: 100%;
+			height: 32px;
+			// border-bottom: #EEE 1px solid;
+			border-radius: 4px;
+			font-size: 14px;
+			// outline: none;
+		}
+		.menuItem .label {
+			position: absolute;
+			top: 0;
+			left: 30px;
+			right: 30px;
+			line-height: 32px;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
+		.menuItem .iconArea {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 28px;
+			height: 32px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.menuItem .iconArea > svg {
+			width: 20px;
+			height: 20px;
+		}
+		.menuItem .iconRightArea {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 28px;
+			height: 32px;
+		}
+		.menuItem .iconRightArea svg {
+			position: absolute;
+			left: 25%;
+			top: 25%;
+			width: 50%;
+			height: 50%;
+		}
+		/* 子菜单倾向向左打开时，右三角翻转（对应 Vue 的 :style transform rotate） */
+		.menuItem .iconRightArea.flipped svg {
+			transform: rotate(180deg);
+		}
+		.menuItem .opArea {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 28px;
+			height: 32px;
+		}
+		.menuItemDisabled {
+			opacity: 0.3;
+		}
+		.menuItemSelected {
+			background: hwb(var(--menuItemSelected));
+		}
+		.menuItemHovered {
+			background: hwb(var(--menuItemHovered));
+		}
+		.menuSeparator {
+			display: inline-block;
+			position: relative;
+			width: 100%;
+			height: 1px;
+			margin: 4px 0;
+			background-color: #77777733;
+		}
+	`;
+  __decorateClass$1([
+    n$4({ attribute: false })
+  ], FFBoxMenu.prototype, "menu", 2);
+  __decorateClass$1([
+    n$4({ attribute: false })
+  ], FFBoxMenu.prototype, "type", 2);
+  __decorateClass$1([
+    n$4({ attribute: false })
+  ], FFBoxMenu.prototype, "selectedValue", 2);
+  __decorateClass$1([
+    n$4({ attribute: false })
+  ], FFBoxMenu.prototype, "triggerRect", 2);
+  __decorateClass$1([
+    n$4({ attribute: false })
+  ], FFBoxMenu.prototype, "onSelect", 2);
+  __decorateClass$1([
+    n$4({ attribute: false })
+  ], FFBoxMenu.prototype, "onCancel", 2);
+  __decorateClass$1([
+    n$4({ attribute: false })
+  ], FFBoxMenu.prototype, "onClose", 2);
+  __decorateClass$1([
+    n$4({ attribute: false })
+  ], FFBoxMenu.prototype, "onKeyDown", 2);
+  __decorateClass$1([
+    n$4({ attribute: false })
+  ], FFBoxMenu.prototype, "returnFocus", 2);
+  __decorateClass$1([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
+  ], FFBoxMenu.prototype, "theme", 2);
+  __decorateClass$1([
+    r$2()
+  ], FFBoxMenu.prototype, "_openedSubMenus", 2);
+  __decorateClass$1([
+    r$2()
+  ], FFBoxMenu.prototype, "_openedSubMenuItemPos", 2);
+  __decorateClass$1([
+    r$2()
+  ], FFBoxMenu.prototype, "_currentHoveredItem", 2);
+  __decorateClass$1([
+    r$2()
+  ], FFBoxMenu.prototype, "_currentSelectedItem", 2);
+  __decorateClass$1([
+    r$2()
+  ], FFBoxMenu.prototype, "_leaving", 2);
+  FFBoxMenu = __decorateClass$1([
+    t$3("ffbox-menu")
+  ], FFBoxMenu);
+  function _detectTheme() {
+    const provider = document.querySelector("ffbox-theme-provider");
+    if (provider) return provider.theme === "dark" ? "dark" : "light";
+    return "light";
+  }
+  FFBoxMenu.showMenu = function(options) {
+    const el = document.createElement("ffbox-menu");
+    el.menu = options.menu;
+    el.type = options.type || "action";
+    el.selectedValue = options.selectedValue;
+    if (options.triggerRect) {
+      el.triggerRect = options.triggerRect;
+    } else if (options.triggerElem) {
+      const rect = options.triggerElem.getBoundingClientRect();
+      el.triggerRect = { xMin: rect.left, yMin: rect.top, xMax: rect.right, yMax: rect.bottom };
+    }
+    el.onSelect = options.onSelect;
+    el.onCancel = options.onCancel;
+    el.onClose = options.onClose;
+    el.onKeyDown = options.onKeyDown;
+    el.returnFocus = options.returnFocus;
+    el.theme = _detectTheme();
+    const container2 = options.container || document.body;
+    container2.appendChild(el);
+    return {
+      menu: el,
+      close: () => el.close(),
+      triggerKeyboardEvent: (event) => el.triggerKeyboardEvent(event),
+      setSelectedValue: (value) => el.setSelectedValue(value)
+    };
+  };
+  const menuButtonIcon = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1565771142011" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2592" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style type="text/css"></style></defs><path d="M230.4 588.8c42.415 0 76.8-34.385 76.8-76.8s-34.385-76.8-76.8-76.8-76.8 34.385-76.8 76.8 34.385 76.8 76.8 76.8zM512 588.8c42.415 0 76.8-34.385 76.8-76.8s-34.385-76.8-76.8-76.8-76.8 34.385-76.8 76.8 34.385 76.8 76.8 76.8zM793.6 588.8c42.415 0 76.8-34.385 76.8-76.8s-34.385-76.8-76.8-76.8-76.8 34.385-76.8 76.8 34.385 76.8 76.8 76.8z" fill="#7f7f7f" p-id="2593"></path></svg>';
+  var __defProp = Object.defineProperty;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __decorateClass = (decorators, target, key, kind) => {
+    var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
+    for (var i2 = decorators.length - 1, decorator; i2 >= 0; i2--)
+      if (decorator = decorators[i2])
+        result = (kind ? decorator(target, key, result) : decorator(result)) || result;
+    if (kind && result) __defProp(target, key, result);
+    return result;
+  };
+  let FFBoxDropdownInput = class extends i$3 {
+    constructor() {
+      super(...arguments);
+      this.list = [];
+      this.readonly = false;
+      this.disabled = false;
+      this.placeholder = "";
+      this.theme = "light";
+      this._focused = false;
+      this._inputText = "-";
+      this._invalidMsg = void 0;
+      this._menuHandle = null;
+      this._openMenu = () => {
+        if (this.disabled) {
+          return;
+        }
+        this._menuHandle = FFBoxMenu.showMenu({
+          menu: this.list,
+          type: "select",
+          selectedValue: this.text,
+          triggerElem: this._selectorEl,
+          // 传入触发元素，菜单据此计算弹出位置与方向
+          onSelect: (_event, value) => {
+            this._inputText = value;
+            this.text = value;
+            this._validate();
+            this._dispatchChange(value);
+            this._menuHandle.setSelectedValue(value);
+          },
+          onClose: () => {
+            this._menuHandle = null;
+          },
+          returnFocus: (_e) => {
+            this._selectorEl.firstElementChild.focus();
+          },
+          onKeyDown: (e2) => {
+            if (["ArrowLeft", "ArrowRight"].includes(e2.key)) {
+              let selPos = this._selectorEl.firstChild.selectionStart || 0;
+              if (e2.key === "ArrowLeft") {
+                selPos--;
+              } else if (e2.key === "ArrowRight") {
+                selPos++;
+              }
+              this._selectorEl.firstChild.selectionStart = selPos;
+              this._selectorEl.firstChild.selectionEnd = selPos;
+            }
+          }
+        });
+        this._selectorEl.firstElementChild.focus();
+      };
+    }
+    willUpdate(changed) {
+      if (changed.has("text")) {
+        this._inputText = this.text !== void 0 ? this.text + "" : "";
+        this._validate();
+      }
+      if (changed.has("validator")) {
+        this._validate();
+      }
+    }
+    render() {
+      const classes = ["combobox-selector"];
+      if (this._focused) classes.push("focused");
+      if (this._invalidMsg) classes.push("invalid");
+      return b`
+			<div class=${classes.join(" ")} @click=${this._openMenu}>
+				<input
+					type="text"
+					.value=${this._inputText}
+					?readonly=${this.readonly || this.disabled}
+					?disabled=${this.disabled}
+					.placeholder=${this.placeholder}
+					@blur=${this._handleBlur}
+					@focus=${this._handleFocus}
+					@input=${this._handleInput}
+					@keydown=${this._handleKeydown}
+				/>
+				<span class="combobox-selector-img">${o$3(menuButtonIcon)}</span>
+			</div>
+		`;
+    }
+    _handleBlur() {
+      this._focused = false;
+    }
+    _handleFocus() {
+      this._focused = true;
+    }
+    _handleInput(event) {
+      var _a2;
+      const input = event.target;
+      this._inputText = this.inputFixer ? this.inputFixer(input.value) : input.value;
+      this.text = this._inputText;
+      let newValue = input.value;
+      (_a2 = this._menuHandle) == null ? void 0 : _a2.setSelectedValue(newValue);
+      this._validate();
+      this._dispatchChange(newValue);
+    }
+    _handleKeydown(event) {
+      if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Home", "End", "Enter", "Escape"].includes(event.key)) {
+        if (this._menuHandle) {
+          this._menuHandle.triggerKeyboardEvent(event);
+          event.preventDefault();
+        } else {
+          if (event.key === "Enter") {
+            this.dispatchEvent(new CustomEvent("enter", {
+              bubbles: true,
+              composed: true
+            }));
+          }
+          if (["ArrowUp", "ArrowDown", "Enter"].includes(event.key)) {
+            this._openMenu();
+            event.preventDefault();
+          }
+        }
+      }
+    }
+    _validate() {
+      if (this.validator) {
+        this._invalidMsg = this.validator(this._inputText ?? "");
+      } else {
+        this._invalidMsg = void 0;
+      }
+    }
+    _dispatchChange(value) {
+      this.dispatchEvent(new CustomEvent("change", {
+        detail: value,
+        bubbles: true,
+        composed: true
+      }));
+    }
+  };
+  FFBoxDropdownInput.styles = i$6`
+		:host {
+			display: inline-block;
+		}
+
+		.combobox-selector {
+			position: relative;
+			height: 24px;
+			/* width: 122px; */
+			flex-grow: 1;
+			border-radius: 24px;
+			background: var(--f7);
+			border: #AAA 1px solid;
+			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+		}
+		.combobox-selector:hover {
+			background: var(--ff);
+		}
+		.combobox-selector:active {
+			background: var(--e7);
+		}
+		.combobox-selector.focused {
+			background: var(--ff);
+		}
+		/* 校验有误的情况下背景和边框都变红 */
+		.combobox-selector.invalid {
+			border: var(--errorBorder) 1px solid;
+			box-shadow: 0 0 12px hsla(0, 100%, 60%, 0.3), 0px 4px 8px hwb(0 0 0 / 0.05);
+		}
+		.combobox-selector.invalid.focused {
+			background: var(--errorBgActive);
+		}
+		.combobox-selector.invalid:not(.focused) {
+			background: var(--errorBg);
+		}
+		/* 禁用的情况下整体变透明，并且固定背景颜色 */
+		:host([disabled]) .combobox-selector {
+			opacity: 0.6;
+			color: var(--66); /* 默认，20% 亮度黑色，变灰 40% 亮度黑色 */
+			background: var(--f7);
+		}
+
+		.combobox-selector input {
+			position: absolute;
+			left: 6px;
+			width: calc(100% - 28px);
+			height: 24px;
+			line-height: 24px;
+			background: none;
+			border: none;
+			margin: 0;
+			padding: 0;
+			outline: none;
+			font-family: inherit;
+			font-size: 13px;
+			color: inherit;
+		}
+
+		.combobox-selector-img {
+			position: absolute;
+			right: 6px;
+			top: 4px;
+			width: 16px;
+			height: 16px;
+			font-size: 0; /* 纯 HTML 状态下，代码中的换行会被渲染出来，需要设置为 0 来屏蔽 */
+		}
+	`;
+  __decorateClass([
+    n$4({ attribute: false })
+  ], FFBoxDropdownInput.prototype, "text", 2);
+  __decorateClass([
+    n$4({ attribute: false })
+  ], FFBoxDropdownInput.prototype, "list", 2);
+  __decorateClass([
+    n$4({ type: Boolean, reflect: true })
+  ], FFBoxDropdownInput.prototype, "readonly", 2);
+  __decorateClass([
+    n$4({ type: Boolean, reflect: true })
+  ], FFBoxDropdownInput.prototype, "disabled", 2);
+  __decorateClass([
+    n$4()
+  ], FFBoxDropdownInput.prototype, "placeholder", 2);
+  __decorateClass([
+    n$4({ attribute: false })
+  ], FFBoxDropdownInput.prototype, "validator", 2);
+  __decorateClass([
+    n$4({ attribute: false })
+  ], FFBoxDropdownInput.prototype, "inputFixer", 2);
+  __decorateClass([
+    c$1({ context: themeContext, subscribe: true }),
+    n$4({ reflect: true, attribute: "data-theme" })
+  ], FFBoxDropdownInput.prototype, "theme", 2);
+  __decorateClass([
+    r$2()
+  ], FFBoxDropdownInput.prototype, "_focused", 2);
+  __decorateClass([
+    r$2()
+  ], FFBoxDropdownInput.prototype, "_inputText", 2);
+  __decorateClass([
+    r$2()
+  ], FFBoxDropdownInput.prototype, "_invalidMsg", 2);
+  __decorateClass([
+    e$4(".combobox-selector")
+  ], FFBoxDropdownInput.prototype, "_selectorEl", 2);
+  FFBoxDropdownInput = __decorateClass([
+    t$3("ffbox-dropdown-input")
+  ], FFBoxDropdownInput);
 })();
 //# sourceMappingURL=ffbox-ui.iife.js.map

@@ -1,5 +1,5 @@
-import { t as themeContext } from "../../ffbox-theme-provider-2ZhrYeYK.js";
-import { a as i, n, c, r, b as e, d as i$1, h as o, f as b, g as t } from "../../lit-Dfi9bTsN.js";
+import { t as themeContext } from "../../ffbox-theme-provider-DLHSaw2W.js";
+import { i, n, c, r, e, a as i$1, h as o, b, t } from "../../lit-CCLFh2ru.js";
 const closeIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="48" height="48"><path d="M743.2 701.21a37.84 37.84 0 0 1-0.39 52.88l5.51-5.51a36.5 36.5 0 0 1-52.19-0.3L281.64 322.79a37.84 37.84 0 0 1 0.39-52.88l-5.5 5.51a36.5 36.5 0 0 1 52.19 0.3z" fill="currentColor"></path><path d="M701.21 284.3a37.84 37.84 0 0 1 52.88 0.39l-5.51-5.51a36.5 36.5 0 0 1-0.3 52.19L322.79 745.86a37.84 37.84 0 0 1-52.88-0.39l5.51 5.51a36.5 36.5 0 0 1 0.3-52.19z" fill="currentColor"></path></svg>\n';
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;

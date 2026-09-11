@@ -16,4 +16,7 @@ export { FFBoxMsgbox, type MsgboxButton, type MsgboxOptions } from './components
 export { FFBoxPopup, type PopupOptions } from './components/popup/ffbox-popup.js';
 export { FFBoxTooltip, type TooltipOptions } from './components/tooltip/ffbox-tooltip.js';
 export { tooltip, useTooltip, type TooltipPosition, type TooltipStyleName } from './components/tooltip/use-tooltip.js';
+export { FFBoxMenu, type MenuOptions, type FFBoxMenuHandle } from './components/menu/ffbox-menu.js';
+export { getMenuItemByValue, type MenuItem, type NarrowedMenuItem } from './components/menu/menu-item.js';
+export { FFBoxDropdownInput } from './components/dropdown-input/ffbox-dropdown-input.js';
 export { durationValidator, durationFixer, numberValidator, notEmptyValidator } from './utils/validatorAndFixer.js';

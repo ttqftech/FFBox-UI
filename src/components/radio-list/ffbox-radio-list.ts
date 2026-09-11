@@ -168,7 +168,7 @@ export class FFBoxRadioList extends LitElement {
 						focus-on-mounted
 						.value=${item.value}
 						@blur=${(e: CustomEvent) => this._handleEditConfirm(item, e.detail, index)}
-						@press-enter=${(e: CustomEvent) => this._editingIndex = -1}
+						@press-enter=${(_e: CustomEvent) => this._editingIndex = -1}
 						@change=${(e: Event) => e.stopPropagation() /* 拦截下层 change 事件穿透上去 */}
 					></ffbox-input-auto-size>`
 					: html`<span

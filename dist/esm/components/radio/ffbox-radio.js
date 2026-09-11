@@ -1,5 +1,5 @@
-import { t as themeContext } from "../../ffbox-theme-provider-2ZhrYeYK.js";
-import { a as i, n, c, d as i$1, f as b, g as t } from "../../lit-Dfi9bTsN.js";
+import { t as themeContext } from "../../ffbox-theme-provider-DLHSaw2W.js";
+import { i, n, c, a as i$1, b, t } from "../../lit-CCLFh2ru.js";
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __decorateClass = (decorators, target, key, kind) => {
@@ -43,6 +43,7 @@ let FFBoxRadio = class extends i$1 {
 FFBoxRadio.styles = i`
 		:host {
 			display: inline-block;
+			font-size: 0; /* 纯 HTML 状态下，代码中的换行会被渲染出来，需要设置为 0 来屏蔽 */
 		}
 
 		// :host([data-theme="dark"]) {
