@@ -11,8 +11,12 @@ export default defineConfig({
     open: '/playground/',
   },
   resolve: {
-    alias: {
-      'ffbox-ui': resolve(__dirname, 'src/ffbox-ui-autoregister.ts'),
-    },
+    alias: [
+      { find: 'ffbox-ui', replacement: resolve(__dirname, 'src/ffbox-ui-autoregister.ts') },
+      { find: 'ffbox-tooltip', replacement: resolve(__dirname, 'src/components/tooltip/ffbox-tooltip.ts') },
+      { find: 'ffbox-msgbox', replacement: resolve(__dirname, 'src/components/msgbox/ffbox-msgbox.ts') },
+      { find: 'ffbox-popup', replacement: resolve(__dirname, 'src/components/popup/ffbox-popup.ts') },
+      { find: 'ffbox-menu', replacement: resolve(__dirname, 'src/components/menu/ffbox-menu.ts') },
+    ],
   },
 });

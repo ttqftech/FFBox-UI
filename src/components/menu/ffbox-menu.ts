@@ -863,6 +863,8 @@ FFBoxMenu.showMenu = function (options: MenuOptions): FFBoxMenuHandle {
 	};
 };
 
+export { getMenuItemByValue, type MenuItem, type NarrowedMenuItem } from './menu-item.js';
+
 declare global {
 	interface HTMLElementTagNameMap {
 		'ffbox-menu': FFBoxMenu;

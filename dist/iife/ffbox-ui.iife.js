@@ -1,4 +1,4 @@
-(function() {
+var FFBoxUI = (function(exports) {
   "use strict";
   /**
    * @license
@@ -288,7 +288,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */
   const t$4 = globalThis, i$4 = (t2) => t2, s$5 = t$4.trustedTypes, e$6 = s$5 ? s$5.createPolicy("lit-html", { createHTML: (t2) => t2 }) : void 0, h$1 = "$lit$", o$6 = `lit$${Math.random().toFixed(9).slice(2)}$`, n$5 = "?" + o$6, r$4 = `<${n$5}>`, l = document, c$2 = () => l.createComment(""), a = (t2) => null === t2 || "object" != typeof t2 && "function" != typeof t2, u = Array.isArray, d = (t2) => u(t2) || "function" == typeof (t2 == null ? void 0 : t2[Symbol.iterator]), f$1 = "[ 	\n\f\r]", v = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, _ = /-->/g, m = />/g, p = RegExp(`>|${f$1}(?:([^\\s"'>=/]+)(${f$1}*=${f$1}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), g = /'/g, $ = /"/g, y = /^(?:script|style|textarea|title)$/i, x = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), b = x(1), E = Symbol.for("lit-noChange"), A = Symbol.for("lit-nothing"), C = /* @__PURE__ */ new WeakMap(), P = l.createTreeWalker(l, 129);
+\f\r"'\`<>=]|("|')|))|$)`, "g"), g = /'/g, $ = /"/g, y = /^(?:script|style|textarea|title)$/i, x = (t2) => (i2, ...s2) => ({ _$litType$: t2, strings: i2, values: s2 }), b = x(1), w = x(2), E = Symbol.for("lit-noChange"), A = Symbol.for("lit-nothing"), C = /* @__PURE__ */ new WeakMap(), P = l.createTreeWalker(l, 129);
   function V(t2, i2) {
     if (!u(t2) || !t2.hasOwnProperty("raw")) throw Error("invalid template strings array");
     return void 0 !== e$6 ? e$6.createHTML(i2) : i2;
@@ -837,7 +837,7 @@
       new t$2().attach(document.body);
     }
   }
-  let FFBoxThemeProvider = class extends i$3 {
+  exports.FFBoxThemeProvider = class FFBoxThemeProvider extends i$3 {
     constructor() {
       super(...arguments);
       this.theme = "light";
@@ -859,10 +859,10 @@
   __decorateClass$h([
     e$2({ context: themeContext }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxThemeProvider.prototype, "theme", 2);
-  FFBoxThemeProvider = __decorateClass$h([
+  ], exports.FFBoxThemeProvider.prototype, "theme", 2);
+  exports.FFBoxThemeProvider = __decorateClass$h([
     t$3("ffbox-theme-provider")
-  ], FFBoxThemeProvider);
+  ], exports.FFBoxThemeProvider);
   var __defProp$g = Object.defineProperty;
   var __getOwnPropDesc$g = Object.getOwnPropertyDescriptor;
   var __decorateClass$g = (decorators, target, key, kind) => {
@@ -873,7 +873,7 @@
     if (kind && result) __defProp$g(target, key, result);
     return result;
   };
-  let FFBoxButton = class extends i$3 {
+  exports.FFBoxButton = class FFBoxButton extends i$3 {
     constructor() {
       super();
       this.type = "normal";
@@ -900,7 +900,7 @@
 		`;
     }
   };
-  FFBoxButton.styles = i$6`
+  exports.FFBoxButton.styles = i$6`
 		:host {
 			display: inline-block;
 			font-family: inherit;
@@ -1095,20 +1095,20 @@
 	`;
   __decorateClass$g([
     n$4({ reflect: true })
-  ], FFBoxButton.prototype, "type", 2);
+  ], exports.FFBoxButton.prototype, "type", 2);
   __decorateClass$g([
     n$4({ reflect: true })
-  ], FFBoxButton.prototype, "size", 2);
+  ], exports.FFBoxButton.prototype, "size", 2);
   __decorateClass$g([
     n$4({ reflect: true, type: Boolean })
-  ], FFBoxButton.prototype, "disabled", 2);
+  ], exports.FFBoxButton.prototype, "disabled", 2);
   __decorateClass$g([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxButton.prototype, "theme", 2);
-  FFBoxButton = __decorateClass$g([
+  ], exports.FFBoxButton.prototype, "theme", 2);
+  exports.FFBoxButton = __decorateClass$g([
     t$3("ffbox-button")
-  ], FFBoxButton);
+  ], exports.FFBoxButton);
   var __defProp$f = Object.defineProperty;
   var __getOwnPropDesc$f = Object.getOwnPropertyDescriptor;
   var __decorateClass$f = (decorators, target, key, kind) => {
@@ -1119,7 +1119,7 @@
     if (kind && result) __defProp$f(target, key, result);
     return result;
   };
-  let FFBoxSwitch = class extends i$3 {
+  exports.FFBoxSwitch = class FFBoxSwitch extends i$3 {
     constructor() {
       super(...arguments);
       this.checked = false;
@@ -1215,7 +1215,7 @@
       }));
     }
   };
-  FFBoxSwitch.styles = i$6`
+  exports.FFBoxSwitch.styles = i$6`
 		:host {
 			display: inline-block;
 		}
@@ -1270,23 +1270,23 @@
 	`;
   __decorateClass$f([
     n$4({ type: Boolean, reflect: true })
-  ], FFBoxSwitch.prototype, "checked", 2);
+  ], exports.FFBoxSwitch.prototype, "checked", 2);
   __decorateClass$f([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxSwitch.prototype, "theme", 2);
+  ], exports.FFBoxSwitch.prototype, "theme", 2);
   __decorateClass$f([
     e$4(".switch-slipper")
-  ], FFBoxSwitch.prototype, "slipperEl", 2);
-  FFBoxSwitch = __decorateClass$f([
+  ], exports.FFBoxSwitch.prototype, "slipperEl", 2);
+  exports.FFBoxSwitch = __decorateClass$f([
     t$3("ffbox-switch")
-  ], FFBoxSwitch);
+  ], exports.FFBoxSwitch);
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$1 = { ATTRIBUTE: 1, CHILD: 2 }, e$1 = (t2) => (...e2) => ({ _$litDirective$: t2, values: e2 });
+  const t$1 = { ATTRIBUTE: 1, CHILD: 2, ELEMENT: 6 }, e$1 = (t2) => (...e2) => ({ _$litDirective$: t2, values: e2 });
   let i$1 = class i {
     constructor(t2) {
     }
@@ -1343,7 +1343,7 @@
     if (kind && result) __defProp$e(target, key, result);
     return result;
   };
-  let FFBoxCheckbox = class extends i$3 {
+  exports.FFBoxCheckbox = class FFBoxCheckbox extends i$3 {
     constructor() {
       super(...arguments);
       this.checked = false;
@@ -1373,7 +1373,7 @@
       }));
     }
   };
-  FFBoxCheckbox.styles = i$6`
+  exports.FFBoxCheckbox.styles = i$6`
 		:host {
 			display: inline-block;
 			font-size: 0; /* 纯 HTML 状态下，代码中的换行会被渲染出来，需要设置为 0 来屏蔽 */
@@ -1434,17 +1434,17 @@
         }
       }
     })
-  ], FFBoxCheckbox.prototype, "checked", 2);
+  ], exports.FFBoxCheckbox.prototype, "checked", 2);
   __decorateClass$e([
     n$4({ type: Boolean, reflect: true })
-  ], FFBoxCheckbox.prototype, "disabled", 2);
+  ], exports.FFBoxCheckbox.prototype, "disabled", 2);
   __decorateClass$e([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxCheckbox.prototype, "theme", 2);
-  FFBoxCheckbox = __decorateClass$e([
+  ], exports.FFBoxCheckbox.prototype, "theme", 2);
+  exports.FFBoxCheckbox = __decorateClass$e([
     t$3("ffbox-checkbox")
-  ], FFBoxCheckbox);
+  ], exports.FFBoxCheckbox);
   var __defProp$d = Object.defineProperty;
   var __getOwnPropDesc$d = Object.getOwnPropertyDescriptor;
   var __decorateClass$d = (decorators, target, key, kind) => {
@@ -1455,7 +1455,7 @@
     if (kind && result) __defProp$d(target, key, result);
     return result;
   };
-  let FFBoxRadio = class extends i$3 {
+  exports.FFBoxRadio = class FFBoxRadio extends i$3 {
     constructor() {
       super(...arguments);
       this.checked = false;
@@ -1485,7 +1485,7 @@
       }));
     }
   };
-  FFBoxRadio.styles = i$6`
+  exports.FFBoxRadio.styles = i$6`
 		:host {
 			display: inline-block;
 			font-size: 0; /* 纯 HTML 状态下，代码中的换行会被渲染出来，需要设置为 0 来屏蔽 */
@@ -1547,17 +1547,17 @@
         }
       }
     })
-  ], FFBoxRadio.prototype, "checked", 2);
+  ], exports.FFBoxRadio.prototype, "checked", 2);
   __decorateClass$d([
     n$4({ type: Boolean, reflect: true })
-  ], FFBoxRadio.prototype, "disabled", 2);
+  ], exports.FFBoxRadio.prototype, "disabled", 2);
   __decorateClass$d([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxRadio.prototype, "theme", 2);
-  FFBoxRadio = __decorateClass$d([
+  ], exports.FFBoxRadio.prototype, "theme", 2);
+  exports.FFBoxRadio = __decorateClass$d([
     t$3("ffbox-radio")
-  ], FFBoxRadio);
+  ], exports.FFBoxRadio);
   var __defProp$c = Object.defineProperty;
   var __getOwnPropDesc$c = Object.getOwnPropertyDescriptor;
   var __decorateClass$c = (decorators, target, key, kind) => {
@@ -1568,7 +1568,7 @@
     if (kind && result) __defProp$c(target, key, result);
     return result;
   };
-  let FFBoxRockerSwitch = class extends i$3 {
+  exports.FFBoxRockerSwitch = class FFBoxRockerSwitch extends i$3 {
     constructor() {
       super(...arguments);
       this.size = "s";
@@ -1596,7 +1596,7 @@
       this.dispatchEvent(new CustomEvent("right", { bubbles: true, composed: true }));
     }
   };
-  FFBoxRockerSwitch.styles = i$6`
+  exports.FFBoxRockerSwitch.styles = i$6`
 		:host {
 			display: inline-flex;
 			align-items: center;
@@ -1681,20 +1681,20 @@
 	`;
   __decorateClass$c([
     n$4({ reflect: true })
-  ], FFBoxRockerSwitch.prototype, "size", 2);
+  ], exports.FFBoxRockerSwitch.prototype, "size", 2);
   __decorateClass$c([
     n$4({ type: Boolean, attribute: "disabled-left" })
-  ], FFBoxRockerSwitch.prototype, "disabledLeft", 2);
+  ], exports.FFBoxRockerSwitch.prototype, "disabledLeft", 2);
   __decorateClass$c([
     n$4({ type: Boolean, attribute: "disabled-right" })
-  ], FFBoxRockerSwitch.prototype, "disabledRight", 2);
+  ], exports.FFBoxRockerSwitch.prototype, "disabledRight", 2);
   __decorateClass$c([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxRockerSwitch.prototype, "theme", 2);
-  FFBoxRockerSwitch = __decorateClass$c([
+  ], exports.FFBoxRockerSwitch.prototype, "theme", 2);
+  exports.FFBoxRockerSwitch = __decorateClass$c([
     t$3("ffbox-rocker-switch")
-  ], FFBoxRockerSwitch);
+  ], exports.FFBoxRockerSwitch);
   var __defProp$b = Object.defineProperty;
   var __getOwnPropDesc$b = Object.getOwnPropertyDescriptor;
   var __decorateClass$b = (decorators, target, key, kind) => {
@@ -1705,7 +1705,7 @@
     if (kind && result) __defProp$b(target, key, result);
     return result;
   };
-  let FFBoxSlider = class extends i$3 {
+  exports.FFBoxSlider = class FFBoxSlider extends i$3 {
     constructor() {
       super(...arguments);
       this.min = 0;
@@ -1934,7 +1934,7 @@
       }
     }
   };
-  FFBoxSlider.styles = i$6`
+  exports.FFBoxSlider.styles = i$6`
 		:host {
 			display: block;
 		}
@@ -2038,7 +2038,7 @@
 			background: #777;
 		}
 	`;
-  FFBoxSlider._numberOrStringConverter = {
+  exports.FFBoxSlider._numberOrStringConverter = {
     fromAttribute(value) {
       if (value === null) return void 0;
       const num = Number(value);
@@ -2049,39 +2049,39 @@
     }
   };
   __decorateClass$b([
-    n$4({ reflect: true, converter: FFBoxSlider._numberOrStringConverter })
-  ], FFBoxSlider.prototype, "value", 2);
+    n$4({ reflect: true, converter: exports.FFBoxSlider._numberOrStringConverter })
+  ], exports.FFBoxSlider.prototype, "value", 2);
   __decorateClass$b([
     n$4({ type: Number })
-  ], FFBoxSlider.prototype, "min", 2);
+  ], exports.FFBoxSlider.prototype, "min", 2);
   __decorateClass$b([
     n$4({ type: Number })
-  ], FFBoxSlider.prototype, "max", 2);
+  ], exports.FFBoxSlider.prototype, "max", 2);
   __decorateClass$b([
     n$4({ type: Number })
-  ], FFBoxSlider.prototype, "arrowKeyStep", 2);
+  ], exports.FFBoxSlider.prototype, "arrowKeyStep", 2);
   __decorateClass$b([
     n$4()
-  ], FFBoxSlider.prototype, "adsorption", 2);
+  ], exports.FFBoxSlider.prototype, "adsorption", 2);
   __decorateClass$b([
     n$4({ attribute: false })
-  ], FFBoxSlider.prototype, "tags", 2);
+  ], exports.FFBoxSlider.prototype, "tags", 2);
   __decorateClass$b([
     n$4()
-  ], FFBoxSlider.prototype, "mode", 2);
+  ], exports.FFBoxSlider.prototype, "mode", 2);
   __decorateClass$b([
     n$4({ attribute: false })
-  ], FFBoxSlider.prototype, "valueToDisplay", 2);
+  ], exports.FFBoxSlider.prototype, "valueToDisplay", 2);
   __decorateClass$b([
     n$4({ type: Boolean, attribute: false })
-  ], FFBoxSlider.prototype, "useIEC", 2);
+  ], exports.FFBoxSlider.prototype, "useIEC", 2);
   __decorateClass$b([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxSlider.prototype, "theme", 2);
-  FFBoxSlider = __decorateClass$b([
+  ], exports.FFBoxSlider.prototype, "theme", 2);
+  exports.FFBoxSlider = __decorateClass$b([
     t$3("ffbox-slider")
-  ], FFBoxSlider);
+  ], exports.FFBoxSlider);
   var __defProp$a = Object.defineProperty;
   var __getOwnPropDesc$a = Object.getOwnPropertyDescriptor;
   var __decorateClass$a = (decorators, target, key, kind) => {
@@ -2092,7 +2092,7 @@
     if (kind && result) __defProp$a(target, key, result);
     return result;
   };
-  let FFBoxNormalInput = class extends i$3 {
+  exports.FFBoxNormalInput = class FFBoxNormalInput extends i$3 {
     constructor() {
       super(...arguments);
       this.value = "";
@@ -2144,7 +2144,6 @@
       }
       this.value = newValue;
       this._validate(newValue);
-      e2.stopPropagation();
       this.dispatchEvent(new CustomEvent("change", {
         detail: newValue,
         bubbles: true,
@@ -2167,7 +2166,7 @@
       }
     }
   };
-  FFBoxNormalInput.styles = i$6`
+  exports.FFBoxNormalInput.styles = i$6`
 		:host {
 			display: inline-block;
 		}
@@ -2246,29 +2245,29 @@
 	`;
   __decorateClass$a([
     n$4({ reflect: true })
-  ], FFBoxNormalInput.prototype, "value", 2);
+  ], exports.FFBoxNormalInput.prototype, "value", 2);
   __decorateClass$a([
     n$4({ reflect: true })
-  ], FFBoxNormalInput.prototype, "type", 2);
+  ], exports.FFBoxNormalInput.prototype, "type", 2);
   __decorateClass$a([
     n$4({ type: Boolean, reflect: true })
-  ], FFBoxNormalInput.prototype, "disabled", 2);
+  ], exports.FFBoxNormalInput.prototype, "disabled", 2);
   __decorateClass$a([
     n$4()
-  ], FFBoxNormalInput.prototype, "placeholder", 2);
+  ], exports.FFBoxNormalInput.prototype, "placeholder", 2);
   __decorateClass$a([
     n$4({ attribute: false })
-  ], FFBoxNormalInput.prototype, "validator", 2);
+  ], exports.FFBoxNormalInput.prototype, "validator", 2);
   __decorateClass$a([
     n$4({ attribute: false })
-  ], FFBoxNormalInput.prototype, "inputFixer", 2);
+  ], exports.FFBoxNormalInput.prototype, "inputFixer", 2);
   __decorateClass$a([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxNormalInput.prototype, "theme", 2);
-  FFBoxNormalInput = __decorateClass$a([
+  ], exports.FFBoxNormalInput.prototype, "theme", 2);
+  exports.FFBoxNormalInput = __decorateClass$a([
     t$3("ffbox-normal-input")
-  ], FFBoxNormalInput);
+  ], exports.FFBoxNormalInput);
   var __defProp$9 = Object.defineProperty;
   var __getOwnPropDesc$9 = Object.getOwnPropertyDescriptor;
   var __decorateClass$9 = (decorators, target, key, kind) => {
@@ -2279,7 +2278,7 @@
     if (kind && result) __defProp$9(target, key, result);
     return result;
   };
-  let FFBoxInputAutoSize = class extends i$3 {
+  exports.FFBoxInputAutoSize = class FFBoxInputAutoSize extends i$3 {
     constructor() {
       super(...arguments);
       this.value = "";
@@ -2360,7 +2359,7 @@
       }));
     }
   };
-  FFBoxInputAutoSize.styles = i$6`
+  exports.FFBoxInputAutoSize.styles = i$6`
 		:host {
 			display: inline-block;
 		}
@@ -2379,23 +2378,23 @@
 	`;
   __decorateClass$9([
     n$4({ reflect: true })
-  ], FFBoxInputAutoSize.prototype, "value", 2);
+  ], exports.FFBoxInputAutoSize.prototype, "value", 2);
   __decorateClass$9([
     n$4({ type: Boolean, attribute: "focus-on-mounted" })
-  ], FFBoxInputAutoSize.prototype, "focusOnMounted", 2);
+  ], exports.FFBoxInputAutoSize.prototype, "focusOnMounted", 2);
   __decorateClass$9([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxInputAutoSize.prototype, "theme", 2);
+  ], exports.FFBoxInputAutoSize.prototype, "theme", 2);
   __decorateClass$9([
     e$4("input")
-  ], FFBoxInputAutoSize.prototype, "_inputEl", 2);
+  ], exports.FFBoxInputAutoSize.prototype, "_inputEl", 2);
   __decorateClass$9([
     e$4(".hidden-div")
-  ], FFBoxInputAutoSize.prototype, "_hiddenDivEl", 2);
-  FFBoxInputAutoSize = __decorateClass$9([
+  ], exports.FFBoxInputAutoSize.prototype, "_hiddenDivEl", 2);
+  exports.FFBoxInputAutoSize = __decorateClass$9([
     t$3("ffbox-input-auto-size")
-  ], FFBoxInputAutoSize);
+  ], exports.FFBoxInputAutoSize);
   var __defProp$8 = Object.defineProperty;
   var __getOwnPropDesc$8 = Object.getOwnPropertyDescriptor;
   var __decorateClass$8 = (decorators, target, key, kind) => {
@@ -2406,7 +2405,7 @@
     if (kind && result) __defProp$8(target, key, result);
     return result;
   };
-  let FFBoxControlBox = class extends i$3 {
+  exports.FFBoxControlBox = class FFBoxControlBox extends i$3 {
     constructor() {
       super(...arguments);
       this.title = "";
@@ -2442,7 +2441,7 @@
       }));
     }
   };
-  FFBoxControlBox.styles = i$6`
+  exports.FFBoxControlBox.styles = i$6`
 		:host {
 			display: block;
 			width: 210px;
@@ -2481,26 +2480,26 @@
 	`;
   __decorateClass$8([
     n$4({ reflect: true })
-  ], FFBoxControlBox.prototype, "title", 2);
+  ], exports.FFBoxControlBox.prototype, "title", 2);
   __decorateClass$8([
     n$4({ reflect: true })
-  ], FFBoxControlBox.prototype, "description", 2);
+  ], exports.FFBoxControlBox.prototype, "description", 2);
   __decorateClass$8([
     n$4({ type: Boolean, reflect: true })
-  ], FFBoxControlBox.prototype, "long", 2);
+  ], exports.FFBoxControlBox.prototype, "long", 2);
   __decorateClass$8([
     n$4({ type: Boolean, reflect: true })
-  ], FFBoxControlBox.prototype, "optional", 2);
+  ], exports.FFBoxControlBox.prototype, "optional", 2);
   __decorateClass$8([
     n$4({ type: Boolean, reflect: true, attribute: "has-value" })
-  ], FFBoxControlBox.prototype, "hasValue", 2);
+  ], exports.FFBoxControlBox.prototype, "hasValue", 2);
   __decorateClass$8([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxControlBox.prototype, "theme", 2);
-  FFBoxControlBox = __decorateClass$8([
+  ], exports.FFBoxControlBox.prototype, "theme", 2);
+  exports.FFBoxControlBox = __decorateClass$8([
     t$3("ffbox-control-box")
-  ], FFBoxControlBox);
+  ], exports.FFBoxControlBox);
   const closeIcon$1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="48" height="48"><path d="M743.2 701.21a37.84 37.84 0 0 1-0.39 52.88l5.51-5.51a36.5 36.5 0 0 1-52.19-0.3L281.64 322.79a37.84 37.84 0 0 1 0.39-52.88l-5.5 5.51a36.5 36.5 0 0 1 52.19 0.3z" fill="currentColor"></path><path d="M701.21 284.3a37.84 37.84 0 0 1 52.88 0.39l-5.51-5.51a36.5 36.5 0 0 1-0.3 52.19L322.79 745.86a37.84 37.84 0 0 1-52.88-0.39l5.51 5.51a36.5 36.5 0 0 1 0.3-52.19z" fill="currentColor"></path></svg>';
   var __defProp$7 = Object.defineProperty;
   var __getOwnPropDesc$7 = Object.getOwnPropertyDescriptor;
@@ -2512,7 +2511,7 @@
     if (kind && result) __defProp$7(target, key, result);
     return result;
   };
-  let FFBoxRadioList = class extends i$3 {
+  exports.FFBoxRadioList = class FFBoxRadioList extends i$3 {
     constructor() {
       super(...arguments);
       this.list = [];
@@ -2595,7 +2594,7 @@
       }));
     }
   };
-  FFBoxRadioList.styles = i$6`
+  exports.FFBoxRadioList.styles = i$6`
 		:host {
 			display: block;
 		}
@@ -2708,23 +2707,23 @@
 	`;
   __decorateClass$7([
     n$4({ attribute: false })
-  ], FFBoxRadioList.prototype, "list", 2);
+  ], exports.FFBoxRadioList.prototype, "list", 2);
   __decorateClass$7([
     n$4({ reflect: true })
-  ], FFBoxRadioList.prototype, "value", 2);
+  ], exports.FFBoxRadioList.prototype, "value", 2);
   __decorateClass$7([
     n$4()
-  ], FFBoxRadioList.prototype, "placeholder", 2);
+  ], exports.FFBoxRadioList.prototype, "placeholder", 2);
   __decorateClass$7([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxRadioList.prototype, "theme", 2);
+  ], exports.FFBoxRadioList.prototype, "theme", 2);
   __decorateClass$7([
     r$2()
-  ], FFBoxRadioList.prototype, "_editingIndex", 2);
-  FFBoxRadioList = __decorateClass$7([
+  ], exports.FFBoxRadioList.prototype, "_editingIndex", 2);
+  exports.FFBoxRadioList = __decorateClass$7([
     t$3("ffbox-radio-list")
-  ], FFBoxRadioList);
+  ], exports.FFBoxRadioList);
   /**
    * @license
    * Copyright 2018 Google LLC
@@ -2766,7 +2765,7 @@
     if (kind && result) __defProp$6(target, key, result);
     return result;
   };
-  let FFBoxAutoSizeWrapper = class extends i$3 {
+  exports.FFBoxAutoSizeWrapper = class FFBoxAutoSizeWrapper extends i$3 {
     constructor() {
       super(...arguments);
       this.useResizeObserver = false;
@@ -2833,7 +2832,7 @@
 		`;
     }
   };
-  FFBoxAutoSizeWrapper.styles = i$6`
+  exports.FFBoxAutoSizeWrapper.styles = i$6`
 		:host {
 			display: block;
 		}
@@ -2845,26 +2844,26 @@
 	`;
   __decorateClass$6([
     n$4({ type: Boolean, attribute: "use-resize-observer" })
-  ], FFBoxAutoSizeWrapper.prototype, "useResizeObserver", 2);
+  ], exports.FFBoxAutoSizeWrapper.prototype, "useResizeObserver", 2);
   __decorateClass$6([
     n$4({ attribute: false })
-  ], FFBoxAutoSizeWrapper.prototype, "customStyle", 2);
+  ], exports.FFBoxAutoSizeWrapper.prototype, "customStyle", 2);
   __decorateClass$6([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxAutoSizeWrapper.prototype, "theme", 2);
+  ], exports.FFBoxAutoSizeWrapper.prototype, "theme", 2);
   __decorateClass$6([
     r$2()
-  ], FFBoxAutoSizeWrapper.prototype, "width", 2);
+  ], exports.FFBoxAutoSizeWrapper.prototype, "width", 2);
   __decorateClass$6([
     r$2()
-  ], FFBoxAutoSizeWrapper.prototype, "height", 2);
+  ], exports.FFBoxAutoSizeWrapper.prototype, "height", 2);
   __decorateClass$6([
     e$4(".autoSizeWrapper")
-  ], FFBoxAutoSizeWrapper.prototype, "_containerEl", 2);
-  FFBoxAutoSizeWrapper = __decorateClass$6([
+  ], exports.FFBoxAutoSizeWrapper.prototype, "_containerEl", 2);
+  exports.FFBoxAutoSizeWrapper = __decorateClass$6([
     t$3("ffbox-auto-size-wrapper")
-  ], FFBoxAutoSizeWrapper);
+  ], exports.FFBoxAutoSizeWrapper);
   function parseTime(timeString) {
     if (timeString === "N/A") {
       return -1;
@@ -2893,9 +2892,21 @@
     return -1;
   }
   const INVALID_TEXT = "默认输入不合法提示";
+  function notEmptyValidator(value) {
+    return value.length ? void 0 : INVALID_TEXT;
+  }
   function durationValidator(value) {
     return parseTime(value) >= 0 || !value.length ? void 0 : INVALID_TEXT;
   }
+  function numberValidator(value) {
+    return value.match(/^-?\d+(.\d+)?$/) ? void 0 : INVALID_TEXT;
+  }
+  numberValidator.integer = function(value) {
+    return value.match(/^-?\d+$/) ? void 0 : INVALID_TEXT;
+  };
+  numberValidator.integerEmptyable = function(value) {
+    return value === void 0 || value === "" || value.match(/^-?\d+$/) ? void 0 : INVALID_TEXT;
+  };
   function durationFixer(value) {
     return value.replaceAll("：", ":").replaceAll("。", ".").replace(/[a-z]/g, "");
   }
@@ -2909,7 +2920,7 @@
     if (kind && result) __defProp$5(target, key, result);
     return result;
   };
-  let FFBoxCutTimeInput = class extends i$3 {
+  exports.FFBoxCutTimeInput = class FFBoxCutTimeInput extends i$3 {
     constructor() {
       super(...arguments);
       this.value = [void 0, void 0];
@@ -3028,7 +3039,7 @@
       }));
     }
   };
-  FFBoxCutTimeInput.styles = i$6`
+  exports.FFBoxCutTimeInput.styles = i$6`
 		:host {
 			display: inline-block;
 		}
@@ -3130,26 +3141,26 @@
 	`;
   __decorateClass$5([
     n$4({ attribute: false })
-  ], FFBoxCutTimeInput.prototype, "value", 2);
+  ], exports.FFBoxCutTimeInput.prototype, "value", 2);
   __decorateClass$5([
     n$4({ type: Boolean, reflect: true })
-  ], FFBoxCutTimeInput.prototype, "disabled", 2);
+  ], exports.FFBoxCutTimeInput.prototype, "disabled", 2);
   __decorateClass$5([
     n$4({ attribute: false })
-  ], FFBoxCutTimeInput.prototype, "placeholder", 2);
+  ], exports.FFBoxCutTimeInput.prototype, "placeholder", 2);
   __decorateClass$5([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxCutTimeInput.prototype, "theme", 2);
+  ], exports.FFBoxCutTimeInput.prototype, "theme", 2);
   __decorateClass$5([
     r$2()
-  ], FFBoxCutTimeInput.prototype, "_inputText", 2);
+  ], exports.FFBoxCutTimeInput.prototype, "_inputText", 2);
   __decorateClass$5([
     r$2()
-  ], FFBoxCutTimeInput.prototype, "_focused", 2);
-  FFBoxCutTimeInput = __decorateClass$5([
+  ], exports.FFBoxCutTimeInput.prototype, "_focused", 2);
+  exports.FFBoxCutTimeInput = __decorateClass$5([
     t$3("ffbox-cut-time-input")
-  ], FFBoxCutTimeInput);
+  ], exports.FFBoxCutTimeInput);
   var __defProp$4 = Object.defineProperty;
   var __getOwnPropDesc$4 = Object.getOwnPropertyDescriptor;
   var __decorateClass$4 = (decorators, target, key, kind) => {
@@ -3165,7 +3176,7 @@
     type: "normal",
     callback: () => console.log("cancelled")
   };
-  let FFBoxMsgbox = class extends i$3 {
+  exports.FFBoxMsgbox = class FFBoxMsgbox extends i$3 {
     constructor() {
       super(...arguments);
       this.title = "";
@@ -3285,7 +3296,7 @@
 		`;
     }
   };
-  FFBoxMsgbox.styles = i$6`
+  exports.FFBoxMsgbox.styles = i$6`
 		:host {
 			/* host 承担原版 <dialog> 的铺满定位（Web Component 多了一层宿主，若不做定位则高度为 0） */
 			display: block;
@@ -3384,44 +3395,44 @@
 	`;
   __decorateClass$4([
     n$4({ reflect: true })
-  ], FFBoxMsgbox.prototype, "title", 2);
+  ], exports.FFBoxMsgbox.prototype, "title", 2);
   __decorateClass$4([
     n$4({ attribute: false })
-  ], FFBoxMsgbox.prototype, "image", 2);
+  ], exports.FFBoxMsgbox.prototype, "image", 2);
   __decorateClass$4([
     n$4({ attribute: false })
-  ], FFBoxMsgbox.prototype, "content", 2);
+  ], exports.FFBoxMsgbox.prototype, "content", 2);
   __decorateClass$4([
     n$4({ attribute: false })
-  ], FFBoxMsgbox.prototype, "buttons", 2);
+  ], exports.FFBoxMsgbox.prototype, "buttons", 2);
   __decorateClass$4([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxMsgbox.prototype, "theme", 2);
+  ], exports.FFBoxMsgbox.prototype, "theme", 2);
   __decorateClass$4([
     r$2()
-  ], FFBoxMsgbox.prototype, "_entered", 2);
+  ], exports.FFBoxMsgbox.prototype, "_entered", 2);
   __decorateClass$4([
     r$2()
-  ], FFBoxMsgbox.prototype, "_leaving", 2);
+  ], exports.FFBoxMsgbox.prototype, "_leaving", 2);
   __decorateClass$4([
     r$2()
-  ], FFBoxMsgbox.prototype, "_disable", 2);
+  ], exports.FFBoxMsgbox.prototype, "_disable", 2);
   __decorateClass$4([
     r$2()
-  ], FFBoxMsgbox.prototype, "_backgroundMouseDown", 2);
+  ], exports.FFBoxMsgbox.prototype, "_backgroundMouseDown", 2);
   __decorateClass$4([
     e$4(".box")
-  ], FFBoxMsgbox.prototype, "_boxEl", 2);
-  FFBoxMsgbox = __decorateClass$4([
+  ], exports.FFBoxMsgbox.prototype, "_boxEl", 2);
+  exports.FFBoxMsgbox = __decorateClass$4([
     t$3("ffbox-msgbox")
-  ], FFBoxMsgbox);
+  ], exports.FFBoxMsgbox);
   function _detectTheme$3() {
     const provider = document.querySelector("ffbox-theme-provider");
     if (provider) return provider.theme === "dark" ? "dark" : "light";
     return "light";
   }
-  FFBoxMsgbox.show = function(options = {}) {
+  exports.FFBoxMsgbox.show = function(options = {}) {
     const el = document.createElement("ffbox-msgbox");
     el.title = options.title ?? "";
     el.image = options.image;
@@ -3446,7 +3457,7 @@
   const instances = [];
   let seed = 0;
   let container;
-  let FFBoxPopup = class extends i$3 {
+  exports.FFBoxPopup = class FFBoxPopup extends i$3 {
     constructor() {
       super(...arguments);
       this.message = "";
@@ -3604,7 +3615,7 @@
       }, this._userClosing ? 550 : 750);
     }
   };
-  FFBoxPopup.styles = i$6`
+  exports.FFBoxPopup.styles = i$6`
 		:host {
 			display: block;
 			position: absolute;
@@ -3756,47 +3767,47 @@
 	`;
   __decorateClass$3([
     n$4({ reflect: true })
-  ], FFBoxPopup.prototype, "message", 2);
+  ], exports.FFBoxPopup.prototype, "message", 2);
   __decorateClass$3([
     n$4({ type: Number })
-  ], FFBoxPopup.prototype, "level", 2);
+  ], exports.FFBoxPopup.prototype, "level", 2);
   __decorateClass$3([
     n$4({ type: Number })
-  ], FFBoxPopup.prototype, "verticalOffset", 2);
+  ], exports.FFBoxPopup.prototype, "verticalOffset", 2);
   __decorateClass$3([
     n$4({ type: Number })
-  ], FFBoxPopup.prototype, "index", 2);
+  ], exports.FFBoxPopup.prototype, "index", 2);
   __decorateClass$3([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxPopup.prototype, "theme", 2);
+  ], exports.FFBoxPopup.prototype, "theme", 2);
   __decorateClass$3([
     r$2()
-  ], FFBoxPopup.prototype, "_show", 2);
+  ], exports.FFBoxPopup.prototype, "_show", 2);
   __decorateClass$3([
     r$2()
-  ], FFBoxPopup.prototype, "_duration", 2);
+  ], exports.FFBoxPopup.prototype, "_duration", 2);
   __decorateClass$3([
     r$2()
-  ], FFBoxPopup.prototype, "_timeLeft", 2);
+  ], exports.FFBoxPopup.prototype, "_timeLeft", 2);
   __decorateClass$3([
     r$2()
-  ], FFBoxPopup.prototype, "_mouseIn", 2);
+  ], exports.FFBoxPopup.prototype, "_mouseIn", 2);
   __decorateClass$3([
     r$2()
-  ], FFBoxPopup.prototype, "_delayedVerticalOffset", 2);
+  ], exports.FFBoxPopup.prototype, "_delayedVerticalOffset", 2);
   __decorateClass$3([
     r$2()
-  ], FFBoxPopup.prototype, "_userClosing", 2);
+  ], exports.FFBoxPopup.prototype, "_userClosing", 2);
   __decorateClass$3([
     r$2()
-  ], FFBoxPopup.prototype, "_leaving", 2);
+  ], exports.FFBoxPopup.prototype, "_leaving", 2);
   __decorateClass$3([
     e$4(".popup-box")
-  ], FFBoxPopup.prototype, "_boxEl", 2);
-  FFBoxPopup = __decorateClass$3([
+  ], exports.FFBoxPopup.prototype, "_boxEl", 2);
+  exports.FFBoxPopup = __decorateClass$3([
     t$3("ffbox-popup")
-  ], FFBoxPopup);
+  ], exports.FFBoxPopup);
   function _getContainer() {
     if (!container) {
       container = document.createElement("div");
@@ -3826,7 +3837,7 @@
       totalHeight += instances[i2].el.offsetHeight + 16;
     }
   }
-  FFBoxPopup.show = function(options) {
+  exports.FFBoxPopup.show = function(options) {
     const el = document.createElement("ffbox-popup");
     el.message = options.message;
     el.level = options.level ?? 0;
@@ -3851,6 +3862,122 @@
     el.updateComplete.then(_reCalcVerticalOffset);
     return el;
   };
+  function computeTooltipStyle(position, e2) {
+    const rect = e2.target.getBoundingClientRect();
+    switch (position) {
+      case "mtl":
+        return { top: `${e2.clientY}px`, right: `${window.innerWidth - e2.clientX}px` };
+      case "t":
+        return { bottom: `${window.innerHeight - rect.top}px`, left: `${rect.left + rect.width / 2}px`, transform: "translateX(-50%)" };
+      case "tl":
+        return { bottom: `${window.innerHeight - rect.top}px`, left: `${rect.left}px` };
+      case "tr":
+        return { bottom: `${window.innerHeight - rect.top}px`, right: `${window.innerWidth - rect.right}px` };
+      case "r":
+        return { top: `${rect.top + rect.height / 2}px`, left: `${rect.left + rect.width}px`, transform: "translateY(-50%)" };
+      case "br":
+      default:
+        return { top: `${rect.top + rect.height}px`, right: `${window.innerWidth - rect.right}px` };
+    }
+  }
+  class TooltipDirective extends i$1 {
+    constructor(partInfo) {
+      super(partInfo);
+      this._onMouseenter = null;
+      this._onMouseleave = null;
+      if (partInfo.type !== t$1.ELEMENT) {
+        throw new Error("tooltip 指令只能用于元素");
+      }
+    }
+    update(part, [content, position, styleName]) {
+      const el = part.element;
+      if (this._onMouseenter) {
+        el.removeEventListener("mouseenter", this._onMouseenter);
+        el.removeEventListener("mouseleave", this._onMouseleave);
+      }
+      this._onMouseenter = (e2) => {
+        exports.FFBoxTooltip.show({
+          content,
+          style: computeTooltipStyle(position, e2),
+          className: styleName === "small" ? "small" : void 0
+        });
+      };
+      this._onMouseleave = () => {
+        exports.FFBoxTooltip.hide();
+      };
+      el.addEventListener("mouseenter", this._onMouseenter);
+      el.addEventListener("mouseleave", this._onMouseleave);
+      return E;
+    }
+    render(_content, _position, _styleName) {
+      return E;
+    }
+  }
+  const tooltip = e$1(TooltipDirective);
+  function useTooltip(content, position = "br", styleName = "small") {
+    return {
+      onmouseenter: (e2) => {
+        exports.FFBoxTooltip.show({
+          content,
+          style: computeTooltipStyle(position, e2),
+          className: styleName === "small" ? "small" : void 0
+        });
+      },
+      onmouseleave: () => {
+        exports.FFBoxTooltip.hide();
+      }
+    };
+  }
+  const _DEFAULT_ATTR = "data-tooltip";
+  const _observedElements = /* @__PURE__ */ new WeakSet();
+  let _observer = null;
+  let _attrName = _DEFAULT_ATTR;
+  function _parseAttr(value) {
+    var _a2, _b;
+    const parts = value.split(";");
+    const content = parts[0];
+    const position = ((_a2 = parts[1]) == null ? void 0 : _a2.trim()) || "br";
+    const styleName = ((_b = parts[2]) == null ? void 0 : _b.trim()) || "small";
+    return [content, position, styleName];
+  }
+  function _bindTooltipFromAttr(el) {
+    if (_observedElements.has(el)) return;
+    const raw = el.getAttribute(_attrName);
+    if (raw === null) return;
+    _observedElements.add(el);
+    const [content, position, styleName] = _parseAttr(raw);
+    const { onmouseenter, onmouseleave } = useTooltip(content, position, styleName);
+    el.addEventListener("mouseenter", onmouseenter);
+    el.addEventListener("mouseleave", onmouseleave);
+  }
+  function _bindDescendants(root) {
+    root.querySelectorAll(`[${_attrName}]`).forEach(_bindTooltipFromAttr);
+  }
+  function enableTooltipAutoscan(attrName = _DEFAULT_ATTR) {
+    if (_observer) return;
+    _attrName = attrName;
+    _observer = new MutationObserver((mutations) => {
+      for (const m2 of mutations) {
+        for (const node of m2.addedNodes) {
+          if (node instanceof HTMLElement) {
+            _bindTooltipFromAttr(node);
+            _bindDescendants(node);
+          }
+        }
+      }
+    });
+    const start = () => {
+      _bindDescendants(document);
+      _observer.observe(document.body, { childList: true, subtree: true });
+    };
+    if (document.body) start();
+    else document.addEventListener("DOMContentLoaded", start, { once: true });
+  }
+  function disableTooltipAutoscan() {
+    if (!_observer) return;
+    _observer.disconnect();
+    _observer = null;
+  }
   var __defProp$2 = Object.defineProperty;
   var __getOwnPropDesc$2 = Object.getOwnPropertyDescriptor;
   var __decorateClass$2 = (decorators, target, key, kind) => {
@@ -3861,7 +3988,7 @@
     if (kind && result) __defProp$2(target, key, result);
     return result;
   };
-  let FFBoxTooltip = class extends i$3 {
+  exports.FFBoxTooltip = class FFBoxTooltip extends i$3 {
     constructor() {
       super(...arguments);
       this.content = "";
@@ -3881,7 +4008,7 @@
 		`;
     }
   };
-  FFBoxTooltip.styles = i$6`
+  exports.FFBoxTooltip.styles = i$6`
 		:host {
 			display: block;
 			position: fixed;
@@ -3932,19 +4059,19 @@
 	`;
   __decorateClass$2([
     n$4({ reflect: true })
-  ], FFBoxTooltip.prototype, "content", 2);
+  ], exports.FFBoxTooltip.prototype, "content", 2);
   __decorateClass$2([
     n$4({ type: Boolean, reflect: true })
-  ], FFBoxTooltip.prototype, "show", 2);
+  ], exports.FFBoxTooltip.prototype, "show", 2);
   __decorateClass$2([
     n$4({ reflect: true })
-  ], FFBoxTooltip.prototype, "className", 2);
+  ], exports.FFBoxTooltip.prototype, "className", 2);
   __decorateClass$2([
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxTooltip.prototype, "theme", 2);
-  FFBoxTooltip = __decorateClass$2([
+  ], exports.FFBoxTooltip.prototype, "theme", 2);
+  exports.FFBoxTooltip = __decorateClass$2([
     t$3("ffbox-tooltip")
-  ], FFBoxTooltip);
+  ], exports.FFBoxTooltip);
   let _instance = null;
   function _getInstance() {
     if (!_instance) {
@@ -3958,7 +4085,7 @@
     if (provider) return provider.theme;
     return "light";
   }
-  FFBoxTooltip.show = function(options) {
+  exports.FFBoxTooltip.show = function(options) {
     const el = _getInstance();
     el.theme = _detectTheme$1();
     el.content = options.content;
@@ -3973,7 +4100,7 @@
       Object.assign(el.style, options.style);
     }
   };
-  FFBoxTooltip.hide = function() {
+  exports.FFBoxTooltip.hide = function() {
     if (_instance) {
       _instance.show = false;
     }
@@ -4072,6 +4199,21 @@
     }
   });
   const rightIcon = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1697533442768" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3305" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M761.056 532.128c0.512-0.992 1.344-1.824 1.792-2.848 8.8-18.304 5.92-40.704-9.664-55.424L399.936 139.744a48 48 0 0 0-65.984 69.76l316.96 299.84L335.2 813.632a48 48 0 0 0 66.624 69.12l350.048-337.376c0.672-0.672 0.928-1.6 1.6-2.304 0.512-0.48 1.056-0.832 1.568-1.344 2.72-2.848 4.16-6.336 6.016-9.6z" fill="currentColor" p-id="3306"></path></svg>';
+  function getMenuItemByValue(menu, value, compareFunc) {
+    function dfs(menu2) {
+      for (const menuItem of menu2) {
+        if (menuItem.type === "submenu") {
+          const result = dfs(menuItem.subMenu);
+          if (result) {
+            return result;
+          }
+        } else if ("value" in menuItem && (compareFunc ? compareFunc(menuItem.value, value) : menuItem.value === value)) {
+          return menuItem;
+        }
+      }
+    }
+    return dfs(menu);
+  }
   var __defProp$1 = Object.defineProperty;
   var __getOwnPropDesc$1 = Object.getOwnPropertyDescriptor;
   var __decorateClass$1 = (decorators, target, key, kind) => {
@@ -4082,7 +4224,7 @@
     if (kind && result) __defProp$1(target, key, result);
     return result;
   };
-  let FFBoxMenu = class extends i$3 {
+  exports.FFBoxMenu = class FFBoxMenu extends i$3 {
     constructor() {
       super(...arguments);
       this.menu = [];
@@ -4163,7 +4305,7 @@
               bottom: `calc(100% - ${menuItemElemRect.top + menuItemElemRect.height}px)`
             };
           }
-          FFBoxTooltip.show({
+          exports.FFBoxTooltip.show({
             content: menuItem.tooltip,
             style: position
           });
@@ -4260,7 +4402,7 @@
           }, 0);
         }
         if ((newItem === void 0 || !("tooltip" in newItem)) && oldItem !== void 0) {
-          FFBoxTooltip.hide();
+          exports.FFBoxTooltip.hide();
         }
       };
       this._keydownListener = (e2) => {
@@ -4373,7 +4515,7 @@
       if (!this.returnFocus) {
         document.removeEventListener("keydown", this._keydownListener);
       }
-      FFBoxTooltip.hide();
+      exports.FFBoxTooltip.hide();
       super.disconnectedCallback();
     }
     render() {
@@ -4600,7 +4742,7 @@
       this._currentSelectedItem = value;
     }
   };
-  FFBoxMenu.styles = i$6`
+  exports.FFBoxMenu.styles = i$6`
 		:host {
 			display: block;
 			position: fixed;
@@ -4743,59 +4885,59 @@
 	`;
   __decorateClass$1([
     n$4({ attribute: false })
-  ], FFBoxMenu.prototype, "menu", 2);
+  ], exports.FFBoxMenu.prototype, "menu", 2);
   __decorateClass$1([
     n$4({ attribute: false })
-  ], FFBoxMenu.prototype, "type", 2);
+  ], exports.FFBoxMenu.prototype, "type", 2);
   __decorateClass$1([
     n$4({ attribute: false })
-  ], FFBoxMenu.prototype, "selectedValue", 2);
+  ], exports.FFBoxMenu.prototype, "selectedValue", 2);
   __decorateClass$1([
     n$4({ attribute: false })
-  ], FFBoxMenu.prototype, "triggerRect", 2);
+  ], exports.FFBoxMenu.prototype, "triggerRect", 2);
   __decorateClass$1([
     n$4({ attribute: false })
-  ], FFBoxMenu.prototype, "onSelect", 2);
+  ], exports.FFBoxMenu.prototype, "onSelect", 2);
   __decorateClass$1([
     n$4({ attribute: false })
-  ], FFBoxMenu.prototype, "onCancel", 2);
+  ], exports.FFBoxMenu.prototype, "onCancel", 2);
   __decorateClass$1([
     n$4({ attribute: false })
-  ], FFBoxMenu.prototype, "onClose", 2);
+  ], exports.FFBoxMenu.prototype, "onClose", 2);
   __decorateClass$1([
     n$4({ attribute: false })
-  ], FFBoxMenu.prototype, "onKeyDown", 2);
+  ], exports.FFBoxMenu.prototype, "onKeyDown", 2);
   __decorateClass$1([
     n$4({ attribute: false })
-  ], FFBoxMenu.prototype, "returnFocus", 2);
+  ], exports.FFBoxMenu.prototype, "returnFocus", 2);
   __decorateClass$1([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxMenu.prototype, "theme", 2);
+  ], exports.FFBoxMenu.prototype, "theme", 2);
   __decorateClass$1([
     r$2()
-  ], FFBoxMenu.prototype, "_openedSubMenus", 2);
+  ], exports.FFBoxMenu.prototype, "_openedSubMenus", 2);
   __decorateClass$1([
     r$2()
-  ], FFBoxMenu.prototype, "_openedSubMenuItemPos", 2);
+  ], exports.FFBoxMenu.prototype, "_openedSubMenuItemPos", 2);
   __decorateClass$1([
     r$2()
-  ], FFBoxMenu.prototype, "_currentHoveredItem", 2);
+  ], exports.FFBoxMenu.prototype, "_currentHoveredItem", 2);
   __decorateClass$1([
     r$2()
-  ], FFBoxMenu.prototype, "_currentSelectedItem", 2);
+  ], exports.FFBoxMenu.prototype, "_currentSelectedItem", 2);
   __decorateClass$1([
     r$2()
-  ], FFBoxMenu.prototype, "_leaving", 2);
-  FFBoxMenu = __decorateClass$1([
+  ], exports.FFBoxMenu.prototype, "_leaving", 2);
+  exports.FFBoxMenu = __decorateClass$1([
     t$3("ffbox-menu")
-  ], FFBoxMenu);
+  ], exports.FFBoxMenu);
   function _detectTheme() {
     const provider = document.querySelector("ffbox-theme-provider");
     if (provider) return provider.theme === "dark" ? "dark" : "light";
     return "light";
   }
-  FFBoxMenu.showMenu = function(options) {
+  exports.FFBoxMenu.showMenu = function(options) {
     const el = document.createElement("ffbox-menu");
     el.menu = options.menu;
     el.type = options.type || "action";
@@ -4832,7 +4974,7 @@
     if (kind && result) __defProp(target, key, result);
     return result;
   };
-  let FFBoxDropdownInput = class extends i$3 {
+  exports.FFBoxDropdownInput = class FFBoxDropdownInput extends i$3 {
     constructor() {
       super(...arguments);
       this.list = [];
@@ -4848,7 +4990,7 @@
         if (this.disabled) {
           return;
         }
-        this._menuHandle = FFBoxMenu.showMenu({
+        this._menuHandle = exports.FFBoxMenu.showMenu({
           menu: this.list,
           type: "select",
           selectedValue: this.text,
@@ -4963,7 +5105,7 @@
       }));
     }
   };
-  FFBoxDropdownInput.styles = i$6`
+  exports.FFBoxDropdownInput.styles = i$6`
 		:host {
 			display: inline-block;
 		}
@@ -5032,43 +5174,59 @@
 	`;
   __decorateClass([
     n$4({ attribute: false })
-  ], FFBoxDropdownInput.prototype, "text", 2);
+  ], exports.FFBoxDropdownInput.prototype, "text", 2);
   __decorateClass([
     n$4({ attribute: false })
-  ], FFBoxDropdownInput.prototype, "list", 2);
+  ], exports.FFBoxDropdownInput.prototype, "list", 2);
   __decorateClass([
     n$4({ type: Boolean, reflect: true })
-  ], FFBoxDropdownInput.prototype, "readonly", 2);
+  ], exports.FFBoxDropdownInput.prototype, "readonly", 2);
   __decorateClass([
     n$4({ type: Boolean, reflect: true })
-  ], FFBoxDropdownInput.prototype, "disabled", 2);
+  ], exports.FFBoxDropdownInput.prototype, "disabled", 2);
   __decorateClass([
     n$4()
-  ], FFBoxDropdownInput.prototype, "placeholder", 2);
+  ], exports.FFBoxDropdownInput.prototype, "placeholder", 2);
   __decorateClass([
     n$4({ attribute: false })
-  ], FFBoxDropdownInput.prototype, "validator", 2);
+  ], exports.FFBoxDropdownInput.prototype, "validator", 2);
   __decorateClass([
     n$4({ attribute: false })
-  ], FFBoxDropdownInput.prototype, "inputFixer", 2);
+  ], exports.FFBoxDropdownInput.prototype, "inputFixer", 2);
   __decorateClass([
     c$1({ context: themeContext, subscribe: true }),
     n$4({ reflect: true, attribute: "data-theme" })
-  ], FFBoxDropdownInput.prototype, "theme", 2);
+  ], exports.FFBoxDropdownInput.prototype, "theme", 2);
   __decorateClass([
     r$2()
-  ], FFBoxDropdownInput.prototype, "_focused", 2);
+  ], exports.FFBoxDropdownInput.prototype, "_focused", 2);
   __decorateClass([
     r$2()
-  ], FFBoxDropdownInput.prototype, "_inputText", 2);
+  ], exports.FFBoxDropdownInput.prototype, "_inputText", 2);
   __decorateClass([
     r$2()
-  ], FFBoxDropdownInput.prototype, "_invalidMsg", 2);
+  ], exports.FFBoxDropdownInput.prototype, "_invalidMsg", 2);
   __decorateClass([
     e$4(".combobox-selector")
-  ], FFBoxDropdownInput.prototype, "_selectorEl", 2);
-  FFBoxDropdownInput = __decorateClass([
+  ], exports.FFBoxDropdownInput.prototype, "_selectorEl", 2);
+  exports.FFBoxDropdownInput = __decorateClass([
     t$3("ffbox-dropdown-input")
-  ], FFBoxDropdownInput);
-})();
+  ], exports.FFBoxDropdownInput);
+  exports.LitElement = i$3;
+  exports.css = i$6;
+  exports.disableTooltipAutoscan = disableTooltipAutoscan;
+  exports.durationFixer = durationFixer;
+  exports.durationValidator = durationValidator;
+  exports.enableTooltipAutoscan = enableTooltipAutoscan;
+  exports.getMenuItemByValue = getMenuItemByValue;
+  exports.html = b;
+  exports.notEmptyValidator = notEmptyValidator;
+  exports.numberValidator = numberValidator;
+  exports.svg = w;
+  exports.themeContext = themeContext;
+  exports.tooltip = tooltip;
+  exports.useTooltip = useTooltip;
+  Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+  return exports;
+})({});
 //# sourceMappingURL=ffbox-ui.iife.js.map

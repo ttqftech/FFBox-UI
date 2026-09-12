@@ -1,6 +1,6 @@
 {
   "name": "ffbox-ui",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "FFBox UI component library based on Lit Web Components",
   "type": "module",
   "main": "./dist/esm/ffbox-ui.js",
@@ -12,6 +12,8 @@
       "types": "./dist/esm/ffbox-ui.d.ts"
     },
     "./dist/esm/components/*": "./dist/esm/components/*",
+    "./dist/esm/utils/*": "./dist/esm/utils/*",
+    "./dist/esm/contexts/*": "./dist/esm/contexts/*",
     "./dist/iife/*": "./dist/iife/*",
     "./dist/themes/*": "./dist/themes/*"
   },

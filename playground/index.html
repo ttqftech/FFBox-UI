@@ -272,8 +272,9 @@
   <div class="section" id="tooltip-section">
     <div class="row" style="position:relative; height:60px; gap:12px;">
       <button id="tooltipShowBtn" style="padding:6px 14px; border-radius:6px; border:1px solid #AAA; cursor:pointer;">Tooltip.show 调用</button>
-      <button id="tooltipUseBtn" style="padding:6px 14px; border-radius:6px; border:1px solid #AAA; cursor:pointer;">useTooltip 包裹</button>
+      <button id="tooltipUseBtn" style="padding:6px 14px; border-radius:6px; border:1px solid #AAA; cursor:pointer;">useTooltip 导出的函数应用在元素上</button>
       <button id="tooltipUseBtn2" style="padding:6px 14px; border-radius:6px; border:1px solid #AAA; cursor:pointer;">useTooltip 上方</button>
+      <button id="tooltipAutoscanBtn" style="padding:6px 14px; border-radius:6px; border:1px solid #AAA; cursor:pointer;" data-tooltip="data-tooltip 声明式; mtl; large">data-tooltip 属性</button>
     </div>
     <div class="event-log" id="tooltip-log"></div>
   </div>
@@ -400,8 +401,11 @@
   <script type="importmap">
     {
       "imports": {
-        "ffbox-ui": "../dist/esm/ffbox-ui-autoregister.js",
-        "ffbox-button": "../dist/esm/components/button/ffbox-button.js"
+        "ffbox-ui"      : "../dist/esm/ffbox-ui-autoregister.js",
+        "ffbox-tooltip" : "../dist/esm/components/tooltip/ffbox-tooltip.js",
+        "ffbox-msgbox"  : "../dist/esm/components/msgbox/ffbox-msgbox.js",
+        "ffbox-popup"   : "../dist/esm/components/popup/ffbox-popup.js",
+        "ffbox-menu"    : "../dist/esm/components/menu/ffbox-menu.js"
       }
     }
   </script>
@@ -569,7 +573,7 @@
 
     // #region ffbox-tooltip
 
-    const { FFBoxTooltip, useTooltip } = await import('../src/ffbox-ui.js');
+    const { FFBoxTooltip, useTooltip, enableTooltipAutoscan } = await import('ffbox-tooltip');
   
     // 用法一：Tooltip.show / Tooltip.hide
     const showBtn = document.getElementById('tooltipShowBtn');
@@ -582,9 +586,13 @@
     });
     showBtn.addEventListener('mouseleave', () => { FFBoxTooltip.hide(); });
 
-    // 用法二：useTooltip 包裹
-    Object.assign(document.getElementById('tooltipUseBtn'), useTooltip('useTooltip 包裹', 'br'));
-    Object.assign(document.getElementById('tooltipUseBtn2'), useTooltip('useTooltip 上方', 't'));
+    // 用法二：将 useTooltip 导出的函数应用在元素上
+    Object.assign(document.getElementById('tooltipUseBtn'), useTooltip('这是一条显示在元素下方的 tooltip', 'br'));
+    Object.assign(document.getElementById('tooltipUseBtn2'), useTooltip('这是一条显示在元素上方的 tooltip', 't'));
+
+    // 用法三：在元素上指定 data-tooltip 属性，并使用 js 开启元素自动扫描
+    enableTooltipAutoscan();
+    // enableTooltipAutoscan('data-tooltip');  // 可以自定义监听的属性名
 
     // #endregion
 
@@ -647,8 +655,9 @@
 
     // #region ffbox-msgbox
 
-    const { FFBoxMsgbox, FFBoxPopup } = await import('../src/ffbox-ui.js');
-    const { html } = await import('lit');
+    const { FFBoxMsgbox } = await import('ffbox-msgbox');
+    const { FFBoxPopup } = await import('ffbox-popup');
+    const { html } = await import('ffbox-ui');
 
     document.getElementById('msgboxSingle').addEventListener('click', () => {
       FFBoxMsgbox.show({
@@ -734,7 +743,7 @@
 
     // #region ffbox-menu
 
-    const { FFBoxMenu, getMenuItemByValue } = await import('../src/ffbox-ui.js');
+    const { FFBoxMenu, getMenuItemByValue } = await import('ffbox-menu');
 
     const menuActionList = [
       { type: 'normal', label: '打开文件…', value: 'open' },

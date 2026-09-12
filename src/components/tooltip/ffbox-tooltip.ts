@@ -119,6 +119,9 @@ FFBoxTooltip.hide = function () {
 	}
 };
 
+export { tooltip, useTooltip, type TooltipPosition, type TooltipStyleName } from './use-tooltip.js';
+export { enableTooltipAutoscan, disableTooltipAutoscan } from './tooltip-autoscan.js';
+
 declare global {
 	interface HTMLElementTagNameMap {
 		'ffbox-tooltip': FFBoxTooltip;

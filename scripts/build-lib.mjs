@@ -50,10 +50,21 @@ await build({
 		minify: false,
 		rollupOptions: {
 			output: {
+				// 默认 chunkFileNames 为 '[name]-[hash].js'，去掉 hash 让产物路径稳定可预测
+				chunkFileNames: '[name].js',
 				manualChunks(id) {
 					// 如果索引到的模块的名称名包含 Lit，就指定这个模块打包到 lit chunk
 					if (/node_modules[\\/](@?lit|@lit-labs)[\\/]/.test(id)) {
 						return 'lit';
+					}
+					// utils / contexts 会被多个入口（各组件 + ffbox-ui + autoregister）共享。
+					// 若不显式分流，Rollup 会按「入口集合」把它们和某个组件合并成共享 chunk，
+					// 导致该组件的入口文件退化成转发壳、真实代码落到 outDir 根目录。
+					if (/src[\\/]utils[\\/]/.test(id)) {
+						return 'utils/ffbox-utils';
+					}
+					if (/src[\\/]contexts[\\/]/.test(id)) {
+						return 'contexts/theme-context';
 					}
 				},
 			},

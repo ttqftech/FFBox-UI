@@ -143,7 +143,6 @@ export class FFBoxNormalInput extends LitElement {
 		}
 		this.value = newValue;
 		this._validate(newValue);
-		e.stopPropagation();
 		this.dispatchEvent(new CustomEvent('change', {
 			detail: newValue,
 			bubbles: true,

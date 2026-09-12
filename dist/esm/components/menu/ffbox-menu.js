@@ -1,9 +1,25 @@
-import { t as themeContext } from "../../ffbox-theme-provider-DLHSaw2W.js";
+import "../theme-provider/ffbox-theme-provider.js";
 import "../checkbox/ffbox-checkbox.js";
 import "../radio/ffbox-radio.js";
 import { FFBoxTooltip } from "../tooltip/ffbox-tooltip.js";
-import { i, n, c, r, a as i$1, b, o, j as n$1, h as o$1, t } from "../../lit-CCLFh2ru.js";
+import { a as i, c as n, d as c, r, i as i$1, b, o, j as n$1, h as o$1, t } from "../../lit.js";
+import { t as themeContext } from "../../contexts/theme-context.js";
 const rightIcon = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1697533442768" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3305" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M761.056 532.128c0.512-0.992 1.344-1.824 1.792-2.848 8.8-18.304 5.92-40.704-9.664-55.424L399.936 139.744a48 48 0 0 0-65.984 69.76l316.96 299.84L335.2 813.632a48 48 0 0 0 66.624 69.12l350.048-337.376c0.672-0.672 0.928-1.6 1.6-2.304 0.512-0.48 1.056-0.832 1.568-1.344 2.72-2.848 4.16-6.336 6.016-9.6z" fill="currentColor" p-id="3306"></path></svg>';
+function getMenuItemByValue(menu, value, compareFunc) {
+  function dfs(menu2) {
+    for (const menuItem of menu2) {
+      if (menuItem.type === "submenu") {
+        const result = dfs(menuItem.subMenu);
+        if (result) {
+          return result;
+        }
+      } else if ("value" in menuItem && (compareFunc ? compareFunc(menuItem.value, value) : menuItem.value === value)) {
+        return menuItem;
+      }
+    }
+  }
+  return dfs(menu);
+}
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __decorateClass = (decorators, target, key, kind) => {
@@ -754,6 +770,7 @@ FFBoxMenu.showMenu = function(options) {
   };
 };
 export {
-  FFBoxMenu
+  FFBoxMenu,
+  getMenuItemByValue
 };
 //# sourceMappingURL=ffbox-menu.js.map

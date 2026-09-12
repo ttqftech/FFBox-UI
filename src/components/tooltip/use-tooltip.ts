@@ -1,29 +1,9 @@
 import { Directive, directive, PartInfo, PartType, ElementPart } from 'lit/directive.js';
 import { noChange } from 'lit';
 import { FFBoxTooltip } from './ffbox-tooltip.js';
+import { computeTooltipStyle, type TooltipPosition, type TooltipStyleName } from './tooltip-helpers.js';
 
-export type TooltipPosition = 'br' | 'r' | 't' | 'tl' | 'tr' | 'mtl';
-export type TooltipStyleName = 'small' | 'large';
-
-function _computeStyle(position: TooltipPosition, e: MouseEvent): Partial<CSSStyleDeclaration> {
-	const rect = (e.target as HTMLElement).getBoundingClientRect();
-
-	switch (position) {
-		case 'mtl':
-			return { top: `${e.clientY}px`, right: `${window.innerWidth - e.clientX}px` };
-		case 't':
-			return { bottom: `${window.innerHeight - rect.top}px`, left: `${rect.left + rect.width / 2}px`, transform: 'translateX(-50%)' };
-		case 'tl':
-			return { bottom: `${window.innerHeight - rect.top}px`, left: `${rect.left}px` };
-		case 'tr':
-			return { bottom: `${window.innerHeight - rect.top}px`, right: `${window.innerWidth - rect.right}px` };
-		case 'r':
-			return { top: `${rect.top + rect.height / 2}px`, left: `${rect.left + rect.width}px`, transform: 'translateY(-50%)' };
-		case 'br':
-		default:
-			return { top: `${rect.top + rect.height}px`, right: `${window.innerWidth - rect.right}px` };
-	}
-}
+export type { TooltipPosition, TooltipStyleName };
 
 class TooltipDirective extends Directive {
 	private _onMouseenter: ((e: Event) => void) | null = null;
@@ -47,7 +27,7 @@ class TooltipDirective extends Directive {
 		this._onMouseenter = (e: Event) => {
 			FFBoxTooltip.show({
 				content,
-				style: _computeStyle(position, e as MouseEvent),
+				style: computeTooltipStyle(position, e as MouseEvent),
 				className: styleName === 'small' ? 'small' : undefined,
 			});
 		};
@@ -76,7 +56,7 @@ export function useTooltip(
 		onmouseenter: (e: MouseEvent) => {
 			FFBoxTooltip.show({
 				content,
-				style: _computeStyle(position, e),
+				style: computeTooltipStyle(position, e),
 				className: styleName === 'small' ? 'small' : undefined,
 			});
 		},

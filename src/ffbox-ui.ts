@@ -1,3 +1,4 @@
+export { html, svg, css, LitElement, type TemplateResult } from 'lit';
 export { FFBoxThemeProvider } from './components/theme-provider/ffbox-theme-provider.js';
 export { themeContext, type Theme } from './contexts/theme-context.js';
 export { FFBoxButton } from './components/button/ffbox-button.js';
@@ -16,6 +17,7 @@ export { FFBoxMsgbox, type MsgboxButton, type MsgboxOptions } from './components
 export { FFBoxPopup, type PopupOptions } from './components/popup/ffbox-popup.js';
 export { FFBoxTooltip, type TooltipOptions } from './components/tooltip/ffbox-tooltip.js';
 export { tooltip, useTooltip, type TooltipPosition, type TooltipStyleName } from './components/tooltip/use-tooltip.js';
+export { enableTooltipAutoscan, disableTooltipAutoscan } from './components/tooltip/tooltip-autoscan.js';
 export { FFBoxMenu, type MenuOptions, type FFBoxMenuHandle } from './components/menu/ffbox-menu.js';
 export { getMenuItemByValue, type MenuItem, type NarrowedMenuItem } from './components/menu/menu-item.js';
 export { FFBoxDropdownInput } from './components/dropdown-input/ffbox-dropdown-input.js';
