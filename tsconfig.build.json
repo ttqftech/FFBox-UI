@@ -1,0 +1,19 @@
+{
+	// 仅供 vite-plugin-dts 生成声明文件时使用（scripts/build-lib.mjs 中通过 tsconfigPath 指定），
+	// 不参与日常 `tsc --noEmit` 类型检查。
+	//
+	// 与主 tsconfig.json 的差异：
+	// 1. outDir 为 ./dist/esm，与 Vite 的 ESM 产物同目录，保证 .js / .d.ts 一一对应；
+	// 2. 关闭 declarationMap：发布的 files 只有 dist/，源码不随包发布，map 会悬空引用。
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"noEmit": false,
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"declarationMap": false,
+		"sourceMap": false,
+		"outDir": "./dist/esm",
+		"rootDir": "./src"
+	},
+	"include": ["src/**/*.ts"]
+}

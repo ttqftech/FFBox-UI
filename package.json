@@ -8,8 +8,8 @@
   "types": "./dist/esm/ffbox-ui.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/ffbox-ui.js",
-      "types": "./dist/esm/ffbox-ui.d.ts"
+      "types": "./dist/esm/ffbox-ui.d.ts",
+      "import": "./dist/esm/ffbox-ui.js"
     },
     "./dist/esm/components/*": "./dist/esm/components/*",
     "./dist/esm/utils/*": "./dist/esm/utils/*",
@@ -34,7 +34,8 @@
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "typescript": "^6.0.0",
-    "vite": "^6.0.0"
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^5.1.0"
   },
   "author": {
     "name": "滔滔清风"

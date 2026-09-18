@@ -1,6 +1,7 @@
 import { build } from 'vite';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { copyFileSync } from 'fs';
 import { logMsg } from './log.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -24,5 +25,13 @@ await build({
 		minify: false,
 	},
 });
+
+// IIFE 产物没有模块导出，而是把 API 挂到全局 FFBoxUI，tsc 推导不出来，
+// 因此手写一份全局声明放在产物旁。文件名必须与产物同名（.js -> .d.ts），
+// 这样 exports 里 "./dist/iife/*" 的解析才能命中。
+copyFileSync(
+	resolve(root, 'types/iife-global.d.ts'),
+	resolve(root, 'dist/iife/ffbox-ui.iife.d.ts')
+);
 
 logMsg('FFBox-UI IIFE 模块打包完成');

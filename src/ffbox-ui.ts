@@ -1,7 +1,7 @@
 export { html, svg, css, LitElement, type TemplateResult } from 'lit';
 export { FFBoxThemeProvider } from './components/theme-provider/ffbox-theme-provider.js';
 export { themeContext, type Theme } from './contexts/theme-context.js';
-export { FFBoxButton } from './components/button/ffbox-button.js';
+export { FFBoxButton, type ButtonType, type ButtonSize } from './components/button/ffbox-button.js';
 export { FFBoxSwitch } from './components/switch/ffbox-switch.js';
 export { FFBoxCheckbox } from './components/checkbox/ffbox-checkbox.js';
 export { FFBoxRadio } from './components/radio/ffbox-radio.js';

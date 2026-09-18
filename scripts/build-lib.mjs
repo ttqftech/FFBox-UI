@@ -1,4 +1,5 @@
 import { build } from 'vite';
+import dts from 'vite-plugin-dts';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { readdir, stat, mkdir, copyFile, rm } from 'fs/promises';
@@ -38,6 +39,15 @@ logMsg(`打包 ESM 模块 (${Object.keys(entries).length} 个入口 + Lit 框架
 await build({
 	root,
 	logLevel: 'warn',
+	// esbuild 不产出 .d.ts，靠这个插件在同一次构建里发射声明文件，
+	// 输出结构镜像 src，与 dist/esm 下的 .js 一一对应
+	plugins: [
+		dts({
+			tsconfigPath: './tsconfig.build.json',
+			entryRoot: 'src',
+			include: ['src'],
+		}),
+	],
 	build: {
 		lib: {
 			entry: entries,
